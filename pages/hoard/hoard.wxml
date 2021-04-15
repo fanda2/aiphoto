@@ -1,0 +1,39 @@
+<view wx:if="{{!navbar.length}}" class="nohoard">
+  <view class="nohoardimg"> 
+     <image src="/img/nohoard.png"></image>
+  </view>
+  <view class="notext">
+     还没有收藏过任何作品哦~
+  </view>
+</view>
+<view wx:else class="contertain">
+  <block wx:for="{{navbar}}" data-idx="{{index}}" class="allitem" wx:key="idx">
+    <view class="hoard-item"  bindtap="Tapgo" data-idx="{{index}}">
+      <view class="hoardimage">
+       <image class="himimg" src="{{item.imgurl}}" mode="aspectFill"></image>
+      </view>
+      <view class="hoardtext">
+        <view class="essaytitle">
+          <text class="{{ac[index]==1 ? 'indent' : ''}}">{{item.title}}</text>
+        </view>
+        <view class="rbottom">
+   
+          <view class="outleft">
+            <view class="bleft">
+            <view>{{item.like}}<text style="font-size:30rpx;font-weight:600"> 喜欢. </text></view>
+            <view>{{item.concern}} <text style="font-size:30rpx;font-weight:600">收藏</text></view>
+            </view>
+          </view>
+          <view class="bright">
+            <view class="handimg">
+              <image src="{{item.handimg}}"></image>
+            </view>
+            <view class="author">
+              <view>{{item.username}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

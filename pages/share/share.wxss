@@ -1,0 +1,396 @@
+/* 总界面样式 */
+.container{
+  background: #efefef;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color:black;
+  font-size: 18px;
+}
+
+
+/* 未登录状态页面样式 */
+.header {
+  margin: 90rpx 0 90rpx 50rpx;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  width: 650rpx;
+  height: 300rpx;
+  line-height: 450rpx;
+}
+
+.header image {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.content {
+  justify-content: center;
+  margin-left: 50rpx;
+  margin-bottom: 90rpx;
+}
+
+.content text {
+  display: block;
+  color: #9d9d9d;
+  margin-top: 40rpx;
+}
+
+.bottom {
+  border-radius: 80rpx;
+  margin: 70rpx 50rpx;
+  font-size: 35rpx;
+}
+
+/* 登录后界面样式 */
+.shareTop{
+  margin: 1px auto;
+  width: 98%;
+  display: flex;
+  /* justify-items:space-between; */
+  justify-content: space-between;
+  flex-direction:row-reverse;
+  background-color: white;
+  border-radius: 8px;
+}
+.shareTop .btn
+{
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 25px;
+  text-align: center;
+  margin: 10px;
+}
+.shareBnt1{
+  /* background: cornsilk; */
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  /* justify-items: center; */
+  justify-content: flex-start;
+  font-weight: 500;
+}
+.shareBtn2{
+  font-weight: 550;
+  background-color: #fb9d39;
+  line-height: 100%;
+  text-align:center;
+}
+.inbtn{
+  display: flex;
+  justify-content: flex-start;
+  width: 70%;
+}
+.inbtn .btn{
+  border: rgb(213, 213, 213) 2px solid ;
+  height: 30px;
+  line-height: 30px;
+  text-align:center;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+.inbtn .active
+{
+  background-color: #fb9d39;
+  border: darkcyan 0px solid ;
+}
+
+.shareBody
+{
+  margin: 2% auto;
+  width: 98%;
+  height: 55%;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.shareLocal
+{
+  margin: 3% auto;
+  width: 98%;
+  height: 8%;
+  background-color: white;
+  border-radius: 8px;
+  /* background-image: url("/img/location-icon.png"); */
+  display: flex;
+  line-height: 8%;
+}
+.shareLL{
+  display: flex;
+  margin: 0 auto;
+  width: 94%;
+  height: 100%;
+}
+.Limg
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5%;
+  line-height: 100%;
+  /* margin:2%; */
+}
+.Ltext{
+  padding-left: 10px;
+  width: 85%;
+}
+.Rimg{
+  float:right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  line-height: 100%;
+  /* margin:2%; */
+}
+.Rimg image
+{
+  width: 15px;
+  height:15px;
+}
+.Limg image
+{
+  width: 25px;
+  height:25px;
+}
+.weui-input
+{
+  font-size: 14px;
+  height: 100%;
+  width: 100%;
+}
+
+.shareTable
+{
+  margin: 3% auto;
+  width: 98%;
+  background-color: white;
+  border-radius: 8px;
+}
+
+/* 中间输入内容的样式 */
+.shareBB
+{
+  margin: 0 auto;
+  width: 94%;
+  height: 100%;
+  /* background: chartreuse; */
+}
+.shareTitle input
+{
+  height: 50px;
+  font-weight: 600;
+  font-size: 22px;
+  color:#424242;
+}
+.shareText
+{
+  /* background: chocolate; */
+  padding-top: 10px;
+  height: 40%;
+  width: 100%;
+  color: #424242;
+  overflow: hidden;
+}
+.divLine
+{
+  background: #d6d6d6;
+  width: 100%;
+  height: 5rpx;
+}
+
+/* 标签模块 */
+.shareTab
+{
+  margin: 0 auto;
+  width: 94%;
+  height: 100%;
+}
+
+.Taltext
+{
+  display: flex;
+  padding: 5px ;
+  height:30%;
+}
+
+.Tbtitle
+{
+  /* background: chocolate; */
+  width: 91%;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+}
+.Tbtitle .tbb
+{
+  float: left;
+}
+.Tbimg
+{
+  float:right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 9%;
+  line-height: 100%;
+}
+.Tbimg image
+{
+  width: 15px;
+  height: 15px;
+}
+
+/* buttom layout */
+.bottom-layout {
+  width: 100%;
+}
+
+.bottom-wrapper {
+  width: 100%;
+}
+
+#share-icon {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+
+.shareImg{
+  /* background: #fb9d39; */
+  height: 300rpx;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+}
+.imgbox image
+{
+  width: 240rpx;
+  height: 240rpx;
+}
+.imgbox {
+  margin-bottom: 10px;
+  width: 230rpx;
+  height: 230rpx;
+  border-radius: 14rpx;
+  /* background: palegreen; */
+}
+.upImg{
+  width: 230rpx;
+  height: 230rpx;
+}
+
+.banner{
+  height:200rpx; 
+  width:100%;
+  display: flex;
+  display: -webkit-box;
+  flex-direction: column;
+} 
+.banner_Item{ 
+ margin-top: 6rpx;
+ width: 225rpx;
+ height: 225rpx;
+ line-height: 225rpx;
+ text-align: center;
+ border-radius: 10px;
+ background-color:rgb(166, 221, 235);
+ margin-right:10rpx;
+ overflow: hidden;
+ display: block;
+} 
+/* //选择 */
+.checked_parameter{
+  background: #36ab60;
+  padding: 2px;
+  font-size: 24rpx;
+  font-weight: 400;
+  border-radius: 10px;
+  color: #fff;
+  }
+
+
+  /* 标签样式 */
+  .tag{
+   margin-top: 2%;
+   width: 98%;
+   height: auto;
+  }
+  .intag{
+    width: 90%;
+    margin:5rpx ;
+    border-radius: 8rpx;
+    background:#fb9d39;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+  }
+  text{
+    margin:10px ;
+    color: white;
+  }
+  .concel{
+    position: relative;
+    top: 0;
+    right: 35rpx;
+  }
+  .concel image{
+    width: 50rpx;
+    height: 50rpx;
+  }
+  .tagConcel image
+  {
+    margin-left: 10%;
+    width: 50rpx;
+    height: 50rpx;
+  }
+  .tagConcel{
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+  }
+  .intable{
+    display: flex;
+    justify-content: space-between;
+    height: 80rpx;
+  }
+  .taginput{
+    height: 8%;
+    margin: 10rpx;
+    display: flex;
+    justify-content:space-between;
+  }
+  .taginput input
+  {
+    /* margin-top:3%; */
+    width: 80%;
+  }
+.myinput{
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+}
+  .addicon{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    /* background: yellowgreen; */
+  }
+  .inaddicon image{
+    width: 60rpx;
+    height: 60rpx;
+  }

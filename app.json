@@ -1,0 +1,52 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/share/share",
+    "pages/man/man",
+    "pages/detail/detail",
+    "pages/login/login",
+    "pages/message/message",
+    "pages/like/like",
+    "pages/hoard/hoard",
+    "pages/concern/concern"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "请求获取您的位置信息"
+    }
+  },
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "ai摄",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#929292",
+    "selectedColor": "#21b9df",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/img/map.png",
+        "selectedIconPath": "/img/map_h.png"
+      },
+      {
+        "pagePath": "pages/share/share",
+        "text": "分享",
+        "iconPath": "/img/share.png",
+        "selectedIconPath": "/img/share_h.png"
+      },
+      {
+        "pagePath": "pages/man/man",
+        "text": "我的",
+        "iconPath": "/img/man.png",
+        "selectedIconPath": "/img/man_h.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

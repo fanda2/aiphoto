@@ -1,0 +1,501 @@
+page{
+  background: white;
+}
+.container{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.bacimg{
+  width: 100%;
+  height: 400rpx;
+}
+.mybac{
+  width: 100%;
+  height: 400rpx;
+}
+.message{
+  position: relative;
+  top:-40rpx;
+  width: 100%;
+  height: 70%;
+  background: rgb(255, 255, 255);
+  border-radius: 40rpx;
+}
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+  display: none;
+  }
+.mtop{
+  /* height: 400px; */
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  /* justify-items: center; */
+}
+.headimg{
+  border: rgb(191, 219, 238) 6rpx solid;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background: sandybrown;
+}
+.headimg image{
+  width: 160rpx;
+  height: 160rpx;
+}
+.surface{
+  position: relative;
+  top: -60rpx;
+  z-index: 33;
+  width: 100%;
+  height: 400px;
+  /* background:royalblue ; */
+}
+/* 关注按钮 */
+.inconcern{
+  float: left;
+  width: 140rpx;
+  font-size: 24rpx;
+  line-height: 60rpx;
+  text-align: center;
+   border-radius: 40rpx;
+   border: rgb(87, 87, 87) 3rpx solid;
+   background: #d8d8d8;
+}
+.active{
+  border: rgb(219, 219, 219) 0rpx solid;
+  background: #fb9527;
+}
+.right{
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-end;
+  justify-content:flex-end;
+  width: 40%;
+}
+.chat{
+  margin:auto 0;
+  width:70rpx;
+  height: 70rpx;
+}
+.chat image{
+  /* margin: auto 0; */
+  width:70rpx;
+  height: 70rpx;
+}
+.inright{
+  height: 70%;
+  display: flex;
+  width: 100%;
+}
+.concern{
+  /* margin-left: 60rpx; */
+  margin:auto 60rpx;
+}
+.mid{
+  /* margin-top: 20rpx; */
+  width: 94%;
+  margin: 25rpx auto;
+  /* height: 100rpx; */
+  display: flex;
+  justify-content: space-between;
+}
+.selflike{
+  width: 50%;
+  display: flex;
+
+}
+.username{
+  margin: 10rpx;
+  font-weight: 600;
+  font-size: 30rpx;
+}
+.likebox{
+  color: rgb(97, 97, 97) ;
+  text-align: center;
+  width: 120rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 24rpx;
+}
+.bn1{
+  border-right: rgb(121, 121, 121) 2px solid;
+}
+.bn2{
+  border-right: rgb(121, 121, 121) 2px solid;
+}
+.bottom{
+  margin:0 auto;
+  padding-left: 10rpx;
+  width: 94%;
+  font-size: 24rpx;
+  color: rgb(97, 97, 97);
+}
+.introduce {
+  height: 70rpx;
+}
+.introduce text{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.bottomplus{
+  width: 94%;
+  margin: 0 auto;
+  height: 400px;
+  background: #fb9527;
+}
+
+
+
+/* 底部样式 */
+
+.bottombox {
+  width: 94%;
+  margin-left: 3%;
+  height: 100%;
+  font-size: 13px;
+}
+.active2 {
+  color: #fb9527;
+}
+
+.navbar .item.active:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  border-radius: 10px 10px 0 0;
+  color: #fb9527;
+}
+
+/* 底部框框内部样式 */
+.navbar {
+  flex: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  /* background: #fff; */
+  text-align: center;
+  font-size: 30rpx;
+  border-bottom: #cecece 3rpx solid;
+}
+
+.userinfo-avatar {
+  /* float: left; */
+  width: 128rpx;
+  height: 128rpx;
+  margin: 30rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: black;
+}
+
+.header {
+  margin: 90rpx 0 90rpx 50rpx;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  width: 650rpx;
+  height: 300rpx;
+  line-height: 450rpx;
+}
+
+.header image {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.content {
+  justify-content: center;
+  margin-left: 50rpx;
+  margin-bottom: 90rpx;
+}
+
+.content text {
+  display: block;
+  color: #9d9d9d;
+  margin-top: 40rpx;
+}
+
+/* 用户中心 */
+
+.hr {
+  width: 100%;
+  height: 15px;
+  /* background-color: #f4f5f6; */
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.title {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  font-size: 15px;
+}
+
+.detail2 {
+  font-size: 15px;
+  position: absolute;
+  right: 10px;
+  height: 50px;
+  line-height: 50px;
+  color: #888;
+}
+
+.line {
+  border: 1px solid #ccc;
+  opacity: 0.2;
+}
+
+.item {
+  position: relative;
+  /* flex: auto; */
+  width: 23%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  line-height: 80rpx;
+
+}
+
+.navbar .item.active {
+  color: #fb9527;
+}
+
+.navbar .item.active:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  border-radius: 10px 10px 0 0;
+  background: #fb9527;
+}
+
+.tab1 {
+  margin-top: 5px;
+  width: 100%;
+  /* text-align: center; */
+}
+
+.tab2 {
+  margin-top: 5px;
+  width: 100%;
+  /* text-align: center; */
+}
+
+.wenzhang {
+  /* margin: 4px; */
+  width: 96%;
+  padding-top: 14px;
+  /* background: chocolate; */
+  border-radius: 10px;
+}
+
+.myimg {
+  width: 310rpx;
+  height: 200rpx;
+  border-radius: 10px;
+  background: url('http://www.fjtbkyc.net/images/load.gif') navajowhite center center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.mymessage {
+  width: 94%;
+  margin: 4px auto;
+  display: flex;
+
+}
+
+.myimg image {
+  border-radius: 10px;
+  display: block;
+}
+
+.mytitle view {
+
+  width: 94%;
+  margin: 0px auto;
+  /* margin-top: 3rpx; */
+  font-size: 28rpx;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.myhand {
+  width: 20%;
+  /* padding:1%; */
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  /* background: chartreuse; */
+}
+
+.myhand image {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.myname {
+  margin-left: 5px;
+  width: 65%;
+  height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 30px;
+}
+
+.hart {
+  width: 35%;
+  height: 34px;
+  width: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+}
+
+.hart image {
+  padding: 1px;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+}
+
+.like {
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  width: 20%;
+}
+
+.Lcontainer {
+    width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.conterL {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 48%;
+  margin: 0 auto;
+  /* background: chartreuse; */
+}
+
+.conterR {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 48%;
+  margin: 0 auto;
+}
+
+.conter {
+  width: 100%;
+  text-align: center;
+  margin-top: 100rpx;
+
+}
+
+.localimg image {
+  width: 30rpx;
+  height: 30rpx;
+  float: left;
+  /* position: relative;
+  bottom:40px; */
+  /* z-index: 12; */
+}
+
+.inlocal {
+  position: relative;
+  bottom: 34rpx;
+  z-index: 0;
+  height: 30rpx;
+  /* float: left; */
+  /* bottom: 80px; */
+  display: flex;
+  font-size: 20rpx;
+  color: white;
+  /* text-shadow:  1rpx 1rpx 1rpx rgba(83,83,83,0.9); */
+  text-shadow: 1rpx 1rpx 1rpx rgba(85, 85, 85, 1.0);
+  width: 98%;
+  /* background: rgb(88,88,88,0.5); */
+  letter-spacing: 3rpx;
+  font-weight: 600;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.localname {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* white-space: pre-line; */
+  white-space: nowrap;
+}
+
+.inlocalname {
+  width: 100%;
+  /* height: 25rpx; */
+  display: block;
+  white-space: pre-line;
+  overflow: hidden;
+  /* height: auto;
+  /* white-space: pre-line; */
+
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* 当文本溢出包含元素时显示省略符号来代表被修剪的文本   */
+
+}
+
+/* 设置滚动列表 */
+.left {
+  height: 100%;
+  margin-left: 2%;
+  width: 96%;
+  display: inline-block;
+}
+
+.nofund {
+  width: 100%;
+  height: 240rpx;
+}
+.nofund image {
+  width: 300rpx;
+  height: 200rpx;
+
+}

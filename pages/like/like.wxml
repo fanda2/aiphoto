@@ -1,0 +1,23 @@
+<view wx:if="{{!mylike.length}}" class="nolike">
+   <view class="nolikeimg"><image src="/img/nolike.png"></image></view>
+   <view class="liketext">暂时没有人点赞你的作品哦~</view>
+</view>
+<view wx:else class="container">
+  <view wx:for="{{mylike}}" class="topitem" data-id="index" wx:key="{{id}}">
+    <view class="like-item" bindtap="goDetail" data-id="item.id" data-num="5" >
+     <view class="left"> 
+     <view class="handimg"><image src="{{item.handimg}}"></image></view>
+    </view>     
+    <view class="right">
+      <view class="username"><view>{{item.username}}</view></view>
+      <view class="essay">
+        <view class="title"><ivew><text style="font-size:25rpx;color:rgb(90, 90, 90)">喜欢了你的分享</text><text class="intitle">{{item.title}}</text></ivew>
+            <view class="date" style="font-size:25rpx;color:rgb(90, 90, 90)">{{item.date}}</view>
+         </view>
+        <view class="imgurl"><view class="inimg"><image mode="aspectFill"  bindload="event" src="{{item.imgurl}}"></image></view></view>
+      </view>
+    </view>
+  </view>
+    <view class="divLine"></view>
+  </view>
+</view>

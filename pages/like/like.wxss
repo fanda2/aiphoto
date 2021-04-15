@@ -1,0 +1,99 @@
+page{
+  background: rgb(236, 249, 255);
+}
+.container{
+  width: 97%;
+  margin: 0 auto;
+}
+.nolike{
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 50rpx;
+}
+.nolikeimg{
+  text-align: center;
+}
+.nolikeimg image{
+  width: 500rpx;
+  height: 500rpx;
+}
+.liketext{
+  text-align: center;
+}
+.intitle{
+  /* height: 150rpx; */
+  font-weight: 600;
+  color: rgb(90, 90, 90);
+  font-size: 32rpx;
+   display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  padding-top: 5rpx;
+  letter-spacing:2rpx;
+}
+.like-item{
+  display: flex;
+  justify-content: flex-start;
+  margin: 30rpx;
+}
+.handimg{
+ margin-top: 10rpx;
+  width: 100rpx;
+  height: 100rpx;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.handimg image{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.essay{
+  margin-top: 10rpx;
+  display: flex;
+  justify-content: space-between;
+  height: 160rpx;
+}
+.inimg{
+  height: 160rpx;
+  width: 160rpx;
+  border-radius: 10rpx;
+}
+.inimg image{
+  height: 180rpx;
+  width: 180rpx;
+}
+.username{
+  font-size: 40rpx;
+  font-weight: 600;
+}
+.title{
+  width: 68%;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.imgurl{ 
+  /* width: 40%; */
+  border-radius: 10rpx;
+  /* height: 0rpx; */
+  overflow: hidden;
+}
+.left{
+  width: 18%;
+  /* background: blanchedalmond; */
+}
+.right{
+  /* background: blue; */
+  margin-left: 1%;
+  width: 79%;
+}
+.divLine
+{
+  background: #d6d6d6;
+  width: 100%;
+  height: 3rpx;
+  margin-top: 40rpx;
+}

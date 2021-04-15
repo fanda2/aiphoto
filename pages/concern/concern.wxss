@@ -1,0 +1,85 @@
+page{
+  background: rgb(236, 249, 255);
+}
+.contertain{
+  width: 100%;
+}
+.noconcern{
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 50rpx;
+}
+.notext{
+  text-align: center;
+}
+.noconcernimg{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.noconcernimg image{
+  width: 400rpx;
+  height: 400rpx;
+}
+.divLine
+{
+  background: #c2c2c2;
+  width: 100%;
+  height: 3rpx;
+  margin: 10rpx;
+}
+.handimg{
+  width: 20%;
+}
+.inheadimg{
+  width: 80rpx;
+  height: 80rpx;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.inheadimg image{
+  width: 80rpx;
+  height: 80rpx;
+}
+.author{
+  margin-top: 30rpx;
+  display: flex;
+  justify-content: flex-start;
+}
+.allitem{
+  width: 90%;
+  margin: 0 auto;
+}
+.name{
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.right{
+  margin-left: 15rpx;
+}
+.introduce{
+  width: 90%;
+}
+.concel{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+  float:right;
+}
+.middle{
+  /* margin-top: 20rpx; */
+  width: 130rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 24rpx;
+  background: #fb9527;
+  color: white;
+  border-radius: 10rpx;
+}
+.outline{
+  display: flex;
+  justify-content: space-between;
+}

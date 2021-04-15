@@ -1,0 +1,11 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rpx 0;
+  box-sizing: border-box;
+} 
+page {
+  background-color: rgba(250,250,250,0.90);
+}

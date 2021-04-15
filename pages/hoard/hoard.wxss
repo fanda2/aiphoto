@@ -1,0 +1,124 @@
+page
+{
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color:black;
+  font-size: 18px;
+  background: rgb(236, 249, 255);
+}
+.nohoard{
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 50rpx;
+}
+.nohoardimg{
+  text-align: center;
+}
+.nohoardimg image{
+  width: 400rpx;
+  height: 400rpx;
+}
+.notext{
+  text-align: center;
+}
+.hoard-item{
+  width: 96%;
+  margin: 0 auto;
+  display: flex;
+  justify-items: flex-start;
+  /* background: rgba(233, 233, 233, 0.9); */
+  /* border-radius: 20px; */
+  border-bottom: rgb(185, 185, 185) 1px solid;
+}
+.hoardimage
+{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+  width: 35%;
+  overflow: hidden;
+  border-radius: 15px;
+}
+.himimg{
+  border-radius: 15px;
+  margin-left: 5px;
+  height: 220rpx;
+  width: 220rpx;
+  overflow: hidden;
+}
+/* .handimg image{
+   width: cover;
+} */
+.hoardtext{
+  padding: 15px;
+  width: 65%;
+  /* background: rebeccapurple; */
+}
+.essaytitle{
+  padding-top:15rpx;
+  font-size: 35rpx;
+  font-weight: 600;
+  height: 160rpx;
+  /* background: red; */
+}
+.essaytitle .indent{
+  text-indent:25rpx
+}
+.essaytitle text{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.rbottom{
+  display: flex;
+  justify-content: space-between;
+}
+.handimg{
+  width: 45rpx;
+  height: 45rpx;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.handimg image{
+  width: 45rpx;
+  height: 45rpx;
+}
+.bleft {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  color: rgb(131, 131, 131);
+  font-weight:500;
+  font-size: 25rpx;
+}
+.outleft{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+}
+.bright{
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+}
+.author{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+  margin-left: 9rpx;
+}
+.author view
+{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
