@@ -7,14 +7,14 @@ Page({
    */
   data: {
     mylike: [
-      // {
-      //   id: 1,
-      //   handimg: "http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-      //   username: "我超能睡反正你不行",
-      //   title: "花香四溢的春天来,花香四溢的春天来,花香四溢的春天来花香四溢的春天来",
-      //   imgurl: "http://www.fjtbkyc.net/mywx/sunny2.jpg",
-      //   date: "2000-01-26",
-      // },
+      {
+        id: 1,
+        handimg: "http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
+        username: "我超能睡反正你不行",
+        title: "花香四溢的春天来,花香四溢的春天来,花香四溢的春天来花香四溢的春天来",
+        imgurl: "http://www.fjtbkyc.net/mywx/sunny2.jpg",
+        date: "2000-01-26",
+      },
     ],
     imageHeight: 0,
     imageWidth: 0
@@ -35,59 +35,21 @@ Page({
     wx.showLoading({
       title: '玩命加载中'
       })
+      setTimeout(function() {
+        wx.hideLoading({
+          success: (res) => {},
+          fail: (res) => {},
+          complete: (res) => {},
+        })
+     }, 1000);
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
-      backgroundColor: '#1ba1f0',
+      backgroundColor: '#52e7e0',
       animation: {
-        duration: 300,
+        duration: 500,
         timingFunc: 'easeIn'
       }
     })
-    var that = this
-    var token = app.globalData.token;
-
-    wx.request({
-      url: 'https://storymap.sherlockouo.com/like/list',
-      method: "GET",
-      header: {
-        'Authorization': token,
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        // posterid: that.data.essayall.id,
-        // tolike: that.data.essayall.userid
-      },
-      success(res) {
-        wx.hideLoading();
-        wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
-        console.log("collect list ", res)
-        var ls = res.data.data
-        for (var key in ls) {
-          var marker = ls[key];
-          marker.id = marker.poster.id
-          var imgurls = marker.poster.files.split("#");
-
-          for (var i = 0; i < imgurls.length; i++) {
-            if (imgurls[i] == "") imgurls.splice(i, 1);
-          }
-          imgurls = Array.from(new Set(imgurls))
-          //cover
-          marker.handimg = marker.userEntity.avatar;
-          marker.username = marker.userEntity.nickname
-          marker.like = marker.poster.likes;
-          marker.imgurl = imgurls[0];
-          marker.title = marker.poster.title
-          marker.local = marker.poster.address
-          marker.concern = Math.floor(Math.random() * (1000 - 10)) + 10;
-          // console.log('marker',marker)
-        }
-        that.setData({
-          mylike:res.data.data
-        })
-      },
-      fail(res) {}
-    })
-
   },
 
   /**

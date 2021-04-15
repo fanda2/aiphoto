@@ -1,0 +1,52 @@
+<view class="page" data-weui-theme="{{theme}}">
+	<view class="page__hd">
+		<view class="page__title">Badge</view>
+		<view class="page__desc">徽章</view>
+	</view>
+	<view class="page__bd">
+		<view class="weui-cells__title">新消息提示跟摘要信息后，统一在列表右侧</view>
+		<view class="weui-cells">
+			<view class="weui-cell weui-cell_active weui-cell_access">
+				<view class="weui-cell__bd">单行列表</view>
+				<view class="weui-cell__ft" style="font-size: 0;">
+					<text class="demo_badge_tips">详细信息</text>
+					<text class="weui-badge weui-badge_dot"></text>
+				</view>
+			</view>
+		</view>
+		<view class="weui-cells__title">未读数红点跟在主题信息后，统一在列表左侧</view>
+		<view class="weui-cells demo_badge_cells">
+			<view class="weui-cell weui-cell_active">
+				<view class="weui-cell__hd">
+					<image src="../images/pic_160.png"></image>
+					<text class="weui-badge">8</text>
+				</view>
+				<view class="weui-cell__bd">
+					<view>联系人名称</view>
+					<view class="demo_badge_desc">摘要信息</view>
+				</view>
+			</view>
+			<view class="weui-cell weui-cell_active weui-cell_access">
+				<view class="weui-cell__bd">
+					<text class="demo_badge_title">单行列表</text>
+					<text class="weui-badge">8</text>
+				</view>
+				<view class="weui-cell__ft"></view>
+			</view>
+			<view class="weui-cell weui-cell_active weui-cell_access">
+				<view class="weui-cell__bd">
+					<text class="demo_badge_title">单行列表</text>
+					<text class="weui-badge">8</text>
+				</view>
+				<view class="weui-cell__ft">详细信息</view>
+			</view>
+			<view class="weui-cell weui-cell_active weui-cell_access">
+				<view class="weui-cell__bd">
+					<text class="demo_badge_title">单行列表</text>
+					<text class="weui-badge">New</text>
+				</view>
+				<view class="weui-cell__ft"></view>
+			</view>
+		</view>
+	</view>
+</view>

@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: -webkit-linear-gradient(top, #1ca1f0, #e9ebee, #e9ebee, #e9ebee);
+  background: -webkit-linear-gradient(top, #52e7e0, #e9ebee, #e9ebee, #e9ebee);
   color: black;
   font-size: 18px;
 }
@@ -68,7 +68,7 @@
   text-align: center;
   font-size: 12px;
   color: white;
-  background-color: #40aef0;
+  background-color: #3fbbb5;
   border-radius: 14px;
   border: white 1px solid;
 }
@@ -448,7 +448,9 @@ display: none;
   width: 100%;
   height: 120px;
 }
-
+.username{
+   font-size: 24rpx;
+}
 .nofund image {
   width: 150px;
   height: 100px;
@@ -461,7 +463,7 @@ display: none;
 .btn1 {
   width: 80rpx;
   height: 80rpx;
-  background: -webkit-linear-gradient(top, #28a5f0, #58b7ef);
+  background: -webkit-linear-gradient(top, #28f0f0, #74dee6);
   color: #696969;
   border-radius: 0rpx;
   

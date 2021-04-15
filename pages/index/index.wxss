@@ -43,19 +43,7 @@
 }
 .active {
   color: #fb9527;
-}
-
-.active:after {
-  /* width: 100px; */
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -10;
-  left: 0;
-  right: 0;
-  height: 8px;
-  border-radius: 10px 10px 0 0;
-  background: #fb9527;
+  border-bottom: #fb9527 8px solid;
 }
 
 .navbar .activeL {

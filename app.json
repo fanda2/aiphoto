@@ -9,7 +9,8 @@
     "pages/message/message",
     "pages/like/like",
     "pages/hoard/hoard",
-    "pages/concern/concern"
+    "pages/concern/concern",
+    "pages/myinfo/myinfo"
   ],
   "permission": {
     "scope.userLocation": {

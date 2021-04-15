@@ -6,35 +6,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sharenavbar: [
-      // {
-      //   id:6,
-      //   imgurl:"http://www.fjtbkyc.net/mywx/sunny2.jpg",
-      //   title:"这是title6",
-      //   headimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-      //   username:"Brank",
-      //   local:'四川省成都市金牛区西华大道16号',
-      //   like:112,
-      //   concern:10
-      // }
-    ],
-    lostnavbar: [
-      // {
-      // id:1,
-      // imgurl:"http://www.fjtbkyc.net/mywx/umber.jpg",
-      // title:"丢失一把雨伞",
-      // headimg:"http://www.fjtbkyc.net/mywx/services1.png",
-      // username:"bigSur",
-      // local:'四川省成都市青羊区光华大道与光耀三路路口',
-      // like:1034,
-      // concern:10
-      // },
-    ],
+    sharenavbar: [{
+      id: 6,
+      imgurl: "http://www.fjtbkyc.net/mywx/sunny2.jpg",
+      title: "这是title6",
+      headimg: "http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
+      username: "Brank",
+      local: '四川省成都市金牛区西华大道16号',
+      like: 112,
+      concern: 10
+    }],
+    lostnavbar: [{
+      id: 1,
+      imgurl: "http://www.fjtbkyc.net/mywx/umber.jpg",
+      title: "丢失一把雨伞",
+      headimg: "http://www.fjtbkyc.net/mywx/services1.png",
+      username: "bigSur",
+      local: '四川省成都市青羊区光华大道与光耀三路路口',
+      like: 1034,
+      concern: 10
+    }, ],
     userinfo: {},
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isHide: false,
-    navbar: ['我的分享', '失物招领'],
+    navbar: ['我的分享', '草稿箱'],
     currentTab: 0,
     tal: 0,
     shareCount: 1, //分享的数量
@@ -43,7 +39,7 @@ Page({
     Smodeheight: [],
     Lmodewith: [],
     Lmodeheight: [],
-    islogin:true,  //判断用户是否登录
+    islogin:1, //判断用户是否登录
   },
   navbarTap: function (e) {
     this.setData({
@@ -59,53 +55,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    
-   
+
+
   },
   goDetail: function (e) {
-    var that = this
-    var postid = e.currentTarget.dataset.id
-    var userid = 0;
-    wx.request({
-      url: 'https://storymap.sherlockouo.com/poster/info',
-      method: "GET",
-      data: {
-        posterId: postid,
-      },
-      success(res) {
-        if (res.data.code == 0) {
-          new Promise((resolve, reject) => {
-            var marker = res.data.data;
-            userid = marker.userid;
-            resolve(userid)
-          }).then(() => {
-            app.globalData.currentMarkerId = e.currentTarget.dataset.id
-            if (app.globalData.token.length == 0) {
-              wx.navigateTo({
-                url: '/pages/login/login?pagetype=' + 3 + "&userid=" + userid,
-              })
-            } else {
-              wx.navigateTo({
-                url: '/pages/detail/detail?pageid=' + 3 + "&userid=" + userid,
-              })
-            }
-          })
-        }
-      }
-    })
-  },
-  gologin:function(e)
-  {
-     wx.redirectTo({
-        url: '/pages/login/login?pagetype=' + 3,
+    //直接进入详情查看界面
+      wx.navigateTo({
+        url: '/pages/detail/detail?pageid=' + 3 + "&userid=" + userid,
       })
   },
-  goMessage:function(e)
-  {
-    var userid=app.globalData.userInfo.id
+  
+  //去登录的状态
+  gologin: function (e) {
+    wx.redirectTo({
+      url: '/pages/login/login?pagetype=' + 3,
+    })
+  },
+
+  goMessage: function (e) {
+    var userid = app.globalData.userInfo.id
     // console.log(app.globalData.userInfo.id);
     wx.navigateTo({
-      url:'/pages/message/message?mystyle='+1+'&userid='+userid,
+      url: '/pages/message/message?mystyle=' + 1 + '&userid=' + userid,
     })
   },
   /**
@@ -172,6 +143,8 @@ Page({
       Smodeheight: newmodeheight
     })
   },
+
+
   // 获取失物招领图片宽高
   LimageLoad: function (e) {
     var k = e.currentTarget.dataset.index;
@@ -219,83 +192,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
-      this.setData({
-        islogin:app.globalData.token.length != 0,
-      })
-      this.setData({
-        userinfo: app.globalData.userInfo
-      })
-      // console.log("获取到的结果信息！", app.globalData.userInfo);
-    var that = this
-    var token = app.globalData.token;
-    // console.log('token ', token.length)
-    if (token.length != 0) {
-      wx.request({
-        url: 'https://storymap.sherlockouo.com/poster/self',
-        method: "GET",
-        header: {
-          Authorization: token,
-        },
-        data: {
-          type: 1,
-          pageNum: 1,
-          pageSize: 100
 
-        },
-        success(res) {
-          // console.log('res is  ', res)
-          var ls = res.data.data.list;
-
-          for (var key in ls) {
-            var marker = ls[key];
-            marker.id = marker.id;
-            marker.userid = marker.userid;
-            marker.local = marker.address;
-            marker.headimg = marker.avator;
-            marker.like = marker.likes;
-            //cover
-            marker.imgurl = marker.files.substr(1, 83);
-            // console.log('marker', marker)
-          }
-          that.setData({
-            sharenavbar: res.data.data.list
-          })
-          console.log("查看一下数据：",that.data.sharenavbar);
-        }
-      })
-      wx.request({
-        url: 'https://storymap.sherlockouo.com/poster/self',
-        method: "GET",
-        header: {
-          Authorization: token,
-        },
-        data: {
-          type: 2,
-          pageNum: 1,
-          pageSize: 100
-
-        },
-        success(res) {
-          // console.log('res is lost  ', res.data.data.list)
-          var ls = res.data.data.list;
-  
-          for (var key in ls) {
-            var marker = ls[key];
-            marker.id = marker.id;
-            marker.userid = marker.userid;
-            marker.local = marker.address;
-            marker.headimg = marker.avator;
-            marker.like = marker.likes;
-            marker.imgurl = marker.files.substr(1, 82);
-            console.log('marker', marker)
-          }
-          that.setData({
-            lostnavbar: res.data.data.list
-          })
-        }
-      })
-    }
+    this.setData({
+      islogin: 1,
+    })
+    this.setData({
+      userinfo: app.globalData.userInfo
+    })
 
   },
 

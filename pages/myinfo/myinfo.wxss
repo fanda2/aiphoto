@@ -1,0 +1,139 @@
+@import '/weui-wxss-master/dist/style/weui.wxss';
+
+.titleCss {
+  width: 100%;
+  height: 400rpx;
+  text-align: center;
+  background: url('http://www.fjtbkyc.net/mywx/bacimg.jpg');
+  background-size: cover;
+}
+
+.setBac {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 60rpx;
+}
+
+.headimg {
+  width: 80px;
+  height: 90px;
+  overflow: hidden;
+}
+
+.box {
+  margin-top: 30px;
+}
+
+.head {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: #a5a5a5;
+  overflow: hidden;
+}
+
+.btn {
+  background-color: #ffffff;
+  width: 120px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 40px;
+}
+
+.addBnCss {
+  margin-top: 5vh;
+}
+
+.iconCss {
+  width: 3.5vh;
+  height: 3.5vh;
+}
+
+.labelCss {
+  display: flex;
+}
+
+.textCss {
+  font-size: 24rpx;
+  margin-left: 5vh;
+  line-height: 3.5vh;
+}
+
+.inputCss {
+  margin-left: 2vh;
+  width: 90%;
+}
+
+.place-holder {
+  font-size: 28rpx;
+}
+
+.weui-cell {
+  height: 40px;
+}
+
+.weui-cell__bd picker {
+  margin-left: 2vh;
+}
+
+.textplus {
+  margin-top: 4vh;
+}
+.signheigh{
+  height: 10vh;
+}
+
+.inputbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top: 10rpx;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 32rpx;
+  color: #535353;
+}
+
+.sexCheck {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+}
+
+.inpbox {
+  width: 100%;
+  height: auto;
+}
+
+.inp {
+  position: relative;
+  width: 100%;
+  height: 50rpx;
+}
+
+.radiogroup {
+  display: flex;
+  flex-direction: row;
+}
+
+.radiobox {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20rpx;
+}
+
+.tui-picker-detail {
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #fff;
+  font-size: 30rpx;
+  overflow: hidden;
+}

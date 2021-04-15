@@ -36,22 +36,7 @@ Page({
   },
 
   parameterTap: function (e) {
-    var that = this
-    var type = e.currentTarget.dataset.id
-    if (type == 1) {
-      this.setData({
-        ac2: 1
-      })
-    } else {
-      this.setData({
-        ac2: 0
-      })
-    }
-    this.setData({
-      title_type: type
-    })
-    console.log(this.data.title_type);
-
+    console.log("点击存入草稿");
   },
 
   /**

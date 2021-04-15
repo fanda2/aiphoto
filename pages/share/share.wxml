@@ -2,8 +2,7 @@
 	<view class="shareTop">
 		<view class="shareBtn2 btn" bindtap="post"> 发布</view>
 		<view class="shareBnt1 inbtn">
-			<view class="btn text-over {{ac2==1 ? 'active' : ''}}" data-id="1" bindtap="parameterTap">故事分享</view>
-			<view class="btn text-over {{ac2==0 ? 'active' : ''}}" data-id="2" bindtap="parameterTap">失物招领</view>
+			<view class="btn text-over" bindtap="parameterTap">存草稿</view>
 		</view>
 	</view>
 	<!-- 分享，带标题，内容，图片 -->

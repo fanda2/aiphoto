@@ -75,6 +75,18 @@
         {
           "name": "首页",
           "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "用户信息界面",
+          "pathName": "pages/man/man",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "用户详细信息界面",
+          "pathName": "pages/message/message",
           "scene": null
         }
       ]

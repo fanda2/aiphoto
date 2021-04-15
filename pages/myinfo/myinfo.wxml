@@ -1,0 +1,66 @@
+<!-- 用户信息界面 -->
+<view>
+    <view class="titleCss">
+        <view class="setBac">
+            <view class="head box">
+                <image src="{{userhead}}" mode="scaleToFill" class="headimg" bindtap="imgShow" data-url="{{userhead}}"></image>
+            </view>
+            <view class="btn box" bindtap="setbackground">设置背景</view>
+        </view>
+    </view>
+
+
+    <!-- 是一个提交表单 -->
+    <view class="weui-cells weui-cells_after-title mbody">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label labelCss">
+                    <text class="textCss">昵称:</text>
+                </view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input inputCss" placeholder-class="place-holder" disabled="true" value="{{username}}"
+                    placeholder="请输入您的昵称" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label labelCss">
+                    <text class="textCss">城市:</text>
+                </view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker bindchange="changeRegin" mode="region" value="{{region}}">
+                    <view class="tui-picker-detail">{{region1}}  {{region2}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label labelCss">
+                    <text class="textCss">生日:</text>
+                </view>
+            </view>
+
+            <view class="weui-cell__bd">
+                <picker mode="date" value="{{date}}" start="1900-01-01" end="2021-10-08" bindchange="changeDate">
+                    <view class="tui-picker-detail">
+                        {{date}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input signheigh">
+            <view class="weui-label labelCss">
+                <text class="textCss">签名:</text>
+            </view>
+            <view class="weui-cell__bd textplus">
+                <textarea auto-height="true"  style="font-size:26rpx" class="weui-input inputCss" maxlength="55" placeholder-class="place-holder" value="{{introduce}}" placeholder="说两句吧" />
+            </view>
+        </view>
+    </view>
+    <view class="page__bd page__bd_spacing addBnCss">
+        <button class="weui-btn" type="primary" bindtap="addUser">确定</button>
+    </view>
+
+</view>
