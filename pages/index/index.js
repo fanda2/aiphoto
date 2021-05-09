@@ -66,7 +66,7 @@ Page({
       concern:10
     }
     ],
-    label:[{name:"北京",id:1},
+    label:[{name:"推荐",id:1},
          {name:"成都",id:2},
          {name:"最新",id:3},
           {name:"风景",id:4},

@@ -1,0 +1,85 @@
+<view class="top" style="height:{{vaHe}}px">
+  <!--顶部提示-->
+  <view class='cover-tip-wrapper' id='input-address-layout' wx:if='{{showTopTip}}'
+    style='height:{{inputHe}}px;  margin-top: {{vaHe-inputHe-10}}px;'>
+    <view class='cover-tip-content'>
+      <view style="margin:6rpx">
+        <image class='input-address gray-text' src='/img/notification.png'
+          style="width:{{inputHe-8}}px;height:{{inputHe-8}}px;margin-top:{{inputHe/4}}px"></image>
+      </view>
+      <input placeholder-style='font-size:18rpx;' bindinput='bindAddressInput' confirm-type="search"
+        value='{{inputAddress}}' placeholder='{{warningText}}'></input>
+      <view class='cancel-wrapper' bindtap='deleteInput' wx:if='{{inputAddress}}'>
+        <view>
+          <image class='delete-input' style="width:{{inputHe-4}}px;height:{{inputHe-4}}px;margin-top:{{vaHe/16}}px"
+            src='/img/delete.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="container-layout">
+
+  <!--地图-->
+  <view class='map-wrapper' style='height:{{mapHeight}}'>
+    <cover-view class='line' style="top:10%">
+      <cover-view wx:for="{{resultList}}" class="chanceadress" bindtap="chance" data-idx="{{index}}">
+        <cover-view class="citytitle">{{item.title}}</cover-view>
+        <cover-view class="cityaddress">{{item.address}}</cover-view>
+      </cover-view>
+    </cover-view>
+    <map class='map' id='myMap' longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" show-location="true"
+      markers="{{markers}}" bindmarkertap="bindMakertap"  data-item="{{markers}}" bindcontroltap='controlTap'
+      bindregionchange='regionChange' controls='{{controls}}' bindtap='bindMapTap' style="position: relative;">
+    </map>
+    <!--定位当前位置-->
+    <cover-view class='cover-layout'>
+      <cover-image bindtap='selfLocationClick' class='self-location' src='/img/self-local.png'></cover-image>
+    </cover-view>
+    <!-- <cover-view class="share-btn">
+      <cover-view>
+        <cover-image bindtap="toShare" src="/img/addshare.png"></cover-image>
+      </cover-view>
+    </cover-view> -->
+  </view>
+
+
+  <!-- 底部布局 -->
+  <view class='bottom-layout' id='bottom-layout'>
+    <view class='bottom-wrapper'>
+      <view upload-wrapper wx:if='{{showConfirm}}'>
+        <!--点击上传信息-->
+        <form bindsubmit='confirmClick'>
+          <view class='cancel-publish-layout'>
+            <view class='cancel-btn flex-center' bindtap='cancelClick'>取消</view>
+            <button class='confirm-btn flex-center' form-type='submit'>发布</button>
+            <view class='split-blur-bg' style='position:absolute;top:0'></view>
+          </view>
+          <view class='line'></view>
+          <view class='location-wrapper' bindtap='chooseAddress'>
+            <image class='location-icon' src='/img/location-icon.png'></image>
+            <view class='address-wrapper'>
+              <text class='location-address'>{{selectAddress}}</text>
+            </view>
+          </view>
+
+          <view class='info-wrapper'>
+            <textarea class='info-text' placeholder='您想对其他人说些什么？' name='message'
+              placeholder-style='color:#CCCCCC'></textarea>
+          </view>
+          <view class='upload-image-root'>
+            <view class='upload-image-wrapper'>
+              <image class='default-image' src='/img/default-camera-image.png' bindtap='takePhoto'
+                wx:if='{{!uploadImagePath}}'></image>
+              <image class='default-image' src='{{uploadImagePath}}' bindtap='previewSelectImage'
+                wx:if='{{uploadImagePath}}' mode='aspectFill'></image>
+              <!--删除图片的图标-->
+              <image class='delete-image-icon' src='/img/delete-icon.png' wx:if='{{uploadImagePath}}'
+                bindtap='deleteSelectImage'></image>
+            </view>
+          </view>
+        </form>
+      </view>
+    </view>
+  </view>
+</view>

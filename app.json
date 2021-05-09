@@ -10,7 +10,8 @@
     "pages/like/like",
     "pages/hoard/hoard",
     "pages/concern/concern",
-    "pages/myinfo/myinfo"
+    "pages/myinfo/myinfo",
+    "pages/address/address"
   ],
   "permission": {
     "scope.userLocation": {
@@ -31,14 +32,14 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "/img/map.png",
-        "selectedIconPath": "/img/map_h.png"
+        "iconPath": "/img/home.png",
+        "selectedIconPath": "/img/home_h.png"
       },
       {
-        "pagePath": "pages/share/share",
-        "text": "分享",
-        "iconPath": "/img/share.png",
-        "selectedIconPath": "/img/share_h.png"
+        "pagePath": "pages/address/address",
+        "text": "地图",
+        "iconPath": "/img/map.png",
+        "selectedIconPath": "/img/map_h.png"
       },
       {
         "pagePath": "pages/man/man",

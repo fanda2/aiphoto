@@ -87,6 +87,13 @@
         {
           "name": "用户详细信息界面",
           "pathName": "pages/message/message",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
           "scene": null
         }
       ]
