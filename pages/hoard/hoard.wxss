@@ -7,7 +7,7 @@ page
   right: 0;
   color:black;
   font-size: 18px;
-  background: rgb(236, 249, 255);
+  background: rgb(204, 238, 235);
 }
 .nohoard{
   width: 80%;

@@ -1,5 +1,5 @@
 page{
-  background: rgb(236, 249, 255);
+  background: rgb(204, 238, 235);
 }
 .container{
   width: 97%;

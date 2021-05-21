@@ -12,16 +12,16 @@
 
 .outuserinfo {
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  /* justify-content: space-between; */
 }
 
 .userinfo {
   display: flex;
   justify-content: left;
-  /* flex-direction: column; */
   align-items: center;
   /* background:; */
-  width: 100%;
+  width: 85%;
   height: 300rpx;
 }
 .nonusershow {
@@ -103,7 +103,7 @@
 .bottombox {
   width: 90%;
   margin-left: 5%;
-  height: 50%;
+  height: 40%;
   background-color: white;
   border-radius: 10px;
   font-size: 13px;
@@ -190,29 +190,23 @@ display: none;
 }
 
 .line {
-  border: 1px solid #ccc;
+  border: 1px solid rgb(124, 121, 121);
   opacity: 0.2;
 }
 
 /* 底部框框内部样式 */
 .navbar {
-  padding-top: 10px;
+  padding-top: 5px;
   flex: none;
   width: 100%;
-  display: flex;
-  justify-content: space-around;
+  /* display: flex;
+  justify-content: space-around; */
   background: #fff;
   text-align: center;
   font-size: 16px;
-  border-bottom: #cecece 3rpx solid;
+  /* border-bottom: #cecece 3rpx solid; */
 }
 
-/* .navbar .item{
-  position: relative;
-  flex: auto;
-  text-align: center;
-  line-height: 80rpx;
-} */
 .item {
   position: relative;
   /* flex: auto; */
@@ -422,8 +416,6 @@ display: none;
   display: block;
   white-space: pre-line;
   overflow: hidden;
-  /* height: auto;
-  /* white-space: pre-line; */
 
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -433,17 +425,7 @@ display: none;
 }
 
 /* 设置滚动列表 */
-.left {
-  height: 80%;
-  margin-left: 2%;
-  width: 96%;
-  display: inline-block;
-}
 
-/* .leftlist{
-    font-size:12px;
-    padding:10px;
-    } */
 .nofund {
   width: 100%;
   height: 120px;
@@ -451,32 +433,61 @@ display: none;
 .username{
    font-size: 24rpx;
 }
-.nofund image {
-  width: 150px;
-  height: 100px;
-
-}
 
 .servive{
-    width: 140rpx;
+  float: left;
+    width: 100rpx;
   }
-.btn1 {
-  width: 80rpx;
-  height: 80rpx;
-  background: -webkit-linear-gradient(top, #28f0f0, #74dee6);
-  color: #696969;
-  border-radius: 0rpx;
-  
-  /* font-size: 16rpx; */
-}
-
+  .btn1 {
+    height: 80rpx;
+    background: -webkit-linear-gradient(top, #28f0e6, #7eebe5);
+    color: #696969;
+    border-radius: 0rpx;
+    
+    /* font-size: 16rpx; */
+  }
 .btnImg {
   width: 60rpx;
   height: 60rpx;
   float: left;
 }
 
-.btn1::after {
-  background: rgb(248, 248, 248);
-  border: 0;
+.list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 80rpx;
+  margin-top: 10rpx;
+  position: relative; /*父元素位置要设置为相对*/
+}
+
+.item-image {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 20rpx;
+}
+
+.item-text {
+  color: gray;
+  font-size: 35rpx;
+  margin-left: 20rpx;
+}
+
+.image-jiantou {
+  width: 20rpx;
+  height: 35rpx;
+  position: absolute; /* 要约束所在位置的子元素的位置要设置成绝对 */
+  right: 0; /* 靠右调节 */
+  margin-right: 35rpx
+}
+
+.unlogin{
+  width: 90%;
+  margin: 15px auto;
+  background: #fff;
+  border-radius: 10px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
 }

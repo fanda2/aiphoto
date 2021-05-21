@@ -28,6 +28,17 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+         wx.setStorage({
+           data:  res.userInfo,
+           key: 'userInfo',
+           success: (res) => {
+            console.log("保存成功！")
+           },
+           fail: (res) => {
+            console.log("保存失败！")
+           },
+           complete: (res) => {},
+         })
         this.goback()
       }
     })
@@ -79,7 +90,7 @@ goback: function (e) {
     })
   } else if (this.data.pagetype == 3) {
     wx.switchTab({
-      url: '/pages/man/man?userInfo?=' + app.globalData.userInfo
+      url: '/pages/man/man'
     })
   }
 

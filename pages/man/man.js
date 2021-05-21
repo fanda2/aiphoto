@@ -39,7 +39,7 @@ Page({
     Smodeheight: [],
     Lmodewith: [],
     Lmodeheight: [],
-    islogin:1, //判断用户是否登录
+    islogin:false, //判断用户是否登录
   },
   navbarTap: function (e) {
     this.setData({
@@ -51,11 +51,31 @@ Page({
 
   },
 
+  // 退出登录
+  unlogin:function(e)
+  {
+    wx.showModal({
+      title: '提示',
+      content: '是否退出登录',
+      success (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
-
+  onLoad: function (e) {
+    console.log("登录状态未：")
+    this.setData({
+      islogin:this.options.islogin
+    })
 
   },
   goDetail: function (e) {
@@ -192,9 +212,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
     this.setData({
-      islogin: 1,
+      islogin: true,
     })
     this.setData({
       userinfo: app.globalData.userInfo
