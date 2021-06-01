@@ -352,6 +352,7 @@ Page({
     var that = this
     var postid = app.globalData.currentMarkerId
     var userid = 0;
+    var currentID=0
     wx.request({
       url: 'https://storymap.sherlockouo.com/poster/info',
       method: "GET",
@@ -359,21 +360,17 @@ Page({
         posterId: postid,
       },
       success(res) {
+        // console.log("结果是：");
         if (res.data.code == 0) {
           new Promise((resolve, reject) => {
             var marker = res.data.data;
             userid = marker.userid;
+            currentID=marker.id;
             resolve(userid)
           }).then(() => {
-            if (app.globalData.token.length == 0) {
               wx.navigateTo({
-                url: '/pages/login/login?pagetype=' + 1 + "&userid=" + userid,
+                url: '/pages/detail/detail?pageid=' + 1 + "&userid=" + userid+"&currentID="+currentID,
               })
-            } else {
-              wx.navigateTo({
-                url: '/pages/detail/detail?pageid=' + 1 + "&userid=" + userid,
-              })
-            }
           })
         }
       }
@@ -547,17 +544,17 @@ Page({
     consoleUtil.log('查询当前坐标 marker 点信息')
     //调用请求 marker 点的接口就好了
     wx.request({
-      url: 'https://storymap.sherlockouo.com/poster/all',
+      url: app.globalData.baseUrl+'/Pst/poster_all', 
       data: {
         // 或许可以改为根据地理位置信息提供服务
-        pageNum: 1,
-        pageSize: 100
+        page: 1,
+        limit: 50
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       success(res) {
-        var ls = res.data.data.list;
+        var ls = res.data.data.row;
         const v = new Promise((resolve, reject) => {
           resolve(ls)
         })
@@ -565,9 +562,6 @@ Page({
           console.log('res type', res[0])
           that.createMarker(res)
         })
-        // that.setData({
-        //   markers:ls
-        // })
       }
     })
   },

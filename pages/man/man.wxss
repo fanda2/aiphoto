@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: -webkit-linear-gradient(top, #52e7e0, #e9ebee, #e9ebee, #e9ebee);
+  background: -webkit-linear-gradient(top, #74ece6, #e9ebee, #e9ebee, #e9ebee);
   color: black;
   font-size: 18px;
 }
@@ -114,7 +114,7 @@
   width: 128rpx;
   height: 128rpx;
   margin: 30rpx;
-  border-radius: 50%;
+  border-radius: 10px;
 }
 
 .userinfo-nickname {
@@ -470,7 +470,7 @@ display: none;
 
 .item-text {
   color: gray;
-  font-size: 35rpx;
+  font-size: 30rpx;
   margin-left: 20rpx;
 }
 

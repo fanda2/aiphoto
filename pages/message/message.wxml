@@ -50,7 +50,7 @@
               <view class="nofund">
                 <image src="/img/nofund.png"></image>
               </view>
-              <view style="font-size: 24rpx;">ta还未分享任何内容哦~</view>
+              <view style="font-size: 24rpx;">还未收藏任何内容哦~</view>
             </view>
             <view class="liftlist" wx:else class="Lcontainer">
               <view class="conterL">
@@ -95,91 +95,6 @@
                       <image bindload="imageLoad" src="{{item.imgurl}}"
                         style="height:{{Smodeheight[index]}}rpx;width:{{Smodewith[index]}}rpx" data-index="{{index}}"
                         bindtap="goDetail" data-id="{{item.id}}"></image>
-                    </view>
-                    <view class="inlocal">
-                      <view class="localimg">
-                        <image src="/img/location-icon2.png"></image>
-                      </view>
-                      <view class="localname">
-                        <view class="inlocalname">{{item.local}}</view>
-                      </view>
-                    </view>
-
-                    <view class="mytitle">
-                      <view>{{item.title}}</view>
-                    </view>
-                    <view class="mymessage">
-                      <view class="myhand">
-                        <image src="{{item.avatar}}" mode="scaleToFill"></image>
-                      </view>
-                      <view class="myname">{{item.username}}</view>
-                      <view class="hart">
-                        <view>
-                          <image src="/img/bottom-unpraise.png"></image>
-                        </view>
-                      </view>
-                      <view class="like">{{item.like}}</view>
-                    </view>
-                  </view>
-                </block>
-              </view>
-            </view>
-          </view>
-        </scroll-view>
-        <!--失物招领-->
-        <scroll-view hidden="{{currentTab!==1}}" class="left" scroll-y>
-          <view class="tab2">
-            <!-- 失物招领还未发布任何内容哦~ -->
-            <view wx:if="{{!lostnavbar.length}}" class="conter">
-              <view class="nofund">
-                <image src="/img/nofund.png"></image>
-              </view>
-              <view style=" font-size: 24rpx;">失物招领没有任何内容哦~</view>
-            </view>
-            <view wx:else class="Lcontainer">
-              <view class="conterL">
-                <block wx:for="{{lostnavbar}}" dataidx="{{index}}" class="text-item" wx:key="idx" bindtap="navbarTap">
-                  <view class="wenzhang" wx:if="{{index%2==0}}">
-                    <view class="myimg">
-                      <image bindload="LimageLoad" src="{{item.imgurl}}" data-index="{{index}}"
-                        style="height:{{Lmodeheight[index]}}rpx;width:{{Lmodewith[index]}}rpx" bindtap="goDetail"
-                        data-id="{{item.id}}">
-                      </image>
-                    </view>
-                    <view class="inlocal">
-                      <view class="localimg">
-                        <image src="/img/location-icon2.png"></image>
-                      </view>
-                      <view class="localname">
-                        <view class="inlocalname">{{item.local}}</view>
-                      </view>
-                    </view>
-                    <view class="mytitle">
-                      <view>{{item.title}}</view>
-                    </view>
-                    <view class="mymessage">
-                      <view class="myhand">
-                        <image src="{{item.avatar}}" mode="scaleToFill"></image>
-                      </view>
-                      <view class="myname">{{item.username}}</view>
-                      <view class="hart">
-                        <view>
-                          <image src="/img/bottom-unpraise.png"></image>
-                        </view>
-                      </view>
-                      <view class="like">{{item.like}}</view>
-                    </view>
-                  </view>
-                </block>
-              </view>
-              <view class="conterR">
-                <block wx:for="{{lostnavbar}}" dataidx="{{index}}" class="text-item" wx:key="idx" bindtap="navbarTap">
-                  <view class="wenzhang" wx:if="{{index%2!=0}}">
-                    <view class="myimg">
-                      <image bindload="LimageLoad" src="{{item.imgurl}}" data-index="{{index}}"
-                        style="height:{{Lmodeheight[index]}}rpx;width:{{Lmodewith[index]}}rpx" data-id="6"
-                        bindtap="goDetail">
-                      </image>
                     </view>
                     <view class="inlocal">
                       <view class="localimg">

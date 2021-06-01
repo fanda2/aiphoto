@@ -5,14 +5,16 @@ Page({
     userInfo: {},
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    pagetype: 1, //页面跳转前的页面
+    pagetype: 3, //页面跳转前的页面
     userInfo: {},
     hasUserInfo: false,
     canIUseGetUserProfile: false,
+    islogin:false
   },
   onLoad() {
     if (wx.getUserProfile) {
       this.setData({
+        pagetype:this.options.pagetype,
         canIUseGetUserProfile: true
       })
     }
@@ -28,11 +30,16 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+        console.log("调用结果",res);
+        app.globalData.userInfo=res.userInfo;
          wx.setStorage({
            data:  res.userInfo,
            key: 'userInfo',
            success: (res) => {
             console.log("保存成功！")
+            this.setData({
+              islogin:true,
+            })
            },
            fail: (res) => {
             console.log("保存失败！")
@@ -43,38 +50,6 @@ Page({
       }
     })
   },
-
-  // onLoad: function(options) {
-  //   this.setData({
-  //     pagetype: options.pagetype
-  //   })
-  //   var that = this;
-  //   // 查看是否授权
-  //   wx.getSetting({
-  //     success: function (res) {
-  //       if (res.authSetting['scope.userInfo']) {
-  //         //已授权，可以获取用户信息
-  //         wx.getUserInfo({
-  //           success: function (res) {
-  //             console.log("23232",res.userInfo); //对象
-  //             console.log(res.rawData); //Json
-            
-  //             var avatarUrl = res.userInfo.avatarUrl;
-  //             var userName = res.userInfo.nickName;
-            
-  //             that.setData({
-  //               avatarUrl: avatarUrl,
-  //               userName: userName
-  //             })
-              
-  //           }
-  //         })
-  //       }
-  //     }
-  //   })
-  // },
-
- 
 
 // 登录成功之后的跳转
 // 从分享界面1，从详情页2，从主信息界面3
@@ -88,7 +63,7 @@ goback: function (e) {
     wx.switchTab({
       url: '/pages/trends/trends'
     })
-  } else if (this.data.pagetype == 3) {
+  } else {
     wx.switchTab({
       url: '/pages/man/man'
     })

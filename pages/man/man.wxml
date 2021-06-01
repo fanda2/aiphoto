@@ -2,12 +2,10 @@
   <view wx:if="{{islogin}}">
     <view class="outuserinfo">
       <view class="userinfo">
-        <view bindtap="goMessage" class="userinfo-avatar" background-size="cover" data-num="index">
-          <open-data type="userAvatarUrl" class="img"></open-data>
-        </view>
+          <image bindtap="goMessage" class="userinfo-avatar" src="{{userinfo.avatarUrl}}" background-size="cover" data-num="index" >
+        </image>
         <view class="userinfo2">
-          <open-data class="username" type="userNickName"></open-data>
-          <!-- <text class="userinfo-nickname">{{userinfo.nickname}}</text> -->
+          <text class="userinfo-nickname">{{userinfo.nickName}}</text>
           <view class='message' bindtap="gomessgeinfo" data-headimg="{{userinfo.avatar}}"
             data-username="{{userinfo.nickname}}">
             <!-- //bindtap="myinfopage" -->
@@ -64,26 +62,26 @@
     <!--导航条-->
     <view class="navbar">
       <view class="list-item">
-        <image class="item-image" src="/img/like_h.png"></image>
+        <image class="item-image" src="/img/sett.png"></image>
+        <text class="item-text">我的信息设置</text>
+        <image class="image-jiantou" src="/img/right-arrow.png"></image>
+      </view>
+      <view class="line"></view>
+      <view class="list-item">
+        <image class="item-image" src="/img/page.png"></image>
         <text class="item-text">我的收藏</text>
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>
       <view class="list-item">
-        <image class="item-image" src="/img/mail.png"></image>
-        <text class="item-text">我的收藏</text>
+        <image class="item-image" src="/img/more.png"></image>
+        <text class="item-text">更多相关</text>
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>
       <view class="list-item">
-        <image class="item-image" src="/img/key.png"></image>
-        <text class="item-text">我的收藏</text>
-        <image class="image-jiantou" src="/img/right-arrow.png"></image>
-      </view>
-      <view class="line"></view>
-      <view class="list-item">
-        <image class="item-image" src="/img/hoard_h.png"></image>
-        <text class="item-text">我的收藏</text>
+        <image class="item-image" src="/img/massge.png"></image>
+        <text class="item-text">服务信息条款</text>
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>

@@ -35,10 +35,6 @@ Page({
     tal: 0,
     shareCount: 1, //分享的数量
     // 图片样式
-    Smodewith: [],
-    Smodeheight: [],
-    Lmodewith: [],
-    Lmodeheight: [],
     islogin:false, //判断用户是否登录
   },
   navbarTap: function (e) {
@@ -72,11 +68,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-    console.log("登录状态未：")
     this.setData({
-      islogin:this.options.islogin
+      userinfo:app.globalData.userInfo
     })
-
   },
   goDetail: function (e) {
     //直接进入详情查看界面

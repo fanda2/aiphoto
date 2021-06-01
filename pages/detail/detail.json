@@ -1,6 +1,5 @@
 {
-  "usingComponents": {}, 
-   "navigationStyle":"custom",
-  "navigationBarTitleText":"详细信息"
-
+  "usingComponents": {},
+  "navigationBarTitleText":"首页",
+  "navigationStyle":"custom"
 }

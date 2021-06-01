@@ -27,15 +27,15 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
-      backgroundColor: '#1ba1f0',
+      backgroundColor: '#52e7e0',
       animation: {
-        duration: 300,
+        duration: 500,
         timingFunc: 'easeIn'
       }
     })
     this.setData({
-      userhead: app.globalData.userInfo.avatar,
-      username: app.globalData.userInfo.nickname,
+      userhead: app.globalData.userInfo.avatarUrl,
+      username: app.globalData.userInfo.nickName,
       date: app.globalData.userInfo.birthday,
       head: app.globalData.userInfo.bgimg,
       introduce: app.globalData.userInfo.motto

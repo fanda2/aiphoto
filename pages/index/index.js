@@ -1,71 +1,8 @@
 // pages/trends/trends.js
+const app=getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    navbar: [{
-      id:1,
-      imgurl:"http://qwq.fjtbkyc.net/public/personalBlog/images/zuopin/portfolio6.jpg",
-      title:"艺术大楼，秋意浓浓，艺术大楼，秋意浓浓",
-      handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog9.jpg",
-      username:"Frightly",
-      local:'四川省成都市高新区西源大道2006号',
-      like:1034,
-      concern:10
-    },
-    {
-      id:2,
-      imgurl:"http://www.fjtbkyc.net/mywx/sunny5.jpg",
-      title:"湖边生活悠闲自得",
-      handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-      username:"Brank",
-      local:'成都市郫都区太双路与蜀新大道交叉路口',
-      like:112,
-      concern:10
-    },
-    {
-      id:3,
-      imgurl:"http://www.fjtbkyc.net/mywx/sunny4.jpg",
-      title:"西华四舍",
-      handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-      username:"Brank",
-      local:'四川省成都市高新区西源大道2006号',
-      like:112,
-      concern:10
-    },
-    {
-      id:4,
-      imgurl:"http://qwq.fjtbkyc.net/public/personalBlog/images/zuopin/portfolio3.jpg",
-      title:"这是title4",
-      handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-      username:"Brank",
-      local:'贵阳市观山湖区金阳新区观山大桥',
-      like:112,
-      concern:10
-    },
-    {
-      id:5,
-      imgurl:"http://www.fjtbkyc.net/mywx/sunny.jpg",
-      title:"这是title5",
-      handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-      username:"Brank",
-      local:'四川省成都市大邑县西岭镇',
-      like:112,
-      concern:10
-    },
-    {
-      id:6,
-      imgurl:"http://www.fjtbkyc.net/mywx/sunny2.jpg",
-      title:"这是title6",
-      handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-      username:"Brank",
-      local:'四川省成都市金牛区西华大道16号',
-      like:112,
-      concern:10
-    }
-    ],
+    navbar: [],
     label:[{name:"推荐",id:1},
          {name:"成都",id:2},
          {name:"最新",id:3},
@@ -83,6 +20,8 @@ Page({
     lostCount:2,
     oldactive:0, //之前显示的值
     isactive:[1,0,0,0,0,0,0,0],
+    basepage:1,
+    baselimit:5,
   },
   navbarTap: function(e){
     this.setData({
@@ -133,7 +72,47 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    console.log("调用接口")
+    wx.request({
+      url: app.globalData.baseUrl+'/Pst/poster_all', //仅为示例，并非真实的接口地址
+      method: "GET",
+      data: {
+        page: this.data.basepage,
+        limit:this.data.baselimit,
+      },
+      header: {
+        // 'content-type': 'application/json' // 默认值
+      },
+      success (res) {
+        console.log("结果",res.data);
+        var ls = res.data.data.row;
+        for (var key in ls) {
+          var marker = ls[key];
+          marker.id = marker.id;
+          marker.userid = marker.authorid;
+          marker.local = marker.address;
+          marker.avatar=marker.avatar;
+          marker.nickname=marker.nickname;
+          var imgurls = marker.files.split("#");
+          for (var i = 0; i < imgurls.length; i++) {
+            if (imgurls[i] == "") imgurls.splice(i, 1);
+          }
+          imgurls = Array.from(new Set(imgurls))
+          //cover
+          marker.headimg = marker.imgurl;
+          marker.like = marker.likes;
+          marker.imgurl = imgurls[0];
+          // console.log('marker',marker)
+        }
+        var array;
+        array=res.data.data.row;
+        // array.reverse();
+        that.setData({
+          navbar: array
+        })
+      }
+    })
   },
 
   /**

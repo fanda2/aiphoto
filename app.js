@@ -5,7 +5,9 @@ App({
     const logs = wx.getStorageSync('logs')
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs) 
-    // 获取用户信息
+      // 获取用户信息
+    this.globalData.token=wx.getStorageSync('token')
+    this.globalData.userInfo=wx.getStorageSync('userInfo')
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -30,6 +32,7 @@ App({
     currentMarkerId:0,
     token:'',
     isHide:0,//登录状态
-    location:{}
+    location:{},
+    baseUrl:"https://aiphoto.fjtbkyc.net/server/"
   }
 })

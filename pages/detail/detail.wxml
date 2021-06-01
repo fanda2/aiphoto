@@ -4,29 +4,55 @@
       <image src="/img/left-arrow.png"></image>
     </view>
   </view>
-  <view class="deMessage">
-    <view class="outimg" style="height:{{vaHe}}px">
-      <view class="inimg" mode="widthFix">
-        <image src="/img/fu.png"></image>
+  <view class="allmessage">
+    <view class="deMessage">
+      <view class="outimg" style="height:{{vaHe}}px">
+        <view class="inimg" mode="widthFix" bindtap="goMessage">
+          <image src="{{headimg}}"></image>
+        </view>
+      </view>
+      <view class="dname" style="height:{{vaHe}}px; line-height:{{vaHe}}px;text-align:center">{{username}}</view>
+    </view>
+    <view wx:if="{{!isyouself}}">
+      <view class="concern"  bindtap="concern">
+        <!-- 点击关注可以变化 -->
+        <view class="inconcern active"  wx:if="{{!concernAc}}">
+          +关注
+        </view>
+        <view class="inconcern" wx:else>
+          已关注
+        </view>
       </view>
     </view>
-    <view class="dname" style="height:{{vaHe}}px; line-height:{{vaHe}}px;text-align:center">{{myname}}</view>
+    <view wx:else>
+      <view class="control">
+         <view class="downicon" bindtap="showedit"><image src="/img/down.png"></image></view>
+      </view>
+      <view wx:if="{{isshow}}" class="useredit">
+          <view class="edit">
+          <view><image src="/img/editessay.png"></image></view>
+          <view bindtap="edit">编辑</view>
+         </view>
+         <view class="delete" bindtap="delete">
+          <view><image src="/img/newdelete.png"></image></view>
+          <view>删除</view>
+          </view>
+         </view>
+    </view>
   </view>
-  <view class="concern">
-    <view class="inconcern">+关注</view>
-  </view>
+
 </view>
 
-<view class="container-layout">
-  <swiper class="container" indicator-dots="{{indicatordots}}" autoplay="{{autoplay}}" interval="{{interval}}"
-    duration="{{duration}}" bindchange='onSlideChange'>
+<view class="container-layout" bindtap="hide">
+  <swiper class="container" indicator-dots="{{indicatordots}}" easing-function='linear' autoplay="{{autoplay}}" interval="{{interval}}"
+    duration="{{duration}}" bindchange='onSlideChange' circular='true'>
     <block wx:for="{{essayall.imgUrls}}" wx:key="index">
       <swiper-item class="vol-swiper-item" bindchange="">
         <view class="vol-card">
           <image class="vol-picture" src="{{item}}" mode="aspectFill" bindtap='imgClick' data-num="{{index}}"></image>
         </view>
       </swiper-item>
-    
+
     </block>
   </swiper>
   <view class='bannerNum'>{{(current+1)}}/{{essayall.imgUrls.length}}</view>
@@ -35,11 +61,50 @@
     <scroll-view scroll-x="true">
       <view class="tabel" scroll-x="true">
         <block wx:for="{{essayall.tabel}}">
-          <view class="tabeltext"><view>{{item}}</view></view>
+          <view class="tabeltext">
+            <view>{{item}}</view>
+          </view>
         </block>
       </view>
     </scroll-view>
     <view class="divLine"></view>
-    <view class="essay">{{essayall.essay_text}}</view>
+    <view class="essay">
+      <text>{{essayall.essay_text}}</text>
+    </view>
+    <view class="data"><text>发布时间：</text>{{essayall.sharetime}}</view>
+  </view>
+  <view class="empty"></view>
+  <view class="bbbox">
+    <view class="bottom">
+      <view class="share">
+        <!-- <button>分享</button> -->
+        <button open-type='share' class='btn1'>
+          <image class='btnImg' src='/img/shareico_h.png'></image>
+          <!-- <view>联系客服</view> -->
+        </button>
+      </view>
+      <view class="boconcern" bindtap="docollect">
+        <view class="inbconcern">
+          <view class="conimg" wx:if="{{ishoard}}">
+              <image src="/img/hoard_h.png"></image>
+          </view>
+          <view class="unconimg" wx:else>
+              <image src="/img/hoard.png"></image>
+          </view>
+          <view class="context">{{essayall.concern}}</view>
+        </view>
+      </view>
+      <view class="like" bindtap="dolike">
+        <view class="inlike">
+        <view class="likeimg" wx:if="{{islike}}">
+          <image src="/img/like_h.png"></image>
+        </view>
+        <view class="didntlike" wx:else>
+          <image src="/img/like.png"></image>
+        </view>
+        <view class="liketext">{{essayall.like+islike}}</view>
+      </view>
+    </view>
+    </view>
   </view>
 </view>

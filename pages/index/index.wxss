@@ -165,6 +165,9 @@
   margin-left: 5px;
   width: 70%;
   height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   line-height: 30px;
 }
 
