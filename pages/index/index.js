@@ -72,6 +72,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '玩命加载中'
+      })
     var that = this
     console.log("调用接口")
     wx.request({
@@ -85,7 +88,8 @@ Page({
         // 'content-type': 'application/json' // 默认值
       },
       success (res) {
-        console.log("结果",res.data);
+        console.log("请求结果",res)
+        wx.hideLoading();
         var ls = res.data.data.row;
         for (var key in ls) {
           var marker = ls[key];

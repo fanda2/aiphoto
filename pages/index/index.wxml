@@ -1,6 +1,6 @@
 <!--导航条-->
 <view class="navbar">
-  <scroll-view scroll-x="true">
+  <scroll-view  class="txtable" scroll-x="true">
     <view class="tabel" scroll-x="true">
       <block wx:for="{{label}}">
         <view bindtap="getMessage" data-idx="{{index}}" class="item {{isactive[index]==1? 'active' : ''}}">{{item.name}}

@@ -544,11 +544,11 @@ Page({
     consoleUtil.log('查询当前坐标 marker 点信息')
     //调用请求 marker 点的接口就好了
     wx.request({
-      url: app.globalData.baseUrl+'/Pst/poster_all', 
+      url: app.globalData.baseUrl+'/Pst/poster_map', 
       data: {
         // 或许可以改为根据地理位置信息提供服务
         page: 1,
-        limit: 50
+        limit: 50,
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -559,7 +559,7 @@ Page({
           resolve(ls)
         })
         v.then((res) => {
-          console.log('res type', res[0])
+          console.log('res type', res)
           that.createMarker(res)
         })
       }

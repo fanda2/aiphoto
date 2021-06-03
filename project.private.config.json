@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -50,6 +51,18 @@
         {
           "name": "地图",
           "pathName": "pages/address/address",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "个人信息界面修改",
+          "pathName": "pages/myinfo/myinfo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "个人条款界面",
+          "pathName": "pages/server/server",
           "query": "",
           "scene": null
         }

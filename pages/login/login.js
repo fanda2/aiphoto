@@ -21,34 +21,91 @@ Page({
   },
 
   getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
-    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+    var that = this
+    wx.showLoading({
+      title: '登录中'
+      })
     wx.getUserProfile({
-      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+      desc: '用于完善用户资料',
+      success: function (res) {
+        console.log("auth ",res)
+        new Promise((resolve)=>{
+          that.setData({
+            userInfo: res = JSON.parse(res.rawData),
+          })
+          resolve(resolve)
+        }).then((result)=>{
+          wx.login({
+            success: res => {
+              console.log("微信登录成功",res)
+              wx.request({
+                // 自行补上自己的 APPID 和 SECRET
+                url: app.globalData.baseUrl+'/Login/onLogin', //仅为示例，并非真实的接口地址
+                method: "GET",
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                
+                data: {
+                  code: res.code,
+                  nickname: that.data.userInfo.nickName,
+                  avatar: that.data.userInfo.avatarUrl,
+                  type:1,
+                  bgimg:"http://www.fjtbkyc.net/images/bg1.jpg"
+                },
+                success: res => { 
+                  wx.hideLoading() ;  
+                  // console.log(" something goes wrong msg ", res.data);
+                  // 获取到用户的信息了，打印到控制台上看下
+                  app.globalData.isHide = 1
+                  try {
+                    wx.setStorageSync('userInfo', res.data.data.row[0])
+                  } catch (e) {
+                    console.log("存储失败！")
+                   }
+                  // 获取到用户的 openid
+                  if (res.data.status == 200) {
+                    app.globalData.token = res.data.data.session;
+                    app.globalData.userInfo=res.data.data.row[0]
+                    try {
+                      wx.setStorageSync('token', res.data.data.session)
+                    } catch (e) {
+                      console.log("存储失败！")
+                     }
+                   
+                     try {
+                      wx.setStorageSync('userInfo', res.data.data.row[0])
+                    } catch (e) {
+                      console.log("存储失败！")
+                     }
+
+                    //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
+                    that.setData({
+                      isHide: 0,
+                      userInfo: res.data.data.row[0]
+                    });
+                  } else {
+                    console.log(" something goes wrong msg ", res.data.data.row[0]);
+                  }
+                  that.goback();
+                },
+                fail: res => {
+                  console.log("shit failed");
+                }
+              });
+            }
+          })
+          
         })
-        console.log("调用结果",res);
-        app.globalData.userInfo=res.userInfo;
-         wx.setStorage({
-           data:  res.userInfo,
-           key: 'userInfo',
-           success: (res) => {
-            console.log("保存成功！")
-            this.setData({
-              islogin:true,
-            })
-           },
-           fail: (res) => {
-            console.log("保存失败！")
-           },
-           complete: (res) => {},
-         })
-        this.goback()
+        
+        // 用户已经授权过,不需要显示授权页面,所以不需要改变 isHide 的值
+        // 根据自己的需求有其他操作再补充
+        // 我这里实现的是在用户授权成功后，调用微信的 wx.login 接口，从而获取code
+      },
+      fail:function(res){
+        console.log("shit failed ",res)
       }
-    })
+    });
   },
 
 // 登录成功之后的跳转

@@ -1,6 +1,6 @@
 <!-- 用户信息界面 -->
 <view>
-    <view class="titleCss">
+    <view class="titleCss"  style="background:url('{{bgimg}}');background-size:cover" >
         <view class="setBac">
             <view class="head box">
                 <image src="{{userhead}}" mode="scaleToFill" class="headimg" bindtap="imgShow" data-url="{{userhead}}"></image>
@@ -43,9 +43,9 @@
             </view>
 
             <view class="weui-cell__bd">
-                <picker mode="date" value="{{date}}" start="1900-01-01" end="2021-10-08" bindchange="changeDate">
+                <picker mode="date" value="{{birthday}}" start="1900-01-01" end="2021-10-08" bindchange="changeDate">
                     <view class="tui-picker-detail">
-                        {{date}}
+                        {{birthday}}
                     </view>
                 </picker>
             </view>

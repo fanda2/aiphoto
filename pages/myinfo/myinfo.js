@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date: "",
+    birthday: "",
     titleInfo: "添加用户信息",
     userhead: "",
     username: "", //用户默认名称
@@ -14,7 +14,8 @@ Page({
     region: [], //存储返回来的值
     region1: "", //表示市,
     region2: " ", //表示省
-    introduce: "留下你的足迹吧~"
+    introduce: "留下你的足迹吧~",
+    bgimg:"",
   },
 
   //设置用户详情页的图片信息
@@ -33,24 +34,29 @@ Page({
         timingFunc: 'easeIn'
       }
     })
-    this.setData({
-      userhead: app.globalData.userInfo.avatarUrl,
-      username: app.globalData.userInfo.nickName,
-      date: app.globalData.userInfo.birthday,
-      head: app.globalData.userInfo.bgimg,
-      introduce: app.globalData.userInfo.motto
-    })
-    var local = app.globalData.userInfo.address; //获得地址
-    var address = [];
-    var n = local.split('·');
-    address.push(n);
-    // }
-    // console.log(address[0][0],);
-    this.setData({
-      region1: address[0][0],
-      region2: address[0][1]
-    })
-
+    if(!app.globalData.token.length)
+    {
+      this.gologin()
+    }else{
+      this.setData({
+        userhead: app.globalData.userInfo.avatar,
+        username: app.globalData.userInfo.nickname,
+        birthday: app.globalData.userInfo.birthday,
+        head: app.globalData.userInfo.bgimg,
+        introduce: app.globalData.userInfo.motto,
+        bgimg: app.globalData.userInfo.bgimg
+      })
+      var local = app.globalData.userInfo.usaddress; //获得地址
+      var address = [];
+      var address = local.split(' ');
+      // address.push(n);
+      // }
+      // console.log(address[0][0],);
+      this.setData({
+        region1: address[0],
+        region2: address[1]
+      })
+    }
   },
   // 选择省市区函数
   changeRegin(e) {
@@ -76,8 +82,14 @@ Page({
   },
   changeDate(e) {
     this.setData({
-      date: e.detail.value
+      birthday: e.detail.value
     });
+    console.log("121",this.data.birthday)
+  },
+  gologin: function (e) {
+    wx.redirectTo({
+      url: '/pages/login/login',
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -87,10 +99,10 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * 生命周期函数--监听页面显示a
    */
   onShow: function () {
-
+     
   },
 
   /**

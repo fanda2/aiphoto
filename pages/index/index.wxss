@@ -22,13 +22,16 @@
   border-bottom: black 1px solid;
   /* border-bottom: #cecece 3rpx solid; */
 }
+.txtable{
+  width: 92%;
+  height: 100%;
+}
 .tabel{
   width: auto;
   height: 80rpx;
   display: flex;
   display: -webkit-box;
   flex-direction: column;
-  
 }
 .item{
   font-size: 16px;

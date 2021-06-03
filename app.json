@@ -11,7 +11,8 @@
     "pages/hoard/hoard",
     "pages/concern/concern",
     "pages/myinfo/myinfo",
-    "pages/address/address"
+    "pages/address/address",
+    "pages/server/server"
   ],
   "permission": {
     "scope.userLocation": {

@@ -1,11 +1,11 @@
 <view class="mancontainer">
-  <view wx:if="{{islogin}}">
+  <view wx:if="{{isHide}}">
     <view class="outuserinfo">
       <view class="userinfo">
-          <image bindtap="goMessage" class="userinfo-avatar" src="{{userinfo.avatarUrl}}" background-size="cover" data-num="index" >
+          <image bindtap="goMessage" class="userinfo-avatar" src="{{userinfo.avatar}}" background-size="cover" data-num="index" >
         </image>
         <view class="userinfo2">
-          <text class="userinfo-nickname">{{userinfo.nickName}}</text>
+          <text class="userinfo-nickname">{{userinfo.nickname}}</text>
           <view class='message' bindtap="gomessgeinfo" data-headimg="{{userinfo.avatar}}"
             data-username="{{userinfo.nickname}}">
             <!-- //bindtap="myinfopage" -->
@@ -61,13 +61,13 @@
   <view class="bottombox">
     <!--导航条-->
     <view class="navbar">
-      <view class="list-item">
+      <view class="list-item" bindtap="myinfopage">
         <image class="item-image" src="/img/sett.png"></image>
         <text class="item-text">我的信息设置</text>
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>
-      <view class="list-item">
+      <view class="list-item" bindtap="toH">
         <image class="item-image" src="/img/page.png"></image>
         <text class="item-text">我的收藏</text>
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
@@ -79,7 +79,7 @@
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>
-      <view class="list-item">
+      <view class="list-item" bindtap="goserve">
         <image class="item-image" src="/img/massge.png"></image>
         <text class="item-text">服务信息条款</text>
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
