@@ -108,7 +108,7 @@ page{
   justify-content: space-between;
 }
 .selflike{
-  width: 50%;
+  width: 60%;
   display: flex;
 }
 .username{
@@ -126,6 +126,7 @@ page{
   font-size: 24rpx;
 }
 .bn1{
+  width: 220rpx;
   border-right: rgb(121, 121, 121) 2px solid;
 }
 .bn2{

@@ -1,65 +1,90 @@
 // pages/trends/trends.js
-const app=getApp();
+const app = getApp();
 Page({
   data: {
     navbar: [],
-    label:[{name:"推荐",id:1},
-         {name:"成都",id:2},
-         {name:"最新",id:3},
-          {name:"风景",id:4},
-          {name:"人物",id:5},
-          {name:"美食",id:6},
-          {name:"住宿",id:7},
-          {name:"景点",id:8}],
+    label: [{
+        name: "推荐",
+        id: 1
+      },
+      {
+        name: "成都",
+        id: 2
+      },
+      {
+        name: "最新",
+        id: 3
+      },
+      {
+        name: "风景",
+        id: 4
+      },
+      {
+        name: "人物",
+        id: 5
+      },
+      {
+        name: "美食",
+        id: 6
+      },
+      {
+        name: "住宿",
+        id: 7
+      },
+      {
+        name: "景点",
+        id: 8
+      }
+    ],
     currentTab: 0,
-    tal:0,
-    ac1:1,
-    ac2:0,
-    cTab:0,
-    shareCount:1,
-    lostCount:2,
-    oldactive:0, //之前显示的值
-    isactive:[1,0,0,0,0,0,0,0],
-    basepage:1,
-    baselimit:5,
+    tal: 0,
+    ac1: 1,
+    ac2: 0,
+    cTab: 0,
+    shareCount: 1,
+    lostCount: 2,
+    oldactive: 0, //之前显示的值
+    isactive: [1, 0, 0, 0, 0, 0, 0, 0],
+    basepage: 1,
+    baselimit: 5,
   },
-  navbarTap: function(e){
+  navbarTap: function (e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
     console.log(e.currentTarget.dataset);
   },
   //点击头部实现不同样式与请求
-  getMessage:function(e)
-  {
-    var idx=e.currentTarget.dataset.idx;
-    var oldactive=this.data.oldactive
-    console.log("点击",oldactive)
-    var newdata=this.data.isactive;
-    newdata[oldactive]=0,  
-    newdata[idx]=1
-    if(idx!=oldactive)
-    {
+  getMessage: function (e) {
+    var idx = e.currentTarget.dataset.idx;
+    var oldactive = this.data.oldactive
+    console.log("点击", oldactive)
+    var newdata = this.data.isactive;
+    newdata[oldactive] = 0,
+      newdata[idx] = 1
+    if (idx != oldactive) {
       this.setData({
-        oldactive:idx
+        oldactive: idx
       })
     }
     this.setData({
-      isactive:newdata
+      isactive: newdata
     })
   },
-  goDetail:function(e)
-  {
-    var pstid=e.currentTarget.dataset.posterid;
+  goDetail: function (e) {
+    var pstid = e.currentTarget.dataset.posterid;
+    var authorid=e.currentTarget.dataset.uid;
     wx.navigateTo({
-      url: '/pages/detail/detail?posterid='+pstid,
+      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid,
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.showLoading({
+      title: '玩命加载中'
+    })
   },
 
   /**
@@ -73,23 +98,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.showLoading({
-      title: '玩命加载中'
-      })
     var that = this
-    console.log("调用接口")
     wx.request({
-      url: app.globalData.baseUrl+'/Pst/poster_all', //仅为示例，并非真实的接口地址
+      url: app.globalData.baseUrl + '/Pst/poster_all', //仅为示例，并非真实的接口地址
       method: "GET",
       data: {
         page: this.data.basepage,
-        limit:this.data.baselimit,
+        limit: this.data.baselimit,
       },
       header: {
         // 'content-type': 'application/json' // 默认值
       },
-      success (res) {
-        console.log("请求结果",res)
+      success(res) {
+        console.log("请求结果", res)
         wx.hideLoading();
         var ls = res.data.data.row;
         for (var key in ls) {
@@ -97,8 +118,8 @@ Page({
           marker.id = marker.id;
           marker.userid = marker.authorid;
           marker.local = marker.address;
-          marker.avatar=marker.avatar;
-          marker.nickname=marker.nickname;
+          marker.avatar = marker.avatar;
+          marker.nickname = marker.nickname;
           var imgurls = marker.files.split("#");
           for (var i = 0; i < imgurls.length; i++) {
             if (imgurls[i] == "") imgurls.splice(i, 1);
@@ -111,7 +132,7 @@ Page({
           // console.log('marker',marker)
         }
         var array;
-        array=res.data.data.row;
+        array = res.data.data.row;
         // array.reverse();
         that.setData({
           navbar: array
@@ -131,7 +152,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+   
   },
 
   /**

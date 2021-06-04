@@ -59,6 +59,8 @@ Page({
     Lmodeheight: [],
     currentTab: 0,
     userid: 0,
+    like:122,
+    concern:100,
   },
 
   navbarTap: function (e) {

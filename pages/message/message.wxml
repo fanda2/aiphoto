@@ -31,8 +31,8 @@
         </view>
         <view class="selflike">
           <view class="likebox bn1"> {{userInfo.usaddress}}</view>
-          <view class="likebox bn2"> {{userInfo.concern}}<text>关注</text></view>
-          <view class="likebox bn3"> {{userInfo.like}}<text>粉丝</text></view>
+          <view class="likebox bn2"> {{concern}}<text>关注</text></view>
+          <view class="likebox bn3"> {{like}}<text>粉丝</text></view>
         </view>
       </view>
       <view class="bottom">

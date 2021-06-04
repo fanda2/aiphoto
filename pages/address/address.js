@@ -100,6 +100,9 @@ Page({
     authourid:0,//文章id    
   },
   onLoad: function (options) {
+    wx.showLoading({
+      title: '玩命加载中'
+    })
     this.selfLocationClick();
     var data = wx.getMenuButtonBoundingClientRect()
     var WH = wx.getSystemInfoSync()
@@ -151,23 +154,6 @@ Page({
     var that = this;
     that.changeMapHeight();
     that.setHomeActionLeftDistance();
-    //如果刚从选择地址页面带数据回调回来，则显示选择的地址
-    // consoleUtil.log(that.data.callbackAddressInfo)
-    // if (that.data.callbackAddressInfo == null) {
-    //   that.getCenterLocation();
-    //   //正在上传的话，不去请求地理位置信息
-    //   that.requestLocation();
-
-    // } else {
-    //   that.setData({
-    //     selectAddress: that.data.callbackAddressInfo.title,
-    //     callbackLocation: that.data.callbackAddressInfo.location
-    //   })
-    //   //置空回调数据，即只使用一次，下次中心点变化后就不再使用
-    //   that.setData({
-    //     callbackAddressInfo: null
-    //   })
-    // }
     this.queryMarkerInfo()
 
 
@@ -554,6 +540,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success(res) {
+        wx.hideLoading();
         var ls = res.data.data.row;
         const v = new Promise((resolve, reject) => {
           resolve(ls)
@@ -580,13 +567,8 @@ Page({
       marker.longitude = marker.longtitude;
       marker.width = 40;
       marker.height = 40;
-      if (marker.type == 1) {
-        // share
-        marker.iconPath = '/img/markshare.png';
-      } else {
-        // lost
-        marker.iconPath = '/img/markslect.png';
-      }
+      marker.iconPath = '/img/markshare.png';
+      
     }
     currentMarker = currentMarker.concat(markers);
     // console.log('ms ss', currentMarker)

@@ -18,10 +18,10 @@
     <view wx:if="{{!shareCount}}" class="conter">附近未发布任何内容哦，快来发送吧！</view>
     <view wx:else class="container">
       <view class="conterL">
-        <block wx:for="{{navbar}}" dataidx="{{index}}" class="text-item" wx:key="idx" bindtap="navbarTap">
+        <block wx:for="{{navbar}}" dataidx="{{index}}"  class="text-item" wx:key="idx" bindtap="navbarTap">
           <view class="wenzhang" wx:if="{{index%2==0}}">
             <view class="myimg" style="height:auto">
-              <image style="height:100px" src="{{item.imgurl}}" mode="widthFix" bindtap="goDetail">
+              <image style="height:100px" src="{{item.imgurl}}" data-posterid="{{item.posterid}}" data-uid="{{item.authorid}}" mode="widthFix" bindtap="goDetail">
               </image>
             </view>
             <view class="inlocal">
@@ -54,7 +54,7 @@
         <block wx:for="{{navbar}}" dataidx="{{index}}" class="text-item" wx:key="idx" bindtap="navbarTap">
           <view class="wenzhang" wx:if="{{index%2!=0}}">
             <view class="myimg" style="height:auto">
-              <image style="height:100px" src="{{item.imgurl}}" mode="widthFix" data-posterid="{{item.posterid}}" bindtap="goDetail"></image>
+              <image style="height:100px" src="{{item.imgurl}}" mode="widthFix" data-uid="{{item.authorid}}" data-posterid="{{item.posterid}}" bindtap="goDetail"></image>
             </view>
             <view class="inlocal">
               <view class="localimg">

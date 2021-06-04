@@ -17,7 +17,7 @@ Page({
     current: 0, //当前所在页面的 index
     concernAc: 0, //用户是否关注
     isconcern: '+关注', //按钮的文字内容
-    headimg: "http://qwq.fjtbkyc.net/image/headimg/default.jpg", //默认头像信息
+    headimg: "http://wew.fjtbkyc.net/images/bg1.jpg", //默认头像信息
     circular: true, //是否采用衔接滑动
     essayall: null,
     links: [
@@ -69,13 +69,12 @@ Page({
       vaHe: data.bottom + 10,
       inputHe: data.bottom - data.top,
       pageid: options.pageid,
-      authorid: options.userid,
       posterid:options.posterid,
+      authorid:options.authorid,
       // Sheight: (WH.windowHeight),
       // Swidth: (WH.windowWidth)
     })
-    console.log("获取到的",this.data.authorid);
-    if (options.userid == app.globalData.userInfo.id) {
+    if (options.authorid == app.globalData.userInfo.userid) {
       this.setData({
         isyouself: 1,
       })
@@ -222,41 +221,41 @@ Page({
     }
   },
   //点击关注按钮调用
-  concern: function (e) {
-    this.gologin();
-    if (!app.globalData.token) {
-    var that = this
-    var token = app.globalData.token;
-    // console.log("iddd ",that.data.essayall.userid,that.data.essayall.id)
-    wx.request({
-      url: 'https://storymap.sherlockouo.com/follow/dofollow',
-      method: "POST",
-      header: {
-        'Authorization': token,
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        // posterid: that.data.essayall.id,
-        tofollow: that.data.essayall.userid
-      },
-      success(res) {
-        // console.log("dolike ",res)
-        if (res.data.code == '0') {
-          console.log("shit ", res)
-          that.setData({
-            concernAc: !that.data.concernAc,
-          })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      }
-    })
-  }
-  },
+  // concern: function (e) {
+  //   this.gologin();
+  //   if (!app.globalData.token) {
+  //   var that = this
+  //   var token = app.globalData.token;
+  //   // console.log("iddd ",that.data.essayall.userid,that.data.essayall.id)
+  //   wx.request({
+  //     url: 'https://storymap.sherlockouo.com/follow/dofollow',
+  //     method: "POST",
+  //     header: {
+  //       'Authorization': token,
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     data: {
+  //       // posterid: that.data.essayall.id,
+  //       tofollow: that.data.essayall.userid
+  //     },
+  //     success(res) {
+  //       // console.log("dolike ",res)
+  //       if (res.data.code == '0') {
+  //         console.log("shit ", res)
+  //         that.setData({
+  //           concernAc: !that.data.concernAc,
+  //         })
+  //       } else {
+  //         wx.showToast({
+  //           title: res.data.msg,
+  //           icon: 'none',
+  //           duration: 2000
+  //         })
+  //       }
+  //     }
+  //   })
+  // }
+  // },
 
   gologin:function(e){
     if (app.globalData.token.length == 0) {
@@ -274,42 +273,38 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+
   onShow: function () {  
     var that = this
     // var postid = app.globalData.currentMarkerId
     var essayall = {};
+    console.log("rrrr",that.data.posterid,"   ",that.data.authorid)
     wx.request({
       url:app.globalData.baseUrl+'/Pst/poster_one',
       method: "GET",
       data: {
-        id: this.data.posterid,
+        id: that.data.posterid,
+        authorid:that.data.authorid,
       },
       success(res) {
-        wx.hideLoading({
-          success: (res) => {},
-        })
-        console.log("res is:",res);
+        wx.hideLoading();
        that.setData({
          essayid:res.data.posterid
        })
         if (res.data.status == 200) {
           new Promise((resolve, reject) => {
             var marker = res.data.data.jrow;
-            essayall.id = marker.id;
-            essayall.userid = marker.userid;
+            essayall.id = marker.posterid;
+            essayall.authorid = marker.authorid;
             essayall.local = marker.address;
             essayall.essay_title = marker.title;
             essayall.essay_text = marker.message
             var imgurls = marker.files.split("#");
-
             for (var i = 0; i < imgurls.length; i++) {
               if (imgurls[i] == "") imgurls.splice(i, 1);
             }
             // 去重方式一 会把imgurls 变为 空
             imgurls = Array.from(new Set(imgurls))
-            // var imgs = [...new Set(imgurls)];
-            // var imgs = imgurls;
-            // console.log('imgs ',imgs)
             essayall.imgUrls = imgurls;
             // console.log('after ', imgurls)
             var tags = marker.tags.split("#");
@@ -318,41 +313,17 @@ Page({
             }
             essayall.tabel = tags;
             essayall.like = marker.likes;
-            essayall.sharetime = marker.createTime;
-            essayall.userid = marker.userid
+            essayall.sharetime = marker.creat_time;
             that.setData({
-              username: marker.username,
-              headimg: marker.avatar
+              username:marker.nickname,
+              headimg:marker.avatar,
             })
             resolve(essayall);
           }).then(() => {
+            console.log("存储的内容",essayall)
             that.setData({
               essayall: essayall,
             })
-          }).then(() => {
-            if (!app.globalData.token.length == 0) {
-            var token=app.globalData.token;
-            wx.request({
-              url:app.globalData.baseUrl+'/Use/user_one',
-              method: "GET",
-              header: {
-                'Authorization': token,
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              data: {
-                // posterId: app.globalData.currentMarkerId,
-                userId: that.data.essayall.authorid
-              },
-              success(res) {
-                // console.log("detail ",res)
-                if (res.data.code == '0') {
-                  that.setData({
-                    concernAc: res.data.data
-                  })
-                }
-              }
-            })
-          }
           })
         }
       }
