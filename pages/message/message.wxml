@@ -1,6 +1,6 @@
 <view class="container">
   <view class="bacimg">
-    <image class="mybac" mode="scaleToFill" src="{{userInfo.bacurl}}"></image>
+    <image class="mybac" mode="scaleToFill" src="{{userInfo.bgimg}}"></image>
     <!-- 背景图片 -->
   </view>
   <view class="message">
@@ -9,7 +9,7 @@
       <!-- 顶部的内容 -->
       <view class="mtop">
         <view class="headimg">
-          <image mode="scaleToFill" src="{{userInfo.headimg}}"></image>
+          <image mode="scaleToFill" src="{{userInfo.avatar}}"></image>
         </view>
         <view class="right">
           <view class="inright">
@@ -18,23 +18,26 @@
             </view>
             <view class="concern">
               <view wx:if="{{!concernAc}}" class="inconcern active" bindtap="concern">+关注</view>
-              <view wx:else class="inconcern" bindtap="concern" >已关注</view>
+              <view wx:else class="inconcern" bindtap="concern">已关注</view>
             </view>
           </view>
         </view>
       </view>
       <view class="mid">
         <view class="username">
-          {{userInfo.username}}
+          <view class="usern">
+            {{userInfo.nickname}}
+            </view>
         </view>
         <view class="selflike">
-          <view class="likebox bn1"> {{userInfo.local}}</view>
+          <view class="likebox bn1"> {{userInfo.usaddress}}</view>
           <view class="likebox bn2"> {{userInfo.concern}}<text>关注</text></view>
           <view class="likebox bn3"> {{userInfo.like}}<text>粉丝</text></view>
         </view>
       </view>
       <view class="bottom">
-        <view class="introduce"><text>{{userInfo.introduce}}</text></view>
+        <view wx:if="{{!userInfo.motto}}" class="introduce"><text>该用户很懒，还没留下任何东西哦~</text></view>
+        <view wx:else class="introduce"><text>{{userInfo.motto}}</text></view>
       </view>
       <view class="bottombox">
         <!--导航条-->

@@ -45,13 +45,14 @@ Page({
                 header: {
                   'content-type': 'application/x-www-form-urlencoded'
                 },
-                
                 data: {
                   code: res.code,
                   nickname: that.data.userInfo.nickName,
                   avatar: that.data.userInfo.avatarUrl,
                   type:1,
-                  bgimg:"http://www.fjtbkyc.net/images/bg1.jpg"
+                  bgimg:"http://www.fjtbkyc.net/images/bg1.jpg",
+                  address:'四川 成都',
+                  birthday:"2000-00-00"
                 },
                 success: res => { 
                   wx.hideLoading() ;  
@@ -59,33 +60,33 @@ Page({
                   // 获取到用户的信息了，打印到控制台上看下
                   app.globalData.isHide = 1
                   try {
-                    wx.setStorageSync('userInfo', res.data.data.row[0])
+                    wx.setStorageSync('userInfo', res.data.data.jrow)
                   } catch (e) {
-                    console.log("存储失败！")
+                    console.log("存储失败11！")
                    }
                   // 获取到用户的 openid
                   if (res.data.status == 200) {
                     app.globalData.token = res.data.data.session;
-                    app.globalData.userInfo=res.data.data.row[0]
+                    app.globalData.userInfo=res.data.data.jrow
                     try {
                       wx.setStorageSync('token', res.data.data.session)
                     } catch (e) {
-                      console.log("存储失败！")
+                      console.log("存储失败22！")
                      }
                    
                      try {
-                      wx.setStorageSync('userInfo', res.data.data.row[0])
+                      wx.setStorageSync('userInfo', res.data.data.jrow)
                     } catch (e) {
-                      console.log("存储失败！")
+                      console.log("存储失败33！")
                      }
 
                     //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
                     that.setData({
                       isHide: 0,
-                      userInfo: res.data.data.row[0]
+                      userInfo: res.data.data.jrow
                     });
                   } else {
-                    console.log(" something goes wrong msg ", res.data.data.row[0]);
+                    console.log(" something goes wrong msg ", res.data.data.jrow);
                   }
                   that.goback();
                 },

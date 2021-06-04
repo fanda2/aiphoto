@@ -1,6 +1,6 @@
 <!--导航条-->
 <view class="navbar">
-  <scroll-view  class="txtable" scroll-x="true">
+  <scroll-view  style="overflow: hidden" class="txtable" scroll-x="true">
     <view class="tabel" scroll-x="true">
       <block wx:for="{{label}}">
         <view bindtap="getMessage" data-idx="{{index}}" class="item {{isactive[index]==1? 'active' : ''}}">{{item.name}}
@@ -54,7 +54,7 @@
         <block wx:for="{{navbar}}" dataidx="{{index}}" class="text-item" wx:key="idx" bindtap="navbarTap">
           <view class="wenzhang" wx:if="{{index%2!=0}}">
             <view class="myimg" style="height:auto">
-              <image style="height:100px" src="{{item.imgurl}}" mode="widthFix" bindtap="goDetail"></image>
+              <image style="height:100px" src="{{item.imgurl}}" mode="widthFix" data-posterid="{{item.posterid}}" bindtap="goDetail"></image>
             </view>
             <view class="inlocal">
               <view class="localimg">

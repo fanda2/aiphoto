@@ -6,7 +6,7 @@
         </image>
         <view class="userinfo2">
           <text class="userinfo-nickname">{{userinfo.nickname}}</text>
-          <view class='message' bindtap="gomessgeinfo" data-headimg="{{userinfo.avatar}}"
+          <view class='message' bindtap="myinfopage" data-headimg="{{userinfo.avatar}}"
             data-username="{{userinfo.nickname}}">
             <!-- //bindtap="myinfopage" -->
             我的信息

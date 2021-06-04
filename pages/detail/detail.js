@@ -31,7 +31,7 @@ Page({
     islike: 0, //是否点赞
     ishoard: 0, //是否收藏
     authorid: 0,
-    currentID:0,//文章的id
+    posterid:0,//文章的id
   },
 
   // 点击图片进行预览函数
@@ -70,7 +70,7 @@ Page({
       inputHe: data.bottom - data.top,
       pageid: options.pageid,
       authorid: options.userid,
-      currentID:options.currentID,
+      posterid:options.posterid,
       // Sheight: (WH.windowHeight),
       // Swidth: (WH.windowWidth)
     })
@@ -224,7 +224,7 @@ Page({
   //点击关注按钮调用
   concern: function (e) {
     this.gologin();
-    if (!app.globalData.token.length == 0) {
+    if (!app.globalData.token) {
     var that = this
     var token = app.globalData.token;
     // console.log("iddd ",that.data.essayall.userid,that.data.essayall.id)
@@ -275,15 +275,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {  
-  
     var that = this
     // var postid = app.globalData.currentMarkerId
     var essayall = {};
     wx.request({
-      url: 'https://storymap.sherlockouo.com/poster/info',
+      url:app.globalData.baseUrl+'/Pst/poster_one',
       method: "GET",
       data: {
-        posterId: this.data.currentID,
+        id: this.data.posterid,
       },
       success(res) {
         wx.hideLoading({
@@ -291,11 +290,11 @@ Page({
         })
         console.log("res is:",res);
        that.setData({
-         essayid:res.data.id
+         essayid:res.data.posterid
        })
-        if (res.data.code == 0) {
+        if (res.data.status == 200) {
           new Promise((resolve, reject) => {
-            var marker = res.data.data;
+            var marker = res.data.data.jrow;
             essayall.id = marker.id;
             essayall.userid = marker.userid;
             essayall.local = marker.address;
@@ -327,16 +326,14 @@ Page({
             })
             resolve(essayall);
           }).then(() => {
-
             that.setData({
               essayall: essayall,
             })
-
           }).then(() => {
             if (!app.globalData.token.length == 0) {
             var token=app.globalData.token;
             wx.request({
-              url: 'https://storymap.sherlockouo.com/follow/didFollow',
+              url:app.globalData.baseUrl+'/Use/user_one',
               method: "GET",
               header: {
                 'Authorization': token,
@@ -344,7 +341,7 @@ Page({
               },
               data: {
                 // posterId: app.globalData.currentMarkerId,
-                userId: that.data.essayall.userid
+                userId: that.data.essayall.authorid
               },
               success(res) {
                 // console.log("detail ",res)

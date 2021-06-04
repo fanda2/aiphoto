@@ -55,7 +55,7 @@
                 <text class="textCss">签名:</text>
             </view>
             <view class="weui-cell__bd textplus">
-                <textarea auto-height="true"  style="font-size:26rpx" class="weui-input inputCss" maxlength="55" placeholder-class="place-holder" value="{{introduce}}" placeholder="说两句吧" />
+                <textarea bindblur="bindTextAreaBlur" auto-height="true"  style="font-size:26rpx" class="weui-input inputCss" maxlength="55" placeholder-class="place-holder" bindinput="inputedit" value="{{introduce}}" placeholder="留下你的足迹吧~" />
             </view>
         </view>
     </view>

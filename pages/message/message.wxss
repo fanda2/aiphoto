@@ -110,12 +110,12 @@ page{
 .selflike{
   width: 50%;
   display: flex;
-
 }
 .username{
   margin: 10rpx;
   font-weight: 600;
   font-size: 30rpx;
+  overflow: hidden;
 }
 .likebox{
   color: rgb(97, 97, 97) ;

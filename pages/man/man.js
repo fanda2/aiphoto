@@ -66,7 +66,7 @@ Page({
     var userid = app.globalData.userInfo.id
     // console.log(app.globalData.userInfo.id);
     wx.navigateTo({
-      url: '/pages/message/message?mystyle=' + 1 + '&userid=' + userid,
+      url: '/pages/message/message?mystyle=' + 1 + '&userid=' + app.globalData.userInfo.userid,
     })
   },
   /**
@@ -91,11 +91,6 @@ Page({
   toL: function (e) {
     wx.navigateTo({
       url: '/pages/like/like'
-    })
-  },
-  gomessgeinfo: function (e) {
-    wx.navigateTo({
-      url: '/pages/myinfo/myinfo?userinfoimg=' + e.currentTarget.dataset.headimg + '&username=' + e.currentTarget.dataset.username
     })
   },
   // 获取图片宽高
@@ -146,7 +141,11 @@ Page({
             //清空本地缓存
             wx.removeStorageSync('token'),
             wx.removeStorageSync('userInfo'),
-            that.onLoad()
+            that.setData({
+              userinfo:"",
+              isHide:0
+            })
+            app.globalData=''
         } else if (res.cancel) {
           console.log('用户点击取消')
         }

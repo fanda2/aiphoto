@@ -1,4 +1,5 @@
 // pages/addOrEditUser/addOrEditUser.js
+var Util = require('../../utils/util.js');
 const app = getApp();
 Page({
 
@@ -6,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userid: 0,
     birthday: "",
     titleInfo: "添加用户信息",
     userhead: "",
@@ -14,8 +16,8 @@ Page({
     region: [], //存储返回来的值
     region1: "", //表示市,
     region2: " ", //表示省
-    introduce: "留下你的足迹吧~",
-    bgimg:"",
+    introduce: "",
+    bgimg: "",
   },
 
   //设置用户详情页的图片信息
@@ -34,11 +36,11 @@ Page({
         timingFunc: 'easeIn'
       }
     })
-    if(!app.globalData.token.length)
-    {
+    if (!app.globalData.token) {
       this.gologin()
-    }else{
+    } else {
       this.setData({
+        userid: app.globalData.userInfo.userid,
         userhead: app.globalData.userInfo.avatar,
         username: app.globalData.userInfo.nickname,
         birthday: app.globalData.userInfo.birthday,
@@ -53,6 +55,7 @@ Page({
       // }
       // console.log(address[0][0],);
       this.setData({
+        region: address,
         region1: address[0],
         region2: address[1]
       })
@@ -66,6 +69,11 @@ Page({
     this.setData({
       region1: this.data.region[0],
       region2: this.data.region[1]
+    })
+  },
+  inputedit: function (e) {
+    this.setData({
+      introduce:e.detail.value,
     })
   },
   imgShow: function (event) {
@@ -84,7 +92,7 @@ Page({
     this.setData({
       birthday: e.detail.value
     });
-    console.log("121",this.data.birthday)
+    console.log("121", this.data.birthday)
   },
   gologin: function (e) {
     wx.redirectTo({
@@ -102,7 +110,7 @@ Page({
    * 生命周期函数--监听页面显示a
    */
   onShow: function () {
-     
+
   },
 
   /**
@@ -139,8 +147,93 @@ Page({
   onShareAppMessage: function () {
 
   },
+
   addUser: function () {
     var that = this;
+    var oldbirthday = app.globalData.userInfo.birthday;
+    var oldmotto = app.globalData.userInfo.motto;
+    var oldlocal = app.globalData.userInfo.usaddress; //获得地址
+    var address = [];
+    var address = oldlocal.split(' ');
+    var newbirthday = that.data.birthday;
+    var newreg1 = that.data.region1;
+    var newreg2 = that.data.region2;
+    var newmotto = that.data.introduce;
+    console.log(that.data.introduce)
+    var newaddress = newreg1 + " " + newreg2;
+    if (oldbirthday != newbirthday || address[0] != newreg1 || address[1] != newreg2 || oldmotto != newmotto) {
+      wx.showLoading({
+        title: '玩命加载中'
+        })
+      wx.request({
+        url: app.globalData.baseUrl + 'Use/user_update',
+        method: 'GET',
+        data: {
+          id: that.data.userid,
+          birthday: newbirthday,
+          address: newaddress,
+          motto: newmotto,
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: res => {
+          console.log("dddd", res)
+          if (res.data.status == 200) {
+            wx.request({
+              url: app.globalData.baseUrl + '/Use/user_one', //仅为示例，并非真实的接口地址
+              method: "GET",
+              data: {
+                id: that.data.userid,
+              },
+              header: {
+                'content-type': 'application/json' // 默认值
+              },
+              success(res) {
+                wx.hideLoading();
+                var array;
+                array = res.data.data.jrow;
+                app.globalData.userInfo = res.data.data.jrow
+                try {
+                  wx.setStorageSync('userInfo', res.data.data.jrow)
+                } catch (e) {
+                  console.log("存储失败33！")
+                }
+                that.setData({
+                  userInfo: array
+                })
+              }
+            })
+            wx.showToast({
+              title: '更新成功',
+              icon: 'success',
+              duration: 2000
+            })
+            that.onShow();
+          } else {
+            wx.showToast({
+              title: '信息更新失败！',
+              icon: 'error',
+              duration: 2000
+            })
+          }
+        },
+        fail(res) {
+          console.log('failes to upload', res.data)
+          wx.showToast({
+            title: '请检查网络！',
+            icon: 'error',
+            duration: 2000
+          })
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '信息未进行修改！',
+        icon: 'error',
+        duration: 2000
+      })
 
-  },
+    }
+  }
 })

@@ -215,7 +215,6 @@ Page({
       wx.request({
         url: 'https://storymap.sherlockouo.com/poster/post', 
         method: 'POST',
-        
         data: {
           title: that.data.shareTitle,
           message: that.data.shareText,

@@ -50,8 +50,9 @@ Page({
   },
   goDetail:function(e)
   {
+    var pstid=e.currentTarget.dataset.posterid;
     wx.navigateTo({
-      url: '/pages/detail/detail',
+      url: '/pages/detail/detail?posterid='+pstid,
     })
   },
   /**
