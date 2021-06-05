@@ -9,48 +9,7 @@ Page({
     userInfo: {},
     isconcern: '+关注', //按钮的文字内容
     concernAc: 0,
-    sharenavbar: [
-      {
-        id:1,
-        imgurl:"http://qwq.fjtbkyc.net/public/personalBlog/images/zuopin/portfolio6.jpg",
-        title:"艺术大楼，秋意浓浓，艺术大楼，秋意浓浓",
-        handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog9.jpg",
-        username:"Frightly",
-        local:'四川省成都市高新区西源大道2006号',
-        like:1034,
-        concern:10
-      },
-      {
-        id:2,
-        imgurl:"http://www.fjtbkyc.net/mywx/sunny5.jpg",
-        title:"湖边生活悠闲自得",
-        handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-        username:"Brank",
-        local:'成都市郫都区太双路与蜀新大道交叉路口',
-        like:112,
-        concern:10
-      },
-      {
-        id:3,
-        imgurl:"http://www.fjtbkyc.net/mywx/sunny4.jpg",
-        title:"西华四舍",
-        handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-        username:"Brank",
-        local:'四川省成都市高新区西源大道2006号',
-        like:112,
-        concern:10
-      },
-      {
-        id:4,
-        imgurl:"http://qwq.fjtbkyc.net/public/personalBlog/images/zuopin/portfolio3.jpg",
-        title:"这是title4",
-        handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-        username:"Brank",
-        local:'贵阳市观山湖区金阳新区观山大桥',
-        like:112,
-        concern:10
-      },
-    ],
+    sharenavbar: [],
     lostnavbar: [],
     navbar: ['ta的收藏'],
     Smodewith: [],
@@ -59,8 +18,8 @@ Page({
     Lmodeheight: [],
     currentTab: 0,
     userid: 0,
-    like:122,
-    concern:100,
+    like: 122,
+    concern: 100,
   },
 
   navbarTap: function (e) {
@@ -141,30 +100,65 @@ Page({
   onShow: function () {
     var that = this
     var token = app.globalData.token;
-    if(token)
-    {
+    if (token) {
       wx.request({
-        url: app.globalData.baseUrl+'/Use/user_one', //仅为示例，并非真实的接口地址
+        url: app.globalData.baseUrl + '/Use/user_one', //仅为示例，并非真实的接口地址
         method: "GET",
         data: {
-          id:this.data.userid,
+          id: this.data.userid,
         },
         header: {
           'content-type': 'application/json' // 默认值
         },
-        success (res) {
-          console.log("请求结果",res)
-          wx.hideLoading();
+        success: res => {
           var array;
-          array=res.data.data.jrow;
+          array = res.data.data.jrow;
           // array.reverse();
           that.setData({
             userInfo: array
           })
+          wx.request({
+            url: app.globalData.baseUrl + '/Hor/hoard_me', //仅为示例，并非真实的接口地址
+            method: "GET",
+            data: {
+              userid: that.data.userid,
+              page: 1,
+              limit: 10,
+            },
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            success(res) {
+              console.log("i请求的结果是", res)
+              var ls = res.data.data.row;
+              for (var key in ls) {
+                var marker = ls[key];
+                marker.id = marker.id;
+                marker.userid = marker.authorid;
+                marker.local = marker.address;
+                marker.avatar = marker.avatar;
+                marker.nickname = marker.nickname;
+                var imgurls = marker.files.split("#");
+                for (var i = 0; i < imgurls.length; i++) {
+                  if (imgurls[i] == "") imgurls.splice(i, 1);
+                }
+                imgurls = Array.from(new Set(imgurls))
+                //cover
+                marker.headimg = marker.imgurl;
+                marker.like = marker.likes;
+                marker.imgurl = imgurls[0];
+              }
+              var array;
+              array = res.data.data.row;
+              that.setData({
+                sharenavbar: array
+              })
+              wx.hideLoading();
+            }
+          })
         }
       })
-    }
-    else{
+    } else {
       that.gologin();
     }
   },
@@ -179,26 +173,34 @@ Page({
     var postid = e.currentTarget.dataset.id
   },
 
- //去登录的状态
- gologin: function (e) {
-  wx.redirectTo({
-    url: '/pages/login/login?pagetype=' + 3,
-  })
-},
+  //去登录的状态
+  gologin: function (e) {
+    wx.redirectTo({
+      url: '/pages/login/login?pagetype=' + 3,
+    })
+  },
+
+  goDetail: function (e) {
+    var pstid = e.currentTarget.dataset.posterid;
+    var authorid=e.currentTarget.dataset.uid;
+    wx.navigateTo({
+      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     wx.showLoading({
       title: '玩命加载中'
+    })
+    setTimeout(function () {
+      wx.hideLoading({
+        success: (res) => {},
+        fail: (res) => {},
+        complete: (res) => {},
       })
-     setTimeout(function() {
-        wx.hideLoading({
-          success: (res) => {},
-          fail: (res) => {},
-          complete: (res) => {},
-        })
-     }, 1000);
+    }, 1000);
     this.setData({
       userid: options.userid
     })

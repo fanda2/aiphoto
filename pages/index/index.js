@@ -129,11 +129,9 @@ Page({
           marker.headimg = marker.imgurl;
           marker.like = marker.likes;
           marker.imgurl = imgurls[0];
-          // console.log('marker',marker)
         }
         var array;
         array = res.data.data.row;
-        // array.reverse();
         that.setData({
           navbar: array
         })

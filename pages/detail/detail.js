@@ -351,11 +351,12 @@ Page({
     })
     return {
       title:this.data.essayall.essay_title,
-      path: '/pages/detail/detail?currentID='+this.data.currentID+"&userid"+this.data.authorid,
+      path: '/pages/detail/detail?id='+this.data.posterid+"&authorid"+this.data.authorid,
       imageUrl:this.data.essayall.imageUrl,
       // promise :36
     }
   },
+
   dolike: function () {
     var that = this
     that.gologin();
@@ -396,6 +397,7 @@ Page({
     })
   }
   },
+
   docollect: function () {
     var that = this
     that.gologin();

@@ -62,7 +62,7 @@
                     <view class="myimg">
                       <image bindload="imageLoad" src="{{item.imgurl}}"
                         style="height:{{Smodeheight[index]}}rpx;width:{{Smodewith[index]}}rpx" data-index="{{index}}"
-                        bindtap="goDetail" data-id="{{item.id}}">
+                        data-uid="{{item.authorid}}" data-posterid="{{item.posterid}}" bindtap="goDetail" data-id="{{item.id}}">
                       </image>
                     </view>
                     <view class="inlocal">
@@ -80,7 +80,7 @@
                       <view class="myhand">
                         <image src="{{item.avatar}}" mode="scaleToFill"></image>
                       </view>
-                      <view class="myname">{{item.username}}</view>
+                      <view class="myname">{{item.nickname}}</view>
                       <view class="hart">
                         <view>
                           <image src="/img/bottom-unpraise.png"></image>
@@ -97,7 +97,7 @@
                     <view class="myimg">
                       <image bindload="imageLoad" src="{{item.imgurl}}"
                         style="height:{{Smodeheight[index]}}rpx;width:{{Smodewith[index]}}rpx" data-index="{{index}}"
-                        bindtap="goDetail" data-id="{{item.id}}"></image>
+                        data-uid="{{item.authorid}}" data-posterid="{{item.posterid}}" bindtap="goDetail" data-id="{{item.id}}"></image>
                     </view>
                     <view class="inlocal">
                       <view class="localimg">
@@ -115,7 +115,7 @@
                       <view class="myhand">
                         <image src="{{item.avatar}}" mode="scaleToFill"></image>
                       </view>
-                      <view class="myname">{{item.username}}</view>
+                      <view class="myname">{{item.nickname}}</view>
                       <view class="hart">
                         <view>
                           <image src="/img/bottom-unpraise.png"></image>
