@@ -6,42 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mylike: [
-      {
-        id: 1,
-        handimg: "http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-        username: "我超能睡反正你不行",
-        title: "花香四溢的春天来,花香四溢的春天来,花香四溢的春天来花香四溢的春天来",
-        imgurl: "http://www.fjtbkyc.net/mywx/sunny2.jpg",
-        date: "2000-01-26",
-      },
-    ],
+    mylike: [],
     imageHeight: 0,
     imageWidth: 0
-  },
-
-  goDetail:function(e)
-  {
-    var pagid=e.currentTarget.dataset.pageid; //用于文章返回 
-    var detailid=e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '/pages/detail/detail?pageid=&&datailid='+pagid+detailid,
-    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (event) {
-    wx.showLoading({
-      title: '玩命加载中'
-      })
-      setTimeout(function() {
-        wx.hideLoading({
-          success: (res) => {},
-          fail: (res) => {},
-          complete: (res) => {},
-        })
-     }, 1000);
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#52e7e0',
@@ -63,6 +35,54 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '玩命加载中'
+    })
+    var that = this
+    var token = app.globalData.token;
+    wx.request({
+      url: app.globalData.baseUrl + '/Like/like_all', //仅为示例，并非真实的接口地址
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        userid: app.globalData.userInfo.userid,
+        limit: 20,
+        page: 1
+      },
+      success(res) {
+        wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
+        var ls = res.data.data.row
+        for (var key in ls) {
+          var marker = ls[key];
+          marker.userid = marker.userid
+          var imgurls = marker.files.split("#");
+          for (var i = 0; i < imgurls.length; i++) {
+            if (imgurls[i] == "") imgurls.splice(i, 1);
+          }
+          imgurls = Array.from(new Set(imgurls))
+          //cover
+          marker.handimg = marker.avatar;
+          marker.username = marker.nickname;
+          // marker.userid = marker.userEntity.id
+          // marker.like = marker.poster.likes;
+          marker.imgurl = imgurls[0];
+          marker.title = marker.title
+          marker.local = marker.address
+          marker.concern = Math.floor(Math.random() * (1000 - 10)) + 10;
+          // console.log('marker',marker)
+        }
+        var array;
+        array = res.data.data.row;
+        array.reverse();
+        that.setData({
+          mylike: array
+        })
+        wx.hideLoading();
+      },
+      fail(res) {}
+    })
 
   },
 

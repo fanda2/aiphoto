@@ -81,56 +81,6 @@ Page({
       })
     }
     //  console.log("",app.globalData.userInfo.id)
-    var that = this
-    var token = app.globalData.token;
-    if (token.length == 0) {
-      console.log("未登录！");
-    } else {
-      wx.request({
-        url: app.globalData.baseUrl + '/Like/like_check',
-        method: "GET",
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: {
-          userid: app.globalData.userInfo.userid,
-          posterid: this.data.posterid
-        },
-        success(res) {
-          console.log("like ", res)
-          if (res.data.status == 200) {
-            if (res.data.data.type == 1) {
-              that.setData({
-                islike: 1,
-                oldlike: 1,
-              })
-            }
-          }
-        }
-
-      })
-      wx.request({
-        url: app.globalData.baseUrl + '/Hor/hoard_check',
-        method: "GET",
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: {
-          userid: app.globalData.userInfo.userid,
-          posterid: this.data.posterid
-        },
-        success(res) {
-          if (res.data.status == 200) {
-            if (res.data.data.type == 1) {
-              that.setData({
-                ishoard: 1,
-                oldhoard: 1
-              })
-            }
-          }
-        }
-      })
-    }
   },
 
   swiperChange: function (e) {
@@ -273,9 +223,62 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-
-  onShow: function () {
+  getstatus: function (e) {
     var that = this
+    var token = app.globalData.token;
+    if (token.length == 0) {
+      console.log("未登录！");
+    } else {
+      wx.request({
+        url: app.globalData.baseUrl + '/Like/like_check',
+        method: "GET",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          userid: app.globalData.userInfo.userid,
+          posterid: this.data.posterid
+        },
+        success(res) {
+          console.log("like ", res)
+          if (res.data.status == 200) {
+            if (res.data.data.type) {
+              that.setData({
+                islike: 1,
+                oldlike: 1,
+              })
+            }
+          }
+        }
+
+      })
+      wx.request({
+        url: app.globalData.baseUrl + '/Hor/hoard_check',
+        method: "GET",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          userid: app.globalData.userInfo.userid,
+          posterid: this.data.posterid
+        },
+        success(res) {
+          if (res.data.status == 200) {
+            if (res.data.data.type) {
+              that.setData({
+                ishoard: 1,
+                oldhoard: 1
+              })
+            }
+          }
+        }
+      })
+    }
+  },
+  onShow: function () {
+    console.log("加载一遍")
+    var that = this
+    that.getstatus();
     // var postid = app.globalData.currentMarkerId
     var essayall = {};
     wx.request({
@@ -367,7 +370,6 @@ Page({
     if (!token.length)
       that.gologin();
     if (token.length) {
-      console.log(this.data.posterid, "rr ", this.data.authorid);
       wx.request({
         url: app.globalData.baseUrl + '/Like/like_updata',
         method: "GET",
@@ -380,7 +382,7 @@ Page({
           posterid: this.data.posterid
         },
         success(res) {
-          // console.log("dolike ",res)
+          console.log("dolike ",res)
           if (res.data.status == 200) {
             console.log("点赞成功")
           } else {
@@ -417,7 +419,7 @@ Page({
           posterid: this.data.posterid
         },
         success(res) {
-          // console.log("doCollect ",res)
+          console.log("doCollect ",res)
           if (res.data.status == 200) {
             console.log("收藏成功", res)
           } else {
@@ -467,7 +469,10 @@ Page({
    */
   onHide: function () {
     if (this.data.oldlike != this.data.islike)
+    {
+      console.log("old",this.data.oldlike,"new:",this.data.islike)
       this.postlike();
+    }
     if (this.data.oldhoard != this.data.ishoard)
       this.postcollect();
 
@@ -478,7 +483,10 @@ Page({
    */
   onUnload: function () {
     if (this.data.oldlike != this.data.islike)
+    {
       this.postlike();
+    }
+     
     if (this.data.oldhoard != this.data.ishoard)
       this.postcollect();
   },

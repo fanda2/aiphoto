@@ -31,16 +31,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '玩命加载中'
-      })
-      setTimeout(function() {
-        wx.hideLoading({
-          success: (res) => {},
-          fail: (res) => {},
-          complete: (res) => {},
-        })
-     }, 1000);
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#52e7e0',
@@ -65,7 +55,34 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    wx.showLoading({
+      title: '玩命加载中'
+    })
+    var that = this
+    var token = app.globalData.token;
+    wx.request({
+      url: app.globalData.baseUrl + '/Flw/follow_all', //仅为示例，并非真实的接口地址
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        userid: app.globalData.userInfo.userid,
+        limit: 20,
+        page: 1
+      },
+      success(res) {
+        console.log("请求结果",res);
+        wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
+        var array;
+        array = res.data.data.row;
+        that.setData({
+          concern: array
+        })
+        wx.hideLoading();
+      },
+      fail(res) {}
+    })
   },
   //界面跳转
   goMessage:function(e)

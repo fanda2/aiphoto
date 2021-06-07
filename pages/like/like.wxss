@@ -65,7 +65,7 @@ page{
   width: 180rpx;
 }
 .username{
-  font-size: 40rpx;
+  font-size: 35rpx;
   font-weight: 600;
 }
 .title{

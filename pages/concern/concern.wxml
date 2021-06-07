@@ -13,16 +13,16 @@
       <view class="author" bindtap="goMessage" data-idx="{{index}}" >
         <view class="handimg">
           <view class="inheadimg">
-            <image src="{{item.handimg}}"></image>
+            <image src="{{item.avatar}}"></image>
           </view>
         </view>
         <view class="right">
-          <view class="name">{{item.name}}</view>
-          <view class="introduce">{{item.introduce}}</view>
+          <view class="name">{{item.nickname}}</view>
+          <view class="introduce">{{item.motto}}</view>
         </view>
       </view>
       <view class="concel">
-        <view class="middle" bindtap="concelConcern" data-id="{{item.id}}" data-name="{{item.name}}">取消关注</view>
+        <view class="middle" bindtap="concelConcern" data-id="{{item.userid}}" data-name="{{item.nickname}}">取消关注</view>
       </view>
 
     </view>
