@@ -62,6 +62,11 @@ Page({
       url: '/pages/server/server'
     })
   },
+  gomorething: function (e) {
+    wx.navigateTo({
+      url: '/pages/morething/morething'
+    })
+  },
   goMessage: function (e) {
     var userid = app.globalData.userInfo.id
     // console.log(app.globalData.userInfo.id);
@@ -76,6 +81,19 @@ Page({
     wx.navigateTo({
       url: '/pages/myinfo/myinfo',
     })
+  },
+  goshare:function(e)
+  {
+    var that = this;
+    if (!app.globalData.token) {
+      wx.navigateTo({
+        url: '/pages/login/login?pagetype=' + 1,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/share/share',
+      });
+    }
   },
   toH: function (e) {
     wx.navigateTo({

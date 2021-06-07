@@ -32,7 +32,9 @@ Page({
     shareText: "",
     shareLocal: "成都市郫都区红光镇红光大道9999号",
     title_type: "1", //作品类别  1表示分享，2表示失物
-    ac2: 1
+    ac2: 1,
+    username:"",//用户的名称，填写
+    email:"", //用户填写的邮箱地址
   },
 
   parameterTap: function (e) {
@@ -96,8 +98,6 @@ Page({
 
   },
 
-
-
   previewSelectImage: function (key) {
     var that = this;
     wx.previewImage({
@@ -117,6 +117,14 @@ Page({
       latitude: options.lat,
       longtitude: options.lng,
     })
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#52e7e0',
+      animation: {
+        duration: 500,
+        timingFunc: 'easeIn'
+      }
+    })
   },
   Stable: function (e) {
     wx.navigateTo({
@@ -130,7 +138,7 @@ Page({
   },
   post: function () {
     var that = this
-    if (that.data.shareTitle == '' || that.data.shareText == '' || that.data.tag) {
+    if (that.data.shareTitle == '' || that.data.shareText == '' || that.data.tag==''||that.data.usernaem==''||that.data.email=='') {
       wx.showModal({
         content: '请检查是否填写完整',
         cancelColor: 'orange',

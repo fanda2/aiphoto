@@ -93,8 +93,6 @@ Page({
     //是否是分享点击进入小程序
     showShare: false,
     //上传者用户信息
-    // userAvatar: 'https://images.unsplash.com/photo-1499355940597-5601b9869168?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0a501f2aa74492264ce48c72546450e8&auto=format&fit=crop&w=1567&q=80',
-    userNickname: '芜湖',
     uploadTime: '一分钟前',
     city: '',
     authourid:0,//文章id    
@@ -155,11 +153,6 @@ Page({
     that.changeMapHeight();
     that.setHomeActionLeftDistance();
     this.queryMarkerInfo()
-
-
-
-
-
   },
 
   /**
@@ -212,7 +205,6 @@ Page({
         windowWidth = res.windowWidth;
         //创建节点选择器
         var query = wx.createSelectorQuery();
-
         var query = wx.createSelectorQuery();
         query.select('#bottom-layout').boundingClientRect()
         query.exec(function (res) {
@@ -321,6 +313,7 @@ Page({
     var that = this;
     var idx = e.detail.markerId;
     app.globalData.currentMarkerId = idx;
+    console.log("结果是：",e);
     //重新设置点击marker为中心点
     for (var key in that.data.markers) {
       var marker = that.data.markers[key];
@@ -338,16 +331,15 @@ Page({
     var that = this
     var postid = app.globalData.currentMarkerId
     var userid = 0;
-    var currentID=0
+    var currentID=0;
     wx.request({
-      url: 'https://storymap.sherlockouo.com/poster/info',
+      url: app.globalData.baseUrl+'/Pst/poster_map', 
       method: "GET",
       data: {
         posterId: postid,
       },
       success(res) {
-        // console.log("结果是：");
-        if (res.data.code == 0) {
+        if (res.data.status == 200) {
           new Promise((resolve, reject) => {
             var marker = res.data.data;
             userid = marker.userid;
@@ -355,7 +347,7 @@ Page({
             resolve(userid)
           }).then(() => {
               wx.navigateTo({
-                url: '/pages/detail/detail?pageid=' + 1 + "&userid=" + userid+"&currentID="+currentID,
+                url: '/pages/detail/detail?pageid=' + 1 + "&posterid=" + pstid+"&authorid="+authorid,
               })
           })
         }
@@ -412,25 +404,25 @@ Page({
     that.adjustViewStatus(true, false, false);
   },
 
-  // 跳转到分享界面
-  toShare: function (e) {
-    var that = this;
-    // that.adjustViewStatus(false, true, false);
-    that.updateCenterLocation(that.data.latitude, that.data.longitude);
-    that.regeocodingAddress();
-    // console.log('shit ', that.data.centerAddressBean)
-    if (app.globalData.token.length == 0) {
-      wx.navigateTo({
-        url: '/pages/login/login?pagetype=' + 1,
-      })
-    } else {
-      wx.navigateTo({
-        // url:'/pages/share/share?city='
-        url: '/pages/share/share?city=' + that.data.centerAddressBean.address_component.city + '&street=' + that.data.centerAddressBean.address_component.street + '&address=' + that.data.centerAddressBean.address + '&lat=' + that.data.latitude + '&lng=' + that.data.longitude,
-      });
-    }
+  // // 跳转到分享界面
+  // toShare: function (e) {
+  //   var that = this;
+  //   // that.adjustViewStatus(false, true, false);
+  //   that.updateCenterLocation(that.data.latitude, that.data.longitude);
+  //   that.regeocodingAddress();
+  //   // console.log('shit ', that.data.centerAddressBean)
+  //   if (app.globalData.token.length == 0) {
+  //     wx.navigateTo({
+  //       url: '/pages/login/login?pagetype=' + 1,
+  //     })
+  //   } else {
+  //     wx.navigateTo({
+  //       // url:'/pages/share/share?city='
+  //       url: '/pages/share/share?city=' + that.data.centerAddressBean.address_component.city + '&street=' + that.data.centerAddressBean.address_component.street + '&address=' + that.data.centerAddressBean.address + '&lat=' + that.data.latitude + '&lng=' + that.data.longitude,
+  //     });
+  //   }
 
-  },
+  // },
   /**
    * 点击控件时触发
    */
@@ -546,7 +538,7 @@ Page({
           resolve(ls)
         })
         v.then((res) => {
-          console.log('res type', res)
+          console.log('res type', res[0])
           that.createMarker(res)
         })
       }
@@ -560,15 +552,15 @@ Page({
   createMarker: function (markers) {
     var that = this;
     var currentMarker = [];
+    // console.log("左边点为",markers)
     for (var key in markers) {
       var marker = markers[key];
-      marker.id = marker.id;
-      marker.userid = marker.userid;
+      marker.posterid = marker.posterid;
+      marker.authorid = marker.authorid;
       marker.longitude = marker.longtitude;
       marker.width = 40;
       marker.height = 40;
       marker.iconPath = '/img/markshare.png';
-      
     }
     currentMarker = currentMarker.concat(markers);
     // console.log('ms ss', currentMarker)
@@ -701,8 +693,6 @@ Page({
     var index = e.currentTarget.dataset.idx
     // console.log('address index ',this.data.resultList[index])
     var location = this.data.resultList[index].location
-    // console.log('lat lng',location.lat,location.lng)
-    // that.updateCenterLocation(location.lat, location.lng);
     app.globalData.location = location
     this.setData({
       latitude: location.lat,

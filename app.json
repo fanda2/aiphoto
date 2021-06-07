@@ -12,7 +12,8 @@
     "pages/concern/concern",
     "pages/myinfo/myinfo",
     "pages/address/address",
-    "pages/server/server"
+    "pages/server/server",
+    "pages/morething/morething"
   ],
   "permission": {
     "scope.userLocation": {

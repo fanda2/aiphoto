@@ -46,18 +46,18 @@
 
 /* 登录后界面样式 */
 .shareTop{
-  margin: 1px auto;
+  margin: 40px auto;
   width: 98%;
   display: flex;
   /* justify-items:space-between; */
   justify-content: flex-start;
   flex-direction:row-reverse;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-radius: 8px;
 }
 .shareTop .btn
 {
-  width: 80px;
+  width: 100px;
   height: 30px;
   line-height: 30px;
   border-radius: 25px;
@@ -75,7 +75,7 @@
 }
 .shareBtn2{
   font-weight: 550;
-  background-color: #fb9d39;
+  background-color: #51cafa;
   line-height: 100%;
   text-align:center;
 }
@@ -97,7 +97,7 @@
 }
 .inbtn .active
 {
-  background-color: #fb9d39;
+  background-color: #47b7eb;
   border: darkcyan 0px solid ;
 }
 
@@ -110,7 +110,7 @@
   border-radius: 8px;
 }
 
-.shareLocal
+.shareLocal 
 {
   margin: 3% auto;
   width: 98%;
@@ -120,6 +120,23 @@
   /* background-image: url("/img/location-icon.png"); */
   display: flex;
   line-height: 8%;
+}
+.message{
+  margin: 3% auto;
+  width: 98%;
+  height: 18%;
+  background-color: white;
+  border-radius: 8px;
+  line-height: 8%;
+}
+.messageL{
+  width: 94%;
+  margin: 0 auto;
+  height: 50%;
+  display: flex;
+}
+.backtext{
+  margin-left: 20rpx;
 }
 .shareLL{
   display: flex;
@@ -193,7 +210,7 @@
 {
   /* background: chocolate; */
   padding-top: 10px;
-  height: 40%;
+  height:45%;
   width: 100%;
   color: #424242;
   overflow: hidden;
@@ -264,28 +281,31 @@
 
 .shareImg{
   /* background: #fb9d39; */
-  height: 300rpx;
+  height: 220rpx;
   width: 100%;
   display: flex;
   justify-content: left;
 }
 .imgbox image
 {
-  width: 240rpx;
-  height: 240rpx;
+  width: 210rpx;
+  height: 210rpx;
 }
 .imgbox {
   margin-bottom: 10px;
-  width: 230rpx;
-  height: 230rpx;
+  width: 200rpx;
+  height: 200rpx;
   border-radius: 14rpx;
   /* background: palegreen; */
 }
 .upImg{
-  width: 230rpx;
-  height: 230rpx;
+  width: 200rpx;
+  height: 200rpx;
 }
 
+.scroll-view{
+  height: 210rpx;
+}
 .banner{
   height:200rpx; 
   width:100%;
@@ -295,13 +315,13 @@
 } 
 .banner_Item{ 
  margin-top: 6rpx;
- width: 225rpx;
- height: 225rpx;
- line-height: 225rpx;
+ width: 200rpx;
+ height: 200rpx;
+ line-height: 200rpx;
  text-align: center;
  border-radius: 10px;
  background-color:rgb(166, 221, 235);
- margin-right:10rpx;
+ margin-right:6rpx;
  overflow: hidden;
  display: block;
 } 
@@ -326,7 +346,7 @@
     width: 90%;
     margin:5rpx ;
     border-radius: 8rpx;
-    background:#fb9d39;
+    background:#77c4e2;
     display: flex;
     flex-direction: column;
     justify-items: center;
@@ -338,8 +358,8 @@
   }
   .concel{
     position: relative;
-    top: 0;
-    right: 35rpx;
+    top: 10rpx;
+    right: 60rpx;
   }
   .concel image{
     width: 50rpx;

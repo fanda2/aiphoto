@@ -75,7 +75,7 @@ Page({
     var pstid = e.currentTarget.dataset.posterid;
     var authorid=e.currentTarget.dataset.uid;
     wx.navigateTo({
-      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid,
+      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid+"&pageid="+1,
     })
   },
   /**

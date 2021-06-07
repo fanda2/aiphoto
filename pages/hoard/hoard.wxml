@@ -8,7 +8,7 @@
 </view>
 <view wx:else class="contertain">
   <block wx:for="{{navbar}}" data-idx="{{index}}" class="allitem" wx:key="idx">
-    <view class="hoard-item"  bindtap="Tapgo" data-idx="{{index}}">
+    <view class="hoard-item"  bindtap="Tapgo" data-posterid="{{item.posterid}}" data-authorid="{{item.authorid}}">
       <view class="hoardimage">
        <image class="himimg" src="{{item.imgurl}}" mode="aspectFill"></image>
       </view>

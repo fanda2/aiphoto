@@ -12,7 +12,7 @@
       <view class='cancel-wrapper' bindtap='deleteInput' wx:if='{{inputAddress}}'>
         <view>
           <image class='delete-input' style="width:{{inputHe-4}}px;height:{{inputHe-4}}px;margin-top:{{vaHe/16}}px"
-            src='/img/delete.png'></image>
+            src='/img/delete2.png'></image>
         </view>
       </view>
     </view>

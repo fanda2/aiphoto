@@ -23,6 +23,58 @@ Page({
   //设置用户详情页的图片信息
   setbackground: function () {
     console.log("点击设置图片")
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      count: 1,
+      success: function (res) {
+        console.log("选择后的结果",res)
+        var imgs = res.tempFilePaths;
+        console.log("imgs ")
+        wx.uploadFile({
+          url: app.globalData.baseUrl + 'Tsf/upload',
+          method: 'GET',
+          header: {
+            // Authorization: token,
+          },
+          name: 'files',
+          filePath: imgs[0],
+          success(res) {
+            new Promise((resolve=>{
+              res = JSON.parse(res.data)
+              console.log("upload result",res.files[0])
+              resolve(res.files[0])
+            })).then((res)=>{
+              that.setData({
+                bgimg:res
+              })
+              wx.request({
+                url: app.globalData.baseUrl + 'Use/bgimg_updata',
+                header:{
+                  Authorization: token,
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: "PUT",
+                data: {
+                  "bgimg": res
+                },  
+                success(res){
+                    console.log("upload bgimg",res)
+                },
+                fail(){
+  
+                }
+              })
+            })
+          },
+          fail(res){
+              console.log("上传失败",res)
+          }
+        })
+        // console.log("fileupload ",res.tempFilePaths[0])
+        // that.adjustViewStatus(false, true, false);
+      },
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -73,7 +125,7 @@ Page({
   },
   inputedit: function (e) {
     this.setData({
-      introduce:e.detail.value,
+      introduce: e.detail.value,
     })
   },
   imgShow: function (event) {
@@ -164,7 +216,7 @@ Page({
     if (oldbirthday != newbirthday || address[0] != newreg1 || address[1] != newreg2 || oldmotto != newmotto) {
       wx.showLoading({
         title: '玩命加载中'
-        })
+      })
       wx.request({
         url: app.globalData.baseUrl + 'Use/user_update',
         method: 'GET',

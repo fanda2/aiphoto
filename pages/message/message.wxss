@@ -112,8 +112,9 @@ page{
   display: flex;
 }
 .username{
-  margin: 10rpx;
+  margin: 5rpx;
   font-weight: 600;
+  height: 50px;
   font-size: 30rpx;
   overflow: hidden;
 }
