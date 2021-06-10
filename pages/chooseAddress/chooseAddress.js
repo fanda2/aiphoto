@@ -1,6 +1,4 @@
 // pages/chooseAddress/chooseAddress.js
-
-
 //获取应用实例
 const app = getApp();
 var consoleUtil = require('../../utils/consoleUtil.js');
@@ -29,8 +27,8 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.setData({
-      city: options.city,
-      street: options.street
+      city: app.globalData.city,
+      street: app.globalData.street
     })
     consoleUtil.log('city--->' + that.data.city + '---street--->' + that.data.street);
     that.getSearchContentHeight();

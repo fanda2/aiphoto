@@ -101,6 +101,7 @@ Page({
     var that = this
     that.postbefollow();
     that.postfollow();
+    that.checkConcern();
     var token = app.globalData.token;
     if (token) {
       wx.request({
@@ -167,10 +168,37 @@ Page({
 
   //点击关注按钮调用
   concern: function (e) {
-    var that = this
-    var token = app.globalData.token;
+    this.setData({
+      concernAc: !this.data.concernAc
+    })
   },
- 
+
+  //点击关注接口调用
+  postconcern: function (e) {
+    if (app.globalData.token) {
+      var that = this
+      wx.request({
+        url: app.globalData.baseUrl + '/Flw/follow_updata',
+        method: "GET",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          userid: app.globalData.userInfo.userid,
+          befwuserid: this.data.userid
+        },
+        success(res) {
+          if (res.data.status == 200) {
+            console.log("关注调用成功")
+          } else {
+            console.log("请求发送失败！")
+          }
+        }
+      })
+    }
+  },
+
+
   //去登录的状态
   gologin: function (e) {
     wx.redirectTo({
@@ -182,7 +210,7 @@ Page({
     var pstid = e.currentTarget.dataset.posterid;
     var authorid = e.currentTarget.dataset.uid;
     wx.navigateTo({
-      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid+"&pageid="+6+"&share="+0,
+      url: '/pages/detail/detail?posterid=' + pstid + "&authorid=" + authorid + "&pageid=" + 6 + "&share=" + 0,
     })
   },
   /**
@@ -226,9 +254,9 @@ Page({
         success(res) {
           if (res.data.status == 200) {
             that.setData({
-              concern:res.data.data.num,
+              concern: res.data.data.num,
             })
-            console.log("res:",res)
+            console.log("res:", res)
           } else {
             console.log("请求发送失败！")
           }
@@ -236,6 +264,7 @@ Page({
       })
     }
   },
+
   postbefollow: function (e) {
     if (app.globalData.token) {
       var that = this
@@ -250,9 +279,9 @@ Page({
         },
         success(res) {
           if (res.data.status == 200) {
-            console.log("res:",res)
+            console.log("res:", res)
             that.setData({
-              like:res.data.data.num,
+              like: res.data.data.num,
             })
           } else {
             console.log("请求发送失败！")
@@ -260,6 +289,31 @@ Page({
         }
       })
     }
+  },
+
+  checkConcern() {
+    var that = this;
+    wx.request({
+      url: app.globalData.baseUrl + '/Flw/follow_check',
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        userid: app.globalData.userInfo.userid,
+        befwuserid: this.data.userid
+      },
+      success(res) {
+        if (res.data.status == 200) {
+          if (res.data.data.type) {
+            that.setData({
+              concernAc: 1,
+              oldfollow: 1
+            })
+          }
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -271,14 +325,18 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    if (this.data.oldfollow != this.data.concernAc) {
+      this.postconcern();
+    }
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    if (this.data.oldfollow != this.data.concernAc) {
+      this.postconcern();
+    }
   },
 
   /**

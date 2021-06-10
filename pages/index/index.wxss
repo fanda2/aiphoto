@@ -285,3 +285,12 @@
   /* 当文本溢出包含元素时显示省略符号来代表被修剪的文本   */
 
 }
+.nofund{
+  width: 100%;
+  height: 120px;
+}
+.nofund image{
+width: 150px;
+height: 100px;
+
+}

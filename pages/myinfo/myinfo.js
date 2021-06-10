@@ -18,63 +18,132 @@ Page({
     region2: " ", //表示省
     introduce: "",
     bgimg: "",
+    imagesrc: "",
+    imgcount: 0,
+    show_hidden: "display:none;",
+    compression: "", //压缩路径
+  },
+  //选择图片
+  chooseMyImage: function () {
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      success: function (res) {
+        that.setData({
+          imagesrc: res.tempFilePaths[0],
+          imgcount: 1,
+          show_hidden: "display:block"
+        })
+        console.log("上传成功", that.data.imagesrc)
+        that.MyImageCompression()
+      },
+      fail: function () {
+        wx.showToast({
+          title: "请选择图片",
+          icon: "none",
+        })
+      }
+    })
+  },
+
+  //压缩图片
+  MyImageCompression: function () {
+    console.log("压缩图片")
+    var that = this;
+    if (that.data.imgcount == 1) {
+      wx.showToast({
+        title: "正在压缩图片",
+        icon: "loading",
+      })
+      wx.compressImage({
+        src: that.data.imagesrc,
+        quality: 0,
+        success: function (res) {
+          wx.showToast({
+            title: "压缩成功",
+          });
+          that.setData({
+            compression: res.tempFilePath
+          })
+          wx.showLoading({
+            title: '正在上传'
+          })
+          wx.uploadFile({
+            url: app.globalData.baseUrl + '/Tsf/upload',
+            method: 'POST',
+            header: {
+              // Authorization: token,
+            },
+            name: 'file',
+            filePath: that.data.compression,
+            success(res) {
+              // wx.showToast({
+              //   title: "上传成功",
+              // });
+              new Promise((resolve => {
+                res = JSON.parse(res.data)
+                resolve(res.data.filepath)
+              })).then((res) => {
+                console.log("返回的地址为", res)
+                that.setData({
+                  bgimg: res
+                }) 
+                that.userimgupload();
+              })
+    
+            },
+            fail(res) {
+              wx.showToast({
+                title: "更新成功",
+              });
+            }
+          })
+        },
+        fail: function () {
+          wx.showToast({
+            title: "压缩失败",
+            icon: "none",
+          })
+        }
+      })
+    }
+  },
+
+  //用户头像更新接口
+  userimgupload: function (e) {
+    console.log("背景信息",this.data.bgimg)
+    var that = this;
+    wx.request({
+      url: app.globalData.baseUrl + '/Use/bgimg_updata',
+      method: "GET",
+      header: {
+        // Authorization: token,
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        id: app.globalData.userInfo.userid,
+        filepath: that.data.bgimg
+      },
+      success(res) {
+        console.log(res);
+        if (res.data.status == 200) {
+          that.setUserinfo()
+        } else {
+          wx.showToast({
+            title: '信息更新失败！',
+            icon: 'error',
+            duration: 2000
+          })
+        }
+      },
+      fail() {}
+    })
   },
 
   //设置用户详情页的图片信息
   setbackground: function () {
-    console.log("点击设置图片")
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      count: 1,
-      success: function (res) {
-        console.log("选择后的结果",res)
-        var imgs = res.tempFilePaths;
-        console.log("imgs ")
-        wx.uploadFile({
-          url: app.globalData.baseUrl + 'Tsf/upload',
-          method: 'GET',
-          header: {
-            // Authorization: token,
-          },
-          name: 'files',
-          filePath: imgs[0],
-          success(res) {
-            new Promise((resolve=>{
-              res = JSON.parse(res.data)
-              console.log("upload result",res.files[0])
-              resolve(res.files[0])
-            })).then((res)=>{
-              that.setData({
-                bgimg:res
-              })
-              wx.request({
-                url: app.globalData.baseUrl + 'Use/bgimg_updata',
-                header:{
-                  Authorization: token,
-                  'content-type': 'application/x-www-form-urlencoded'
-                },
-                method: "PUT",
-                data: {
-                  "bgimg": res
-                },  
-                success(res){
-                    console.log("upload bgimg",res)
-                },
-                fail(){
-  
-                }
-              })
-            })
-          },
-          fail(res){
-              console.log("上传失败",res)
-          }
-        })
-        // console.log("fileupload ",res.tempFilePaths[0])
-        // that.adjustViewStatus(false, true, false);
-      },
-    })
+    var that = this;
+    that.chooseMyImage()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -144,7 +213,6 @@ Page({
     this.setData({
       birthday: e.detail.value
     });
-    console.log("121", this.data.birthday)
   },
   gologin: function (e) {
     wx.redirectTo({
@@ -218,7 +286,7 @@ Page({
         title: '玩命加载中'
       })
       wx.request({
-        url: app.globalData.baseUrl + 'Use/user_update',
+        url: app.globalData.baseUrl + '/Use/user_update',
         method: 'GET',
         data: {
           id: that.data.userid,
@@ -230,38 +298,8 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: res => {
-          console.log("dddd", res)
           if (res.data.status == 200) {
-            wx.request({
-              url: app.globalData.baseUrl + '/Use/user_one', //仅为示例，并非真实的接口地址
-              method: "GET",
-              data: {
-                id: that.data.userid,
-              },
-              header: {
-                'content-type': 'application/json' // 默认值
-              },
-              success(res) {
-                wx.hideLoading();
-                var array;
-                array = res.data.data.jrow;
-                app.globalData.userInfo = res.data.data.jrow
-                try {
-                  wx.setStorageSync('userInfo', res.data.data.jrow)
-                } catch (e) {
-                  console.log("存储失败33！")
-                }
-                that.setData({
-                  userInfo: array
-                })
-              }
-            })
-            wx.showToast({
-              title: '更新成功',
-              icon: 'success',
-              duration: 2000
-            })
-            that.onShow();
+            that.setUserinfo()
           } else {
             wx.showToast({
               title: '信息更新失败！',
@@ -287,5 +325,38 @@ Page({
       })
 
     }
+  },
+  setUserinfo: function (e) {
+    var that = this
+    wx.request({
+      url: app.globalData.baseUrl + '/Use/user_one', //仅为示例，并非真实的接口地址
+      method: "GET",
+      data: {
+        id: that.data.userid,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        wx.hideLoading();
+        var array;
+        array = res.data.data.jrow;
+        app.globalData.userInfo = res.data.data.jrow
+        try {
+          wx.setStorageSync('userInfo', res.data.data.jrow)
+        } catch (e) {
+          console.log("存储失败33！")
+        }
+        that.setData({
+          userInfo: array
+        })
+      }
+    })
+    wx.showToast({
+      title: '更新成功',
+      icon: 'success',
+      duration: 2000
+    })
+    that.onShow();
   }
 })

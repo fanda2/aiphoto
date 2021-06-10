@@ -26,6 +26,11 @@ App({
     token:'',
     isHide:0,//登录状态
     location:{},
-    baseUrl:"https://aiphoto.fjtbkyc.net/"
+    baseUrl:"https://aiphoto.fjtbkyc.net",
+    city:'',
+    street:'',
+    address:'',//地址
+    latitude:'',
+    longitude:'',
   }
 })

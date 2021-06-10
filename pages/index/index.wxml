@@ -3,19 +3,19 @@
   <scroll-view  style="overflow: hidden" class="txtable" scroll-x="true">
     <view class="tabel" scroll-x="true">
       <block wx:for="{{label}}">
-        <view bindtap="getMessage" data-idx="{{index}}" class="item {{isactive[index]==1? 'active' : ''}}">{{item.name}}
+        <view bindtap="getMessage" data-idx="{{index}}" data-id="{{item.id}}" class="item {{isactive[index]==1? 'active' : ''}}">{{item.name}}
         </view>
       </block>
     </view>
   </scroll-view>
-  <!-- <view wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</view> -->
-  <!-- <view class="item title1  {{ac1==1 ? 'activeL' : ''}}" bindtap="active1">附近分享</view>
-  <view class="item title2 {{ac2==1 ? 'activeR' : ''}}" bindtap="active2">失物信息</view> -->
 </view>
 <view class="bottombox">
   <!--附近分享-->
   <view hidden="{{cTab==1}}" class="tab1">
-    <view wx:if="{{!shareCount}}" class="conter">附近未发布任何内容哦，快来发送吧！</view>
+    <view wx:if="{{!navbar.length}}" class="conter">
+      <view class="nofund"><image src="/img/nofund.png"></image></view>
+         <view>还未发布任何内容哦~,敬请期待</view>
+    </view>
     <view wx:else class="container">
       <view class="conterL">
         <block wx:for="{{navbar}}" dataidx="{{index}}"  class="text-item" wx:key="idx" bindtap="navbarTap">

@@ -111,9 +111,9 @@ Page({
     // console.log('lat: ',options.lat,'lng: ',options.lng)
     var that = this;
     that.setData({
-      shareLocal: options.address,
-      city: options.city,
-      street: options.street,
+      shareLocal: app.globalData.address,
+      city: app.globalData.city,
+      street: app.globalData.street,
       latitude: options.lat,
       longtitude: options.lng,
     })
@@ -221,7 +221,7 @@ Page({
       var fileurls = files.join("")
       console.log("localyag", tags);
       wx.request({
-        url: 'https://storymap.sherlockouo.com/poster/post', 
+        url: app.globalData.baseUrl+'poster/post', 
         method: 'POST',
         data: {
           title: that.data.shareTitle,

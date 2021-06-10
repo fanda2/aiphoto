@@ -54,7 +54,7 @@ Page({
   //去登录的状态
   gologin: function (e) {
     wx.redirectTo({
-      url: '/pages/login/login?pagetype=' + 3,
+      url: '/pages/login/login?pagetype=' + 1,
     })
   },
   goserve: function (e) {

@@ -9,13 +9,17 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUseGetUserProfile: false,
-    islogin:false
+    islogin:false,
+    posterid:0,
+    authorid:0,
   },
   onLoad() {
     if (wx.getUserProfile) {
       this.setData({
         pagetype:this.options.pagetype,
-        canIUseGetUserProfile: true
+        canIUseGetUserProfile: true,
+        posterid:this.options.posterid,
+        authorid:this.options.authorid
       })
     }
   },
@@ -37,9 +41,7 @@ Page({
         }).then((result)=>{
           wx.login({
             success: res => {
-              console.log("微信登录成功",res)
               wx.request({
-                // 自行补上自己的 APPID 和 SECRET
                 url: app.globalData.baseUrl+'/Login/onLogin', //仅为示例，并非真实的接口地址
                 method: "GET",
                 header: {
@@ -79,7 +81,6 @@ Page({
                     } catch (e) {
                       console.log("存储失败33！")
                      }
-
                     //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
                     that.setData({
                       isHide: 0,
@@ -88,6 +89,11 @@ Page({
                   } else {
                     console.log(" something goes wrong msg ", res.data.data.jrow);
                   }
+                  wx.showToast({
+                    title: '登录成功',
+                    icon: 'success',
+                    duration: 2000
+                  })
                   that.goback();
                 },
                 fail: res => {
@@ -115,18 +121,17 @@ goback: function (e) {
   console.log('pagetype ', this.data.pagetype);
   if (this.data.pagetype == 1) {
     wx.switchTab({
-      url: '/pages/index/index'
+      url: '/pages/man/man'
     })
   } else if (this.data.pagetype == 2) {
-    wx.switchTab({
-      url: '/pages/trends/trends'
+    wx.redirectTo({
+      url: '/pages/detail/detail'
     })
   } else {
     wx.switchTab({
-      url: '/pages/man/man'
+      url: '/pages/index/index'
     })
   }
-
 },
 
 /**

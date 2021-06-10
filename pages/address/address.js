@@ -269,8 +269,9 @@ Page({
               })
             }
           })
-        } else {
-          that.initMap();
+        }
+         else {
+          // that.initMap();
         }
       }
     })
@@ -338,26 +339,14 @@ Page({
       },
       success(res) {
         if (res.data.status == 200) {
-          console.log("ssssss",res.data.data.jrow.authorid)
           var authorid = res.data.data.jrow.authorid;
           var posterid = postid;
-          console.log("陈工",authorid,"wewew",posterid)
           wx.navigateTo({
-            url: '/pages/detail/detail?pageid=' + 5 + "&posterid=" + posterid + "&authorid=" + authorid+"&share="+0,
+            url: '/pages/detail/detail?pageid=' + 5 + "&posterid=" + posterid + "&authorid=" + authorid + "&share=" + 0,
           })
         }
       }
     })
-  },
-
-  /**
-   * 上传情报
-   */
-  uploadInfoClick: function () {
-    var that = this;
-    that.adjustViewStatus(false, true, false);
-    that.updateCenterLocation(that.data.latitude, that.data.longitude);
-    that.regeocodingAddress();
   },
 
   /**
@@ -398,29 +387,6 @@ Page({
     that.resetPhoto();
     that.adjustViewStatus(true, false, false);
   },
-
-  // // 跳转到分享界面
-  // toShare: function (e) {
-  //   var that = this;
-  //   // that.adjustViewStatus(false, true, false);
-  //   that.updateCenterLocation(that.data.latitude, that.data.longitude);
-  //   that.regeocodingAddress();
-  //   // console.log('shit ', that.data.centerAddressBean)
-  //   if (app.globalData.token.length == 0) {
-  //     wx.navigateTo({
-  //       url: '/pages/login/login?pagetype=' + 1,
-  //     })
-  //   } else {
-  //     wx.navigateTo({
-  //       // url:'/pages/share/share?city='
-  //       url: '/pages/share/share?city=' + that.data.centerAddressBean.address_component.city + '&street=' + that.data.centerAddressBean.address_component.street + '&address=' + that.data.centerAddressBean.address + '&lat=' + that.data.latitude + '&lng=' + that.data.longitude,
-  //     });
-  //   }
-
-  // },
-  /**
-   * 点击控件时触发
-   */
   controlTap: function () {
 
   },
@@ -569,9 +535,11 @@ Page({
    */
   chooseAddress: function () {
     var that = this;
-    wx.navigateTo({
-      url: '../chooseAddress/chooseAddress?city=' + that.data.centerAddressBean.address_component.city + '&street=' + that.data.centerAddressBean.address_component.street,
-    })
+    app.globalData.city = that.data.centerAddressBean.address_component.city
+    app.globalData.street = that.data.centerAddressBean.address_component.street
+    app.globalData.address=that.data.centerAddressBean.address
+    app.globalData.latitude=that.data.latitude
+    app.globalData.longitude=that.data.longitude
   },
 
   /**
@@ -734,4 +702,17 @@ Page({
 
     })
   },
+
+  onHide: function () {
+    this.chooseAddress();
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    this.chooseAddress();
+
+  },
+
 })

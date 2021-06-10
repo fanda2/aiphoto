@@ -33,9 +33,9 @@ Page({
     oldhoard: 0,
     authorid: 0,
     posterid: 0, //文章的id
-    sharepage:0,
-    countnum:0,//表示用户点击按钮后的结果
-    cont:0,//表示点击按钮的次数
+    sharepage: 0,
+    countnum: 0, //表示用户点击按钮后的结果
+    cont: 0, //表示点击按钮的次数
   },
 
   // 点击图片进行预览函数
@@ -74,9 +74,9 @@ Page({
       pageid: options.pageid,
       posterid: options.posterid,
       authorid: options.authorid,
-      sharepage:options.share,
+      sharepage: options.share,
     })
-    console.log("加载时获取的信息",this.data.posterid+" ",this.data.authorid+" ",this.data.sharepage)
+    console.log("加载时获取的信息", this.data.posterid + " ", this.data.authorid + " ", this.data.sharepage)
     if (options.authorid == app.globalData.userInfo.userid) {
       this.setData({
         isyouself: 1,
@@ -91,11 +91,10 @@ Page({
   },
   //界面跳转
   goMessage: function (e) {
-    this.gologin(); //判断用户是否登录进入登录界面
-    if (!app.globalData.token.length == 0) {
-      this.setData({
-        isshow: 0
-      })
+    if (!app.globalData.token.length) {
+      this.gologin(); //判断用户是否登录进入登录界面
+    } else {
+
       var userid = this.data.authorid
       var youself = this.data.isyouself
       wx.navigateTo({
@@ -134,7 +133,6 @@ Page({
   swipclick: function (e) {
     wx.switchTab({
       url: this.data.links[this.data.swiperCurrent]
-
     })
 
   },
@@ -170,8 +168,7 @@ Page({
       })
     }
   },
-  gohome:function(e)
-  {
+  gohome: function (e) {
     wx.switchTab({
       url: '/pages/index/index'
     })
@@ -179,39 +176,43 @@ Page({
 
   //点击关注按钮调用
   concern: function () {
-    this.setData({
-      concernAc: !this.data.concernAc
-    })
-  },
-   //点击关注接口调用
-  postconcern: function (e) {
-    if (app.globalData.token) {
-      var that = this
-      wx.request({
-        url: app.globalData.baseUrl + '/Flw/follow_updata',
-        method: "GET",
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: {
-          userid: app.globalData.userInfo.userid,
-          befwuserid: this.data.authorid
-        },
-        success(res) {
-          if (res.data.status == 200) {
-            console.log("关注调用成功")
-          } else {
-            console.log("请求发送失败！")
-          }
-        }
+    var that = this
+    if (!app.globalData.token) {
+      that.gologin()
+    } else {
+      this.setData({
+        concernAc: !this.data.concernAc
       })
     }
+
+  },
+  //点击关注接口调用
+  postconcern: function (e) {
+    var that = this
+    wx.request({
+      url: app.globalData.baseUrl + '/Flw/follow_updata',
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        userid: app.globalData.userInfo.userid,
+        befwuserid: this.data.authorid
+      },
+      success(res) {
+        if (res.data.status == 200) {
+          console.log("关注调用成功")
+        } else {
+          console.log("请求发送失败！")
+        }
+      }
+    })
   },
 
   gologin: function (e) {
     if (app.globalData.token.length == 0) {
       wx.navigateTo({
-        url: '/pages/login/login?pagetype=' + 2,
+        url: '/pages/login/login?pagetype=' + 2+'posterid=' + this.data.posterid + "&authorid=" + this.data.authorid,
       })
     }
   },
@@ -232,9 +233,9 @@ Page({
         success(res) {
           if (res.data.status == 200) {
             that.setData({
-              likes:res.data.data.num,
+              likes: res.data.data.num,
             })
-            console.log("res:",res)
+            console.log("res:", res)
           } else {
             console.log("请求发送失败！")
           }
@@ -389,47 +390,46 @@ Page({
     })
     return {
       title: this.data.essayall.essay_title,
-      path: '/pages/detail/detail?posterid=' + this.data.posterid + "&authorid=" + this.data.authorid+"&share="+1,
+      path: '/pages/detail/detail?posterid=' + this.data.posterid + "&authorid=" + this.data.authorid + "&share=" + 1,
       imageUrl: this.data.essayall.imageUrl,
       // promise :36
     }
   },
   dolike: function (e) {
-   
-    if(this.data.oldlike)
-    {
-      if(this.data.cont%2)
-      this.setData({
-        countnum:0,
-      })
-      else{
-        this.setData({
-          countnum:-1,
-        })
+    if (!app.globalData.token) {
+      this.gologin();
+    } else {
+      if (this.data.oldlike) {
+        if (this.data.cont % 2)
+          this.setData({
+            countnum: 0,
+          })
+        else {
+          this.setData({
+            countnum: -1,
+          })
+        }
       }
-    }
-    if(this.data.oldlike==0)
-    {
-      if(this.data.cont%2)
-      this.setData({
-        countnum:0,
-      })
-      else{
-        this.setData({
-          countnum:1,
-        })
+      if (this.data.oldlike == 0) {
+        if (this.data.cont % 2)
+          this.setData({
+            countnum: 0,
+          })
+        else {
+          this.setData({
+            countnum: 1,
+          })
+        }
       }
+      this.setData({
+        cont: this.data.cont + 1,
+        islike: !this.data.islike
+      })
     }
-    this.setData({
-      cont:this.data.cont+1,
-      islike: !this.data.islike
-    })
   },
   postlike: function () {
     var that = this
     var token = app.globalData.token;
-    if (!token.length)
-      that.gologin();
     if (token.length) {
       wx.request({
         url: app.globalData.baseUrl + '/Like/like_updata',
@@ -456,16 +456,19 @@ Page({
 
   //在页面进行执行
   docollect: function () {
-    this.setData({
-      ishoard: !this.data.ishoard
-    })
+    if (!app.globalData.token) {
+      this.gologin();
+    } else {
+      this.setData({
+        ishoard: !this.data.ishoard
+      })
+    }
   },
   //调用接口执行
   postcollect: function () {
     var that = this
-    that.gologin();
     var token = app.globalData.token;
-    if (!token.length == 0) {
+    if (token.length ) {
       wx.request({
         url: app.globalData.baseUrl + '/Hor/hoard_updata',
         method: "GET",
@@ -490,35 +493,10 @@ Page({
   },
 
   delete: function () {
-    var that = this
-    var that = this
-    var token = app.globalData.token
-    wx.request({
-      url: 'https://storymap.sherlockouo.com/poster/del',
-      method: "DELETE",
-      header: {
-        'Authorization': token,
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        posterId: that.data.essayall.id,
-      },
-      success(res) {
-        if (res.data.code == 0) {
-          wx.showToast({
-            title: '删除成功',
-            icon: 'success',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '删除失败',
-            icon: 'error',
-            duration: 2000
-          })
-        }
-      }
-    })
+    console.log("点击删除按钮")
+  },
+  edit: function (e) {
+    console.log("点击编辑文章按钮")
   },
   /**
    * 生命周期函数--监听页面隐藏
