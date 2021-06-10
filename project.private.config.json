@@ -71,6 +71,12 @@
           "pathName": "pages/hoard/hoard",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "关注界面",
+          "pathName": "pages/concern/concern",
+          "query": "",
+          "scene": null
         }
       ]
     }

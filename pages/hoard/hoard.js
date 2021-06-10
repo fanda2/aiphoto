@@ -35,10 +35,9 @@ Page({
   Tapgo: function (e) {
     var that = this
     var authorid = e.currentTarget.dataset.authorid
-    var posterid = e.currentTarget.dataset.posterid
-    console.log("userid ", authorid, "posterid", posterid)
+    var pstid = e.currentTarget.dataset.posterid
     wx.redirectTo({
-      url: '/pages/detail/detail?posterid=' + posterid + "&authorid=" + authorid + "&pageid=" + 4,
+      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid+"&pageid="+4+"&share="+0,
     })
   },
 
@@ -98,7 +97,6 @@ Page({
           marker.title = marker.title
           marker.local = marker.address
           marker.concern = Math.floor(Math.random() * (1000 - 10)) + 10;
-          // console.log('marker',marker)
         }
         var array;
         array = res.data.data.row;
@@ -110,7 +108,6 @@ Page({
       },
       fail(res) {}
     })
-
   },
 
 

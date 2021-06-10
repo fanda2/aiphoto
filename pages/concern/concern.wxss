@@ -59,7 +59,8 @@ page{
   margin-left: 15rpx;
 }
 .introduce{
-  width: 90%;
+  font-size: 26rpx;
+  width: 420rpx;
 }
 .concel{
   display: flex;

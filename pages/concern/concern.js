@@ -7,24 +7,54 @@ Page({
    */
   data: {
     refreshPage: 1,
-    concern:[
-      {
-        id:1,
-        handimg:"http://qwq.fjtbkyc.net/public/personalBlog/images/blog/blog11.jpg",
-        name:"喜羊羊",
-        introduce:"择一城终老，爱一人白首！"
-      },
-    ]
+    bwfwuserid:0,//被关注者的id
+    concern:[ ]
   },
   concelConcern:function(e)
   {
+    var bwfwuserid=e.currentTarget.dataset.id
+    this.setData({
+      bwfwuserid:bwfwuserid,
+    })
     var that = this
     var token = app.globalData.token;
-    // console.log("点击 ",e.currentTarget)
     wx.showModal({
       title: '提示',
       content: '是否取消关注: '+e.currentTarget.dataset.name,
+      success (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          that.postconcern()
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
     })
+  },
+
+  postconcern: function (e) {
+    console.log("调用")
+    if (app.globalData.token) {
+      var that = this
+      wx.request({
+        url: app.globalData.baseUrl + '/Flw/follow_updata',
+        method: "GET",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          userid: app.globalData.userInfo.userid,
+          befwuserid: that.data.bwfwuserid,
+        },
+        success(res) {
+          if (res.data.status == 200) {
+            that.onShow()
+          } else {
+            console.log("请求发送失败！")
+          }
+        }
+      })
+    }
   },
 
   /**
@@ -39,8 +69,6 @@ Page({
         timingFunc: 'easeIn'
       }
     })
-
-    
   },
 
 

@@ -95,7 +95,7 @@ Page({
     //上传者用户信息
     uploadTime: '一分钟前',
     city: '',
-    authourid:0,//文章id    
+    authourid: 0, //文章id    
   },
   onLoad: function (options) {
     wx.showLoading({
@@ -313,7 +313,6 @@ Page({
     var that = this;
     var idx = e.detail.markerId;
     app.globalData.currentMarkerId = idx;
-    console.log("结果是：",e);
     //重新设置点击marker为中心点
     for (var key in that.data.markers) {
       var marker = that.data.markers[key];
@@ -324,31 +323,27 @@ Page({
         })
       }
     }
-    this.goDetail();
+    that.goDetail();
   },
-  goDetail:function(e)
-  {
+
+  goDetail: function (e) {
     var that = this
     var postid = app.globalData.currentMarkerId
     var userid = 0;
-    var currentID=0;
     wx.request({
-      url: app.globalData.baseUrl+'/Pst/poster_map', 
+      url: app.globalData.baseUrl + '/Pst/poster_authorid',
       method: "GET",
       data: {
-        posterId: postid,
+        posterid: postid,
       },
       success(res) {
         if (res.data.status == 200) {
-          new Promise((resolve, reject) => {
-            var marker = res.data.data;
-            userid = marker.userid;
-            currentID=marker.id;
-            resolve(userid)
-          }).then(() => {
-              wx.navigateTo({
-                url: '/pages/detail/detail?pageid=' + 1 + "&posterid=" + pstid+"&authorid="+authorid,
-              })
+          console.log("ssssss",res.data.data.jrow.authorid)
+          var authorid = res.data.data.jrow.authorid;
+          var posterid = postid;
+          console.log("陈工",authorid,"wewew",posterid)
+          wx.navigateTo({
+            url: '/pages/detail/detail?pageid=' + 5 + "&posterid=" + posterid + "&authorid=" + authorid+"&share="+0,
           })
         }
       }
@@ -522,7 +517,7 @@ Page({
     consoleUtil.log('查询当前坐标 marker 点信息')
     //调用请求 marker 点的接口就好了
     wx.request({
-      url: app.globalData.baseUrl+'/Pst/poster_map', 
+      url: app.globalData.baseUrl + '/Pst/poster_map',
       data: {
         // 或许可以改为根据地理位置信息提供服务
         page: 1,
@@ -555,7 +550,7 @@ Page({
     // console.log("左边点为",markers)
     for (var key in markers) {
       var marker = markers[key];
-      marker.posterid = marker.posterid;
+      marker.id = marker.posterid;
       marker.authorid = marker.authorid;
       marker.longitude = marker.longtitude;
       marker.width = 40;
@@ -688,7 +683,7 @@ Page({
   },
   //选择地点
   chance: function (e) {
-    var that=this
+    var that = this
     // console.log("点击地点",e.currentTarget.dataset.idx);
     var index = e.currentTarget.dataset.idx
     // console.log('address index ',this.data.resultList[index])
@@ -702,8 +697,8 @@ Page({
     // that.regeocodingAddress();
     // that.queryMarkerInfo();
     this.setData({
-      resultList:"",
-      inputAddress:''
+      resultList: "",
+      inputAddress: ''
     })
   },
 

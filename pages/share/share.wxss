@@ -58,9 +58,9 @@
 .shareTop .btn
 {
   width: 100px;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 25px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 10px;
   text-align: center;
   margin: 10px;
 }
@@ -75,7 +75,7 @@
 }
 .shareBtn2{
   font-weight: 550;
-  background-color: #51cafa;
+  background-color: #8ecfe9;
   line-height: 100%;
   text-align:center;
 }
@@ -86,8 +86,8 @@
 }
 .inbtn .btn{
   border: rgb(213, 213, 213) 2px solid ;
-  height: 30px;
-  line-height: 30px;
+  height: 40px;
+  line-height: 40px;
   text-align:center;
   width: 90%;
   display: flex;

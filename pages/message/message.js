@@ -99,6 +99,8 @@ Page({
 
   onShow: function () {
     var that = this
+    that.postbefollow();
+    that.postfollow();
     var token = app.globalData.token;
     if (token) {
       wx.request({
@@ -129,7 +131,7 @@ Page({
               'content-type': 'application/json' // 默认值
             },
             success(res) {
-              console.log("i请求的结果是", res)
+              wx.hideLoading();
               var ls = res.data.data.row;
               for (var key in ls) {
                 var marker = ls[key];
@@ -168,11 +170,7 @@ Page({
     var that = this
     var token = app.globalData.token;
   },
-  goDetail: function (e) {
-    var that = this
-    var postid = e.currentTarget.dataset.id
-  },
-
+ 
   //去登录的状态
   gologin: function (e) {
     wx.redirectTo({
@@ -182,9 +180,9 @@ Page({
 
   goDetail: function (e) {
     var pstid = e.currentTarget.dataset.posterid;
-    var authorid=e.currentTarget.dataset.uid;
+    var authorid = e.currentTarget.dataset.uid;
     wx.navigateTo({
-      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid,
+      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid+"&pageid="+6+"&share="+0,
     })
   },
   /**
@@ -194,17 +192,9 @@ Page({
     wx.showLoading({
       title: '玩命加载中'
     })
-    setTimeout(function () {
-      wx.hideLoading({
-        success: (res) => {},
-        fail: (res) => {},
-        complete: (res) => {},
-      })
-    }, 1000);
     this.setData({
       userid: options.userid
     })
-
     if (options.mystyle == 1) {
       wx.setNavigationBarColor({
         frontColor: '#ffffff',
@@ -220,6 +210,57 @@ Page({
     }
   },
 
+
+  postfollow: function (e) {
+    if (app.globalData.token) {
+      var that = this
+      wx.request({
+        url: app.globalData.baseUrl + '/Flw/follow_num',
+        method: "GET",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          userid: that.data.userid,
+        },
+        success(res) {
+          if (res.data.status == 200) {
+            that.setData({
+              concern:res.data.data.num,
+            })
+            console.log("res:",res)
+          } else {
+            console.log("请求发送失败！")
+          }
+        }
+      })
+    }
+  },
+  postbefollow: function (e) {
+    if (app.globalData.token) {
+      var that = this
+      wx.request({
+        url: app.globalData.baseUrl + '/Flw/follow_benum',
+        method: "GET",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          userid: that.data.userid,
+        },
+        success(res) {
+          if (res.data.status == 200) {
+            console.log("res:",res)
+            that.setData({
+              like:res.data.data.num,
+            })
+          } else {
+            console.log("请求发送失败！")
+          }
+        }
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

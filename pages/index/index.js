@@ -8,7 +8,7 @@ Page({
         id: 1
       },
       {
-        name: "成都",
+        name: "附近",
         id: 2
       },
       {
@@ -16,11 +16,11 @@ Page({
         id: 3
       },
       {
-        name: "风景",
+        name: "关注",
         id: 4
       },
       {
-        name: "人物",
+        name: "风景",
         id: 5
       },
       {
@@ -28,11 +28,11 @@ Page({
         id: 6
       },
       {
-        name: "住宿",
+        name: "人物",
         id: 7
       },
       {
-        name: "景点",
+        name: "生活",
         id: 8
       }
     ],
@@ -75,7 +75,7 @@ Page({
     var pstid = e.currentTarget.dataset.posterid;
     var authorid=e.currentTarget.dataset.uid;
     wx.navigateTo({
-      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid+"&pageid="+1,
+      url: '/pages/detail/detail?posterid=' + pstid+"&authorid="+authorid+"&pageid="+1+"&share="+0,
     })
   },
   /**
