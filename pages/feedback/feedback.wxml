@@ -1,0 +1,7 @@
+<view class="contair">
+  <view class="title">
+  <text>存在任何问题请及时联系管理员解决，可以通过点击下方的按钮联系客服反馈仪</text></view>
+  <button open-type='contact' class="btn" type='primary'>
+    <view>联系客服</view>
+  </button>
+</view>

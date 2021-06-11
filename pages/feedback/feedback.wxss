@@ -1,0 +1,8 @@
+.contair{
+  width: 96%;
+  height: 100%;
+  margin: 0 auto;
+}
+.btn{
+  margin-top: 20px;
+}

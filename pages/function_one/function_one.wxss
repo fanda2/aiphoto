@@ -1,0 +1,25 @@
+.container{
+  width: 100%;
+  height: 100%;
+}
+.imgquality{
+  width: 90%;
+  margin: 20px auto;
+  display: flex;
+}
+.scale{
+  width: 30%;
+}
+.imgbody{
+  width: 100%;
+  height:auto;
+}
+.imgbody image{
+  width: 100%;
+}
+.ImgOperateView{
+  margin: 40px;
+}
+.compresion{
+  margin: 30px;
+}

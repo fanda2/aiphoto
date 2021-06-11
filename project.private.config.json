@@ -77,6 +77,24 @@
           "pathName": "pages/concern/concern",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "功能编辑界面",
+          "pathName": "pages/morething/morething",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "压缩图片功能页面",
+          "pathName": "pages/function_one/function_one",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "功能相关",
+          "pathName": "pages/morething/morething",
+          "query": "",
+          "scene": null
         }
       ]
     }

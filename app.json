@@ -3,7 +3,6 @@
     "pages/address/address",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/share/share",
     "pages/man/man",
     "pages/detail/detail",
     "pages/login/login",
@@ -13,7 +12,9 @@
     "pages/concern/concern",
     "pages/myinfo/myinfo",
     "pages/server/server",
-    "pages/morething/morething"
+    "pages/morething/morething",
+    "pages/feedback/feedback",
+    "pages/function_one/function_one"
   ],
   "permission": {
     "scope.userLocation": {

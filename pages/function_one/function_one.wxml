@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="imgbody">
+    <image src="{{imagesrc}}" mode="widthFix">
+    </image>
+  </view>
+  <view class="imgquality">
+    <view class="text">请选择压缩比例：</view>
+    <view class="scale">
+      <picker value="{{numindex}}" range="{{array}}" range-key="{{'name'}}" bindchange="bindPickerChange">
+        <view class="picker">
+          {{imgquality}}
+        </view>
+      </picker>
+    </view>
+    <view class="text">(点击即可选择）</view>
+  </view>
+  <view class="ImgOperateView">
+    <button type="primary" bindtap="chooseMyImage">选择图片</button>
+    <button type="primary" class="compresion" bindtap="MyImageCompression" style="{{show_hidden}}">压缩图片</button>
+  </view>
+</view>

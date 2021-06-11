@@ -1,5 +1,27 @@
 <view class="container">
   <view class="title">
-    <text>更多相关内容敬请期待！</text>
+    <view class="functionleft">
+      <view class="left">
+        <view class="function" data-idx="1" bindtap="gofunction">
+         <view class="fucico">
+          <image src="/img/image.png">
+         </image>
+         </view>
+         <view class="fuctitle">
+         <text>图片压缩处理</text>
+         </view>
+        </view>
+        <view class="function">
+        </view>
+      </view>
+    </view>
+    <view class="functionright">
+      <view class="function">
+
+      </view>
+      <view class="function">
+
+      </view>
+    </view>
   </view>
 </view>

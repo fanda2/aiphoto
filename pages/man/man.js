@@ -91,7 +91,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '/pages/share/share',
+        url: '/pages/feedback/feedback',
       });
     }
   },
