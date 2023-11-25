@@ -12,16 +12,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '玩命加载中'
-      })
-      setTimeout(function() {
-        wx.hideLoading({
-          success: (res) => {},
-          fail: (res) => {},
-          complete: (res) => {},
-        })
-     }, 1000);
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#52e7e0',

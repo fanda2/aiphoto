@@ -1,3 +1,6 @@
+page{
+  background:  #e9ebee;
+}
 .mancontainer {
   /* background-image: url(../../images/flower1.png); */
   position: absolute;
@@ -76,7 +79,7 @@
 .stare {
   width: 90%;
   margin-left: 5%;
-  height: 100px;
+  height: 88px;
   background-color: white;
   border-radius: 10px;
   display: flex;
@@ -88,7 +91,7 @@
   width: 30%;
   height: 50px;
   display: flex;
-  margin-top: 30px;
+  margin-top: 20px;
   flex-direction: column;
   justify-self: center;
   align-items: center;
@@ -103,7 +106,7 @@
 .bottombox {
   width: 90%;
   margin-left: 5%;
-  height: 40%;
+  height: 43%;
   background-color: white;
   border-radius: 10px;
   font-size: 13px;
@@ -487,7 +490,8 @@ display: none;
   margin: 15px auto;
   background: #fff;
   border-radius: 10px;
-  height: 50px;
-  line-height: 50px;
+  height: 85rpx;
+  font-size: 30rpx;
+  line-height: 85rpx;
   text-align: center;
 }

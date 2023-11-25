@@ -67,15 +67,21 @@
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>
-      <view class="list-item" bindtap="goshare">
-        <image class="item-image" src="/img/page.png"></image>
-        <text class="item-text">问题与反馈</text>
-        <image class="image-jiantou" src="/img/right-arrow.png"></image>
-      </view>
-      <view class="line"></view>
       <view class="list-item" bindtap="gomorething">
         <image class="item-image" src="/img/more.png"></image>
         <text class="item-text">更多相关</text>
+        <image class="image-jiantou" src="/img/right-arrow.png"></image>
+      </view>
+      <view class="line"></view>
+      <view class="list-item" bindtap="gonotify">
+        <image class="item-image" src="/img/notify.png"></image>
+        <text class="item-text">通知与提醒</text>
+        <image class="image-jiantou" src="/img/right-arrow.png"></image>
+      </view>
+      <view class="line"></view>
+      <view class="list-item" bindtap="goshare">
+        <image class="item-image" src="/img/page.png"></image>
+        <text class="item-text">问题与反馈</text>
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>
@@ -87,7 +93,7 @@
       <view class="line"></view>
     </view>
   </view>
-  <view class="unlogin" bindtap="unlogin">
+  <view wx:if="{{isHide}}" class="unlogin" bindtap="unlogin">
    <text>退出登录</text>
   </view>
 </view>

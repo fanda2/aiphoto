@@ -208,7 +208,6 @@
   display: flex;
   display: -webkit-box;
   flex-direction: column;
-  
 }
 .tabeltext{
   background: rgb(140, 202, 238,0.6);
@@ -240,11 +239,55 @@
   height: 200rpx;
   line-height: 200rpx;
   text-align: center;
+  /* float: left; */
+}
+.data text{
   float: left;
 }
 .empty{
-  height:300rpx;
+  height:100rpx;
   /* background-color: chartreuse; */
+}
+.empty1{
+  height:210rpx;
+  /* background-color: chartreuse; */
+}
+.bottom_line{
+  width: 92%;
+  height: 40px;
+  line-height: 40px;
+ padding-left:10px ;
+  margin: 0 auto;
+  border-top:1px black solid;
+}
+
+/* 评论框 */
+.review{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.review_text{
+  width: 80%;
+  border-radius: 45rpx;
+  background: rgb(233, 233, 233);
+  padding-left: 10px;
+  margin-top: 5px;
+}
+.review_content{
+  height: 420px;
+  width: 95%;
+  margin: 0 auto;
+  background: rgb(182, 225, 241);
+}
+.in_content{
+  height: 90%;
+}
+.in_btn{
+  margin-top: 5px;
+  width:20%;
+  text-align: center;
+  color: #fb9527;
 }
 .bottom{
   width: 85%;
@@ -263,6 +306,7 @@
 
 }
 .inlike{
+  padding-top: 8px;
   display: flex;
 }
 .inlike image{
@@ -281,6 +325,7 @@
   display: flex;
 }
 .inbconcern image{
+  padding-top: 8px;
   width: 60rpx;
   height: 60rpx;
 }
@@ -314,7 +359,7 @@
 .bbbox{
   position: fixed;
   bottom: 0;
-  height: 120rpx;
+  height: 150rpx;
   width: 100%;
   background-color: rgb(255, 255, 255);
   box-shadow:-3rpx -3rpx 4px #e0e0e0 ;

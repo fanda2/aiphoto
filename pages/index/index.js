@@ -46,7 +46,7 @@ Page({
     oldactive: 0, //之前显示的值
     isactive: [1, 0, 0, 0, 0, 0, 0, 0],
     basepage: 1,
-    baselimit: 5,
+    baselimit: 20,
   },
   navbarTap: function (e) {
     this.setData({
@@ -138,6 +138,8 @@ Page({
     wx.showLoading({
       title: '玩命加载中'
     })
+    var that = this;
+    that.pst_recommend();
   },
 
   /**
@@ -151,8 +153,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    that.pst_recommend();
+  
   },
 
   //请求推荐的文章
@@ -200,12 +201,13 @@ Page({
   //查询附近的文章
   pst_nearby: function (e) {
     var that = this
+    var location = app.globalData.location
     wx.request({
       url: app.globalData.baseUrl + '/Pst/poster_nearby', //仅为示例，并非真实的接口地址
       method: "GET",
       data: {
-        long: app.globalData.longitude,
-        lat: app.globalData.latitude,
+        long:location.lng,
+        lat: location.lat,
         page: this.data.basepage,
         limit: this.data.baselimit,
       },

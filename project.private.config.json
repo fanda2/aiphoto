@@ -95,6 +95,30 @@
           "pathName": "pages/morething/morething",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "通知界面",
+          "pathName": "pages/notify/notify",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "问题与反馈",
+          "pathName": "pages/feedback/feedback",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "编辑文章页面",
+          "pathName": "pages/edit/edit",
+          "query": "userid=4&ismystyle=1",
+          "scene": null
+        },
+        {
+          "name": "111",
+          "pathName": "pages/imagecropper/image",
+          "query": "",
+          "scene": null
         }
       ]
     }

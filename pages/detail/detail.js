@@ -31,11 +31,16 @@ Page({
     ishoard: 0, //是否收藏
     oldlike: 0,
     oldhoard: 0,
+    oldfollow:0,
     authorid: 0,
     posterid: 0, //文章的id
     sharepage: 0,
     countnum: 0, //表示用户点击按钮后的结果
     cont: 0, //表示点击按钮的次数
+    pagehigh:0,  //页面高度
+    pagewidth:0,
+    inputcontent:"", //评论内容
+    warningText:"可以发表你的评论"
   },
 
   // 点击图片进行预览函数
@@ -76,6 +81,7 @@ Page({
       authorid: options.authorid,
       sharepage: options.share,
     })
+    this.watchHeight(),
     console.log("加载时获取的信息", this.data.posterid + " ", this.data.authorid + " ", this.data.sharepage)
     if (options.authorid == app.globalData.userInfo.userid) {
       this.setData({
@@ -87,6 +93,16 @@ Page({
   swiperChange: function (e) {
     this.setData({
       swiperCurrent: e.detail.current
+    })
+  },
+
+  //获取页面高度
+  watchHeight:function(){
+    var h = wx.getSystemInfoSync().windowHeight;
+    var w = wx.getSystemInfoSync().windowWidth;
+    this.setData({
+      pagehigh:h,
+      pagewidth:w,
     })
   },
   //界面跳转
@@ -174,6 +190,39 @@ Page({
     })
   },
 
+ /**
+   * 绑定输入框
+   */
+  bindAddressInput: function (e) {
+    var that = this;
+    that.setData({
+      inputcontent: e.detail.value,
+    })
+   
+  },
+
+  //  发表评论
+   send_remark:function(){
+     if(this.data.inputcontent!="")
+     {
+        console.log("发送信息",this.data.inputcontent)
+        this.setData({
+          inputcontent:"",
+        })
+        wx.showToast({
+          title: '评论成功',
+          duration: 1500
+        })
+     }
+     else{
+      wx.showToast({
+        title: '输入内容不能为空',
+        icon: 'none',
+        duration: 1500
+      })
+     }
+    
+   },
   //点击关注按钮调用
   concern: function () {
     var that = this
@@ -297,6 +346,11 @@ Page({
                 concernAc: 1,
                 oldfollow: 1
               })
+            }else{
+              that.setData({
+                concernAc: 0,
+                oldfollow: 0
+              })
             }
           }
         }
@@ -325,6 +379,7 @@ Page({
     }
   },
   onShow: function () {
+    console.log("加载依次",this.data.concernAc," ",this.data.oldfollow)
     var that = this
     that.getstatus();
     that.postselectlike();
@@ -495,8 +550,12 @@ Page({
   delete: function () {
     console.log("点击删除按钮")
   },
-  edit: function (e) {
-    console.log("点击编辑文章按钮")
+  go_edit: function () {
+      var userid = this.data.authorid
+      var youself = this.data.isyouself
+      wx.navigateTo({
+        url: '/pages/edit/edit?userid=' + userid + "&ismystyle=" + youself,
+      })
   },
   /**
    * 生命周期函数--监听页面隐藏

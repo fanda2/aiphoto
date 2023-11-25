@@ -43,7 +43,7 @@
           <view>
             <image src="/img/editessay.png"></image>
           </view>
-          <view bindtap="edit">编辑</view>
+          <view bindtap="go_edit">编辑</view>
         </view>
         <view class="delete" bindtap="delete">
           <view>
@@ -58,12 +58,12 @@
 </view>
 
 <view class="container-layout" bindtap="hide">
-  <swiper class="container" indicator-dots="{{indicatordots}}" easing-function='linear' autoplay="{{autoplay}}"
-    interval="{{interval}}" duration="{{duration}}" bindchange='onSlideChange' circular='true'>
+  <swiper class="container" easing-function='linear' autoplay="true"
+    interval="3000" duration="1000" bindchange='onSlideChange' circular='true'>
     <block wx:for="{{essayall.imgUrls}}" wx:key="index">
       <swiper-item class="vol-swiper-item" bindchange="">
         <view class="vol-card">
-          <image class="vol-picture" src="{{item}}" mode="aspectFill" bindtap='imgClick' data-num="{{index}}"></image>
+          <image class="vol-picture" src="{{item}}" mode="aspectFill" bindtap='imgClick' data-num="{{index}}" style="transition: all {{duration/1000}}s"></image>
         </view>
       </swiper-item>
     </block>
@@ -84,10 +84,21 @@
     <view class="essay">
       <text>{{essayall.essay_text}}</text>
     </view>
-    <view class="data"><text>发布时间：</text>{{essayall.sharetime}}</view>
+    <view class="data"><text>发布时间：</text><text>{{essayall.sharetime}}</text></view>
   </view>
-  <view class="empty"></view>
-  <view class="bbbox">
+  <view class="bottom_line"><text>评论：</text></view>
+  <view class="review_content" style="height:{{pagehigh*0.65}}px;">
+    <scroll-view scroll-y="true" class="in_content" >
+     
+   </scroll-view>
+   </view>
+
+  <view class="empty1"></view>
+  <view class="bbbox" style="height:{{pagehigh*0.12}}px;">
+    <view class="review" style="width:{{pagewidth*0.9}}px;"> 
+     <view class="review_text"><input type="text" confirm-type="send" placeholder='{{warningText}}'  bindinput='bindAddressInput' value='{{inputcontent}}' cursor-spacing="10px" style="height:{{pagehigh*0.045}}px;"></input></view> 
+      <view class="in_btn" style="height:{{pagehigh*0.045}}px;  line-height:{{pagehigh*0.045}}px"><text bindtap="send_remark">发送</text></view>
+    </view>
     <view class="bottom">
       <view class="share">
         <!-- <button>分享</button> -->

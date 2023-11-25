@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/address/address",
     "pages/index/index",
     "pages/logs/logs",
@@ -14,18 +14,25 @@
     "pages/server/server",
     "pages/morething/morething",
     "pages/feedback/feedback",
-    "pages/function_one/function_one"
+    "pages/function_one/function_one",
+    "pages/function_two/function_two",
+    "pages/function_three/function_three",
+    "pages/function_four/function_four",
+    "pages/notify/notify",
+    "pages/edit/edit",
+    "component/image-cropper/index",
+    "pages/imagecropper/image"
   ],
   "permission": {
     "scope.userLocation": {
       "desc": "请求获取您的位置信息"
     }
   },
-  "window":{
-    "backgroundTextStyle":"dark",
+  "window": {
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "ai摄",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#929292",

@@ -82,6 +82,19 @@ Page({
       url: '/pages/myinfo/myinfo',
     })
   },
+  gonotify:function(e)
+  {
+    var that = this;
+    if (!app.globalData.token) {
+      wx.navigateTo({
+        url: '/pages/login/login?pagetype=' + 1,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/notify/notify',
+      });
+    }
+  },
   goshare:function(e)
   {
     var that = this;

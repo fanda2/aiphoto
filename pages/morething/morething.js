@@ -1,4 +1,4 @@
-// pages/morething/morething.js
+const app = getApp()
 Page({
 
   /**
@@ -12,26 +12,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '玩命加载中'
-    })
-    setTimeout(function () {
-      wx.hideLoading({
-        success: (res) => {},
-        fail: (res) => {},
-        complete: (res) => {},
+    if (!app.globalData.token) {
+      this.gologin()
+    } 
+      wx.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#52e7e0',
+        animation: {
+          duration: 500,
+          timingFunc: 'easeIn'
+        }
       })
-    }, 1000);
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#52e7e0',
-      animation: {
-        duration: 500,
-        timingFunc: 'easeIn'
-      }
+  },
+  
+  gologin: function (e) {
+    wx.redirectTo({
+      url: '/pages/login/login',
     })
   },
-
 
   gofunction: function (e) {
     var idx = e.currentTarget.dataset.idx
@@ -41,7 +39,16 @@ Page({
       })
     else if (idx == 2) {
       wx.navigateTo({
-        url: '/pages/function_one/function_one',
+        url: '/pages/function_two/function_two',
+      })
+
+    } else if (idx == 3) {
+      wx.navigateTo({
+        url: '/pages/function_three/function_three',
+      })
+    } else if (idx == 4) {
+      wx.navigateTo({
+        url: '/pages/function_four/function_four',
       })
     }
   },

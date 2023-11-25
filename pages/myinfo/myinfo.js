@@ -22,20 +22,27 @@ Page({
     imgcount: 0,
     show_hidden: "display:none;",
     compression: "", //压缩路径
+    imageUrl:"",//文件剪裁路径
   },
+
   //选择图片
   chooseMyImage: function () {
     var that = this;
     wx.chooseImage({
       count: 1,
       success: function (res) {
+        app.globalData.imgcount= 1,
         that.setData({
           imagesrc: res.tempFilePaths[0],
-          imgcount: 1,
           show_hidden: "display:block"
         })
         console.log("上传成功", that.data.imagesrc)
-        that.MyImageCompression()
+        //进入编辑页面
+        wx.navigateTo({
+          url: '/pages/imagecropper/image?imagePath=' + that.data.imagesrc,
+        })
+        //确定在什么地方上传！！！！！此处为压缩图片
+        //点击确定后带回临时链接，进行图片压缩与上传
       },
       fail: function () {
         wx.showToast({
@@ -48,40 +55,40 @@ Page({
 
   //压缩图片
   MyImageCompression: function () {
-    console.log("压缩图片")
     var that = this;
-    if (that.data.imgcount == 1) {
+    if (app.globalData.imgcount == 1) {
       wx.showToast({
         title: "正在压缩图片",
         icon: "loading",
       })
       wx.compressImage({
-        src: that.data.imagesrc,
+        src:app.globalData.imageUrl,
         quality: 0,
         success: function (res) {
           wx.showToast({
             title: "压缩成功",
           });
+          console.log("压缩"+res.tempFilePath)
+          app.globalData.imgcount=0;
           that.setData({
             compression: res.tempFilePath
           })
           wx.showLoading({
             title: '正在上传'
-          })
+          }) 
           wx.uploadFile({
             url: app.globalData.baseUrl + '/Tsf/upload',
             method: 'POST',
             header: {
               // Authorization: token,
+              'content-type': 'application/x-www-form-urlencoded'
             },
             name: 'file',
             filePath: that.data.compression,
             success(res) {
-              // wx.showToast({
-              //   title: "上传成功",
-              // });
               new Promise((resolve => {
                 res = JSON.parse(res.data)
+                app.globalData.imageUrl=""
                 resolve(res.data.filepath)
               })).then((res) => {
                 console.log("返回的地址为", res)
@@ -90,7 +97,6 @@ Page({
                 }) 
                 that.userimgupload();
               })
-    
             },
             fail(res) {
               wx.showToast({
@@ -172,9 +178,6 @@ Page({
       var local = app.globalData.userInfo.usaddress; //获得地址
       var address = [];
       var address = local.split(' ');
-      // address.push(n);
-      // }
-      // console.log(address[0][0],);
       this.setData({
         region: address,
         region1: address[0],
@@ -198,7 +201,6 @@ Page({
     })
   },
   imgShow: function (event) {
-    console.log("点击");
     console.log(event.currentTarget.dataset.url)
     var currentUrl = event.currentTarget.dataset.url
     this.setData({
@@ -230,7 +232,12 @@ Page({
    * 生命周期函数--监听页面显示a
    */
   onShow: function () {
-
+    console.log("存储的11111",app.globalData.imageUrl)
+      if(app.globalData.imageUrl!="")
+      {
+        console.log("上传图片")
+        this.MyImageCompression()
+      }
   },
 
   /**

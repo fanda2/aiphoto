@@ -9,6 +9,7 @@ Page({
     userInfo: {},
     isconcern: '+关注', //按钮的文字内容
     concernAc: 0,
+    oldfollow:0,
     sharenavbar: [],
     lostnavbar: [],
     navbar: ['ta的收藏'],
@@ -18,8 +19,10 @@ Page({
     Lmodeheight: [],
     currentTab: 0,
     userid: 0,
-    like: 122,
-    concern: 100,
+    like: 0,
+    concern: 0,
+  
+    
   },
 
   navbarTap: function (e) {

@@ -96,6 +96,11 @@ Page({
     uploadTime: '一分钟前',
     city: '',
     authourid: 0, //文章id    
+    lat:0,
+    lng:0,
+    show_all: true, //是否展示相关信息
+    show_mine:false, //展示个人
+    mycount:0,
   },
   onLoad: function (options) {
     wx.showLoading({
@@ -148,7 +153,7 @@ Page({
 
 
   onShow: function () {
-    consoleUtil.log('onShow--------------------->');
+    // consoleUtil.log('onShow--------------------->');
     var that = this;
     that.changeMapHeight();
     that.setHomeActionLeftDistance();
@@ -159,6 +164,25 @@ Page({
    * 页面不可见时
    */
   onHide: function () {
+
+  },
+  //展示所有
+  range_all:function()
+  {
+    this.setData({
+      show_all:true,
+      show_mine:false,
+    })
+    this.queryMarkerInfo()
+  },
+
+  //展示个人
+  range_mine:function(){
+    this.setData({
+      show_all:false,
+      show_mine:true,
+    })
+    this.queryMarkermyInfo()
 
   },
 
@@ -350,17 +374,6 @@ Page({
   },
 
   /**
-   * 更新上传坐标点
-   */
-  updateCenterLocation: function (latitude, longitude) {
-    var that = this;
-    that.setData({
-      centerLatitude: latitude,
-      centerLongitude: longitude
-    })
-  },
-
-  /**
    * 回到定位点
    */
   selfLocationClick: function () {
@@ -424,6 +437,9 @@ Page({
     // 改变中心点位置  
     if (res.type == "end") {
       that.getCenterLocation();
+      that.setData({
+        mycount:100,
+      })
     }
   },
 
@@ -443,7 +459,40 @@ Page({
         location.lng = res.longitude
         app.globalData.location = location
         that.regeocodingAddress();
+        that.setData({
+          lat:res.latitude,
+          lng:res.longitude,
+        })
         that.queryMarkerInfo();
+      }
+    })
+     if(this.data.mycount==0)
+        {
+          console.log("sfsdfsdfdsfdf_______",this.data.mycount)
+          that.savalocal();
+        }
+    // that.savalocal()
+  },
+
+  //存储坐标点信息
+  savalocal:function()
+  {
+    console.log("ddddd")
+    wx.request({
+      url: app.globalData.baseUrl + '/Use/user_address',
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        id:app.globalData.userInfo.userid,
+        latitude: app.globalData.location.lat,
+        longitude: app.globalData.location.lng,
+      },
+      success(res) {
+        if (res.data.status == 200) {
+          console.log("存储成功",res)
+          }
       }
     })
   },
@@ -467,6 +516,9 @@ Page({
           currentProvince: res.result.address_component.province,
           currentCity: res.result.address_component.city,
           currentDistrict: res.result.address_component.district,
+          longitude: that.data.centerLongitude,
+          latitude:that.data.centerLatitude,
+       
         })
       },
       fail: function (res) {
@@ -480,7 +532,7 @@ Page({
    */
   queryMarkerInfo: function () {
     var that = this;
-    consoleUtil.log('查询当前坐标 marker 点信息')
+    consoleUtil.log('查询当前坐标全部的 marker 点信息')
     //调用请求 marker 点的接口就好了
     wx.request({
       url: app.globalData.baseUrl + '/Pst/poster_map',
@@ -488,6 +540,8 @@ Page({
         // 或许可以改为根据地理位置信息提供服务
         page: 1,
         limit: 50,
+        lat:this.data.lat,
+        lng:this.data.lng,
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -499,13 +553,55 @@ Page({
           resolve(ls)
         })
         v.then((res) => {
-          console.log('res type', res[0])
+          // console.log('res type', res[0])
           that.createMarker(res)
         })
       }
     })
   },
 
+  /**
+   * 查询 个人marker 信息
+   */
+  queryMarkermyInfo: function () {
+    var that = this;
+    consoleUtil.log('查询当前坐标个人的 marker 点信息')
+    //调用请求 marker 点的接口就好了
+    wx.request({
+      url: app.globalData.baseUrl + '/Pst/myposter_map',
+      data: {
+        // 或许可以改为根据地理位置信息提供服务'
+        id:app.globalData.userInfo.userid,
+        page: 1,
+        limit: 50,
+        lat:this.data.lat,
+        lng:this.data.lng,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success(res) {
+        wx.hideLoading();
+        var ls = res.data.data.row;
+        const v = new Promise((resolve, reject) => {
+          resolve(ls)
+        })
+        v.then((res) => {
+          that.createMarker(res)
+        })
+      }
+    })
+  },
+/**
+   * 更新上传坐标点
+   */
+  updateCenterLocation: function (latitude, longitude) {
+    var that = this;
+    that.setData({
+      centerLatitude: latitude,
+      centerLongitude: longitude
+    })
+  },
 
   /**
    * 创建marker
@@ -535,11 +631,9 @@ Page({
    */
   chooseAddress: function () {
     var that = this;
-    app.globalData.city = that.data.centerAddressBean.address_component.city
-    app.globalData.street = that.data.centerAddressBean.address_component.street
+    // app.globalData.city = that.data.centerAddressBean.address_component.city
+    // app.globalData.street = that.data.centerAddressBean.address_component.street
     app.globalData.address=that.data.centerAddressBean.address
-    app.globalData.latitude=that.data.latitude
-    app.globalData.longitude=that.data.longitude
   },
 
   /**
@@ -566,7 +660,6 @@ Page({
           }
         })
       })
-
       updateManager.onUpdateFailed(function () {
         // 新的版本下载失败
       })
@@ -649,26 +742,29 @@ Page({
       }
     });
   },
-  //选择地点
-  chance: function (e) {
-    var that = this
-    // console.log("点击地点",e.currentTarget.dataset.idx);
-    var index = e.currentTarget.dataset.idx
-    // console.log('address index ',this.data.resultList[index])
-    var location = this.data.resultList[index].location
-    app.globalData.location = location
-    this.setData({
-      latitude: location.lat,
-      longitude: location.lng
-    })
-    // that.getCenterLocation()
-    // that.regeocodingAddress();
-    // that.queryMarkerInfo();
-    this.setData({
-      resultList: "",
-      inputAddress: ''
-    })
-  },
+
+ //选择地点
+ chance: function (e) {
+  var that=this
+  // console.log("点击地点",e.currentTarget.dataset.idx);
+  var index = e.currentTarget.dataset.idx
+  // console.log('address index ',this.data.resultList[index])
+  var location = this.data.resultList[index].location
+  // console.log('lat lng',location.lat,location.lng)
+  // that.updateCenterLocation(location.lat, location.lng);
+  app.globalData.location = location
+  this.setData({
+    latitude: location.lat,
+    longitude: location.lng
+  })
+  // that.getCenterLocation()
+  // that.regeocodingAddress();
+  // that.queryMarkerInfo();
+  this.setData({
+    resultList:"",
+    inputAddress:''
+  })
+},
 
   /**
    * 删除输入内容
@@ -702,7 +798,7 @@ Page({
 
     })
   },
-
+//监听页面隐藏
   onHide: function () {
     this.chooseAddress();
   },
