@@ -1,15 +1,49 @@
 page{
+  background:  #f3f3f3;
+}
+.container{
   width: 100%;
-  height: 100%;
+  margin: 0 auto;
+}
+.introduce{
+  width: 92%;
+  margin: 50rpx auto;
+  border-radius: 10rpx;
+  background-color: rgb(255, 255, 255);
+  font-size: 26rpx;
+  letter-spacing:5rpx;
+  /* box-shadow: rgb(172, 172, 172) 6rpx 6rpx 5rpx ; */
+  box-shadow:0px -5rpx 0px 0px #ff8f25,   /*上边阴影  红色*/
+  -5rpx 0px 0px 0px #a6f196,   /*左边阴影  绿色*/
+  5rpx 0px 0px 0px #9bc6ff,    /*右边阴影  蓝色*/
+  0px 5rpx 0px 0px #ff7fca;    /*下边阴影  黄色*/
+}
+.tag{
+  width: 180rpx;
+  height: 70rpx;
+  color: white;
+  line-height: 70rpx;
+  text-align: center;
+  border-radius: 5rpx;
+  box-shadow: rgb(172, 172, 172) 5rpx 5rpx 5rpx 5rpx ;
+  background-color: rgb(231, 126, 56);
+  position: relative;
+  left: -20rpx;
+  top: -10rpx;
+}
+/* 相关对应内容 */
+.content{
+  line-height: 45rpx;
+  margin: 10rpx;
+  font-size: 24rpx;
 
 }
-.title{
-  text-align: center;
- font-size: 35px;
- margin: 0 auto; 
+.tell,.man{
+  text-align: right;
+  width: 90%;
+  margin: 15rpx auto;
 }
-.serve{
-  width: 95%;
-  margin:20px auto;
-  letter-spacing:3rpx
+.man{
+  padding-right: 50rpx;
+  padding-bottom: 20px;
 }

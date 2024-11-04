@@ -1,74 +1,18 @@
-<view class="top" style="height:{{vaHe}}px">
-  <view class="deBack">
-    <view wx:if="{{sharepage==0}}">
-      <view bindtap="deback">
-        <image src="/img/left-arrow.png"></image>
-      </view>
-    </view>
-    <view wx:else>
-      <view class="gohome" bindtap="gohome">
-        <image src="/img/gohome.png"></image>
-      </view>
-    </view>
-
-  </view>
-  <view class="allmessage">
-    <view class="deMessage">
-      <view class="outimg" style="height:{{vaHe}}px">
-        <view class="inimg" mode="widthFix" bindtap="goMessage">
-          <image src="{{headimg}}"></image>
-        </view>
-      </view>
-      <view class="dname" style="height:{{vaHe}}px; line-height:{{vaHe}}px;text-align:center">{{username}}</view>
-    </view>
-    <view wx:if="{{!isyouself}}">
-      <view class="concern" bindtap="concern">
-        <!-- 点击关注可以变化 -->
-        <view class="inconcern active" wx:if="{{!concernAc}}">
-          +关注
-        </view>
-        <view class="inconcern" wx:else>
-          已关注
-        </view>
-      </view>
-    </view>
-    <view wx:else>
-      <view class="control">
-        <view class="downicon" bindtap="showedit">
-          <image src="/img/down.png"></image>
-        </view>
-      </view>
-      <view wx:if="{{isshow}}" class="useredit">
-        <view class="edit">
-          <view>
-            <image src="/img/editessay.png"></image>
-          </view>
-          <view bindtap="edit">编辑</view>
-        </view>
-        <view class="delete" bindtap="delete">
-          <view>
-            <image src="/img/newdelete.png"></image>
-          </view>
-          <view>删除</view>
-        </view>
-      </view>
-    </view>
-  </view>
-
-</view>
-
-<view class="container-layout" bindtap="hide">
-  <swiper class="container" indicator-dots="{{indicatordots}}" easing-function='linear' autoplay="{{autoplay}}"
-    interval="{{interval}}" duration="{{duration}}" bindchange='onSlideChange' circular='true'>
+<view>
+  <swiper class="container" easing-function='linear' autoplay="true"
+    interval="3000" duration="1000" bindchange='onSlideChange' circular='true'>
     <block wx:for="{{essayall.imgUrls}}" wx:key="index">
       <swiper-item class="vol-swiper-item" bindchange="">
         <view class="vol-card">
-          <image class="vol-picture" src="{{item}}" mode="aspectFill" bindtap='imgClick' data-num="{{index}}"></image>
+          <image class="vol-picture" src="{{item}}" mode="aspectFill" bindtap='imgClick' data-num="{{index}}" style="transition: all {{duration/1000}}s"></image>
         </view>
       </swiper-item>
     </block>
   </swiper>
+
+  <!-- 展示图片详情 -->
   <view class='bannerNum'>{{(current+1)}}/{{essayall.imgUrls.length}}</view>
+  <!-- 展示文章内容 -->
   <view class="container-text">
     <view class="title">{{essayall.essay_title}}</view>
     <scroll-view scroll-x="true">
@@ -80,13 +24,41 @@
         </block>
       </view>
     </scroll-view>
+
     <view class="divLine"></view>
-    <view class="essay">
+ <!-- 用于放置作者头像等相关信息 -->
+ <view class="author">
+   <view class="author_top">
+    <view class="atop_left">
+     <image src="{{headimg}}" bindtap="gomydetail" data-flw="{{isfollow}}" data-userid="{{essayall.authorid}}"></image>
+    </view>
+    <view class="atop_center">
+     <view class="a_nickname">{{username}}</view>
+     <view class="a_sex">
+       <view class="sex" wx:if="{{userInfo.sex==1}}"><image src="../../img/male.png"></image></view>
+       <view class="sex" wx:else><image src="../../img/fmale.png"></image></view>
+     </view>
+    </view>
+    <view class="atop_right">
+      <view wx:if="{{!userSelf}}" bindtap="doFollow" data-name="{{username}}" data-userid="{{essayall.authorid}}" class="follow_text {{isfollow==1? 'follow-active':''}}">{{isfollow==0? '+关注':'已关注'}}</view>
+    </view>
+   </view>
+   <view class="author_bottom">
+     <view>获赞：<text>{{likes}}</text></view>
+     <view>粉丝：<text>{{fans}}</text></view>
+     <view>关注：<text>{{concern}}</text></view>
+   </view>
+  </view>
+      <view class="essay">
       <text>{{essayall.essay_text}}</text>
     </view>
-    <view class="data"><text>发布时间：</text>{{essayall.sharetime}}</view>
+    <view class="article_data"><text>发布时间：</text><text>{{essayall.sharetime}}</text></view>
+    <view class="article_local"><text>拍摄地址：</text><text class="map_api" bindtap="openMap">{{essayall.local}}</text></view>
+   
   </view>
-  <view class="empty"></view>
+ 
+
+  <view class="empty1"></view>
   <view class="bbbox">
     <view class="bottom">
       <view class="share">

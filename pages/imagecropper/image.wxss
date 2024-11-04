@@ -1,0 +1,19 @@
+page{
+  background-color: black;
+  padding: 0;
+  margin: 0;
+}
+.white{
+  color: #fff;
+  font-size: 30rpx;
+}
+
+.black{
+  color: #333333;
+  font-size: 30rpx;
+  margin-top:10rpx;
+}
+.btn{
+  width: 100%;
+  display: flex;
+}

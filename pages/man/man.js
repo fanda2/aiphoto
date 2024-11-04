@@ -62,54 +62,53 @@ Page({
       url: '/pages/server/server'
     })
   },
-  gomorething: function (e) {
+  codeman: function (e) {
     wx.navigateTo({
-      url: '/pages/morething/morething'
+      url: '/pages/codeman/codeman'
+    })
+  },
+  //进入我的二维码界面。展示二维码
+  mycodepage: function () {
+    wx.navigateTo({
+      url: '/pages/myCodepage/mycode',
+    })
+  },
+  //进入微信扫一扫界面
+  goscan() {
+    wx.navigateTo({
+      url: '/pages/wxScan/scan',
     })
   },
   goMessage: function (e) {
-    var userid = app.globalData.userInfo.id
+    var userid = app.globalData.userInfo.userid;
     // console.log(app.globalData.userInfo.id);
     wx.navigateTo({
-      url: '/pages/message/message?mystyle=' + 1 + '&userid=' + app.globalData.userInfo.userid,
+      url: '/pages/message/message?mystyle=' + 1 + '&userid=' + userid,
     })
   },
   /**
    * 自定义函数
    */
   myinfopage: function () {
-    wx.navigateTo({
-      url: '/pages/myinfo/myinfo',
-    })
+    this.checkLogin('/pages/myinfo/myinfo')
+  //   wx.navigateTo({
+  //     url: '/pages/myinfo/myinfo',
+  //   })
   },
-  goshare:function(e)
-  {
-    var that = this;
-    if (!app.globalData.token) {
-      wx.navigateTo({
-        url: '/pages/login/login?pagetype=' + 1,
-      })
-    } else {
-      wx.navigateTo({
-        url: '/pages/feedback/feedback',
-      });
-    }
+  gonotify: function () {
+    this.checkLogin('/pages/notify/notify')
   },
-  toH: function (e) {
-    wx.navigateTo({
-      url: '/pages/hoard/hoard'
-    })
-
+  goshare: function () {
+    this.checkLogin('/pages/feedback/feedback')
   },
-  toC: function (e) {
-    wx.navigateTo({
-      url: '/pages/concern/concern'
-    })
+  toH: function () {
+    this.checkLogin('/pages/hoard/hoard')
   },
-  toL: function (e) {
-    wx.navigateTo({
-      url: '/pages/like/like'
-    })
+  toC: function () {
+    this.checkLogin('/pages/concern/concern')
+  },
+  toL: function () {
+    this.checkLogin('/pages/like/like')
   },
   // 获取图片宽高
   imageLoad: function (e) {
@@ -160,16 +159,28 @@ Page({
             wx.removeStorageSync('token'),
             wx.removeStorageSync('userInfo'),
             that.setData({
-              userinfo:"",
-              isHide:0
+              userinfo: "",
+              isHide: 0
             })
-            app.globalData=''
+          app.globalData = ''
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
     })
+  },
 
+  //检查状态并登录
+  checkLogin(url) {
+    if (this.data.islogin) {
+      wx.navigateTo({
+        url: url
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
 
   /**
@@ -189,6 +200,15 @@ Page({
     if (app.globalData.token.length) {
       this.setData({
         isHide: 1
+      })
+    }
+    if (wx.getStorageSync('token')) {
+      this.setData({
+        islogin: true,
+      })
+    } else {
+      this.setData({
+        islogin: false
       })
     }
 
@@ -225,5 +245,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {}
+  onShareAppMessage: function () { }
 })

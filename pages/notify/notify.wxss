@@ -1,0 +1,152 @@
+page{
+  background: rgb(247, 252, 255);
+}
+.not-container{
+  width: 96%;
+  margin: 0 auto;
+}
+
+.top-btn{
+  height: 50px;
+  line-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.contact-btn{
+  color: white;
+  background: #07c160;
+}
+.item{
+  margin-top: 10px;
+  height: 120px;
+  background: rgb(216, 189, 153);
+  box-shadow: 2px 2px 2px #cccccc;
+  border-radius: 14px;
+  width: 100%;
+
+}
+.top{
+  height: 30px;
+  display: flex;
+ width: 96%;
+ padding: 15rpx;
+}
+.title{
+  height: 30px;
+  width: 85%;
+  font-size: 36rpx;
+  font-weight: 600;
+  margin-bottom: 2px;
+  border-bottom: black 1px dashed;
+}
+.head{
+  padding-left: 3%;
+  width: 10%;
+  height: 30px;
+  line-height: 30px;
+}
+.head image{
+  width: 30px;
+  height: 30px;
+border-radius: 3px;
+}
+.message{
+  width: 96%;
+  height: 45px;
+  line-height: 45px;
+  padding-left: 10rpx;
+  /* background-color: cadetblue; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+}
+.time{
+  width: 96%;
+  font-size: 24rpx;
+  text-align: right;
+}
+.showtitle{
+  width: 98%;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  /* background-color: blanchedalmond; */
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.showmessage{
+  padding-top: 10px;
+  width: 98%;
+  height: 220rpx;
+  /* background: blueviolet; */
+  font-weight: 24rpx;
+}
+.btn{
+  margin-top: 10px;
+  width: 80px;
+  height: 35px;
+  line-height: 35px;
+  float:right;
+  text-align: center;
+  background:rgb(247, 172, 33);
+  border-radius: 5px;
+}
+
+.zan-dialog__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0);   /*设置阴影半透明背景如： background: rgba(0, 0, 0, 0.4);*/
+  display: none;
+}
+
+.zan-dialog__container {
+  position: fixed;
+  bottom: 550rpx;
+  width: 650rpx;    /*弹窗布局宽*/
+  height: 450rpx;   /*弹窗布局高，与下面弹出距离transform有关*/
+  margin-left: 50rpx;
+  background: #f8f8f8;
+  transform: translateY(300%);  /*弹框弹出距离，与弹框布局高度有关，如300%表示弹起距离为3倍弹窗高度 */
+  transition: all 0.4s ease;
+  z-index: 12;
+  border-radius: 20rpx;
+  box-shadow: 0px 3px 3px 2px gainsboro;  /*弹框的悬浮阴影效果，如不需要可注释该行*/
+}
+
+.zan-dialog--show .zan-dialog__container {
+  transform: translateY(0);
+}
+
+.zan-dialog--show .zan-dialog__mask {
+  display: block;
+}
+
+/* 没有内容时候显示 */
+.noconcern{
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 50rpx;
+}
+.notext{
+  text-align: center;
+  color: #8b8b8b;
+  line-height: 200rpx;
+}
+.noconcernimg{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 100rpx;
+}
+.noconcernimg image{
+  width: 400rpx;
+  height: 300rpx;
+}

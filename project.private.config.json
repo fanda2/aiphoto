@@ -1,15 +1,9 @@
 {
-  "setting": {},
+  "setting": {
+    "compileHotReLoad": true,
+    "urlCheck": false
+  },
   "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
     "miniprogram": {
       "list": [
         {
@@ -95,8 +89,52 @@
           "pathName": "pages/morething/morething",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "通知界面",
+          "pathName": "pages/notify/notify",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "问题与反馈",
+          "pathName": "pages/feedback/feedback",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "编辑文章页面",
+          "pathName": "pages/edit/edit",
+          "query": "userid=4&ismystyle=1",
+          "scene": null
+        },
+        {
+          "name": "111",
+          "pathName": "pages/imagecropper/image",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "用户反馈界面",
+          "pathName": "pages/feedback/feedback",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "开发者页面",
+          "pathName": "pages/codeman/codeman",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "点赞信息界面",
+          "pathName": "pages/like/like",
+          "query": "",
+          "scene": null
         }
       ]
     }
-  }
+  },
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "projectname": "ai%E6%91%84"
 }

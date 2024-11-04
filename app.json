@@ -1,7 +1,7 @@
 {
-  "pages":[
-    "pages/address/address",
+  "pages": [
     "pages/index/index",
+    "pages/address/address",
     "pages/logs/logs",
     "pages/man/man",
     "pages/detail/detail",
@@ -14,19 +14,35 @@
     "pages/server/server",
     "pages/morething/morething",
     "pages/feedback/feedback",
-    "pages/function_one/function_one"
+    "pages/function_one/function_one",
+    "pages/function_two/function_two",
+    "pages/function_three/function_three",
+    "pages/function_four/function_four",
+    "pages/notify/notify",
+    "pages/edit/edit",
+    "component/image-cropper/index",
+    "pages/imagecropper/image",
+    "pages/codeman/codeman",
+    "pages/wxScan/scan",
+    "pages/myCodepage/mycode"
   ],
-  "permission": {
-    "scope.userLocation": {
-      "desc": "请求获取您的位置信息"
-    }
-  },
-  "window":{
-    "backgroundTextStyle":"dark",
+  "window": {
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "ai摄",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位地理坐标息将用于小程序位置接口的效果展示"
+    },
+    "scope.userFuzzyLocation": {
+      "desc": "你的模糊位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getFuzzyLocation"
+  ],
   "tabBar": {
     "color": "#929292",
     "selectedColor": "#21b9df",
@@ -43,6 +59,12 @@
         "text": "地图",
         "iconPath": "/img/map.png",
         "selectedIconPath": "/img/map_h.png"
+      },
+      {
+        "pagePath": "pages/morething/morething",
+        "text": "工具",
+        "iconPath": "/img/function.png",
+        "selectedIconPath": "/img/function_h.png"
       },
       {
         "pagePath": "pages/man/man",

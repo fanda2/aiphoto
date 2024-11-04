@@ -1,0 +1,18 @@
+<view>
+ <view class="top">
+  <view class="code-title">我的二维码</view>
+  <view class="code-content">
+    <canvas class="canvas-code"canvas-id="myQrcode" style="background:#fff;width: 150px;height: 150px;"/>
+  </view>
+ </view>
+ <view class="bottom">
+   <view class="msg">
+   <view class="tab">个人信息</view>
+    <view> 昵称：<text>{{userInfo.nickname}}</text></view>
+    <view>邮箱：<text>{{userInfo.mailnumber}}</text></view>
+    <view>地址：<text>{{userInfo.usaddress}}</text></view>
+    <view>生日：<text>{{userInfo.birthday}}</text></view>
+    <view class="motto-box"><view class="label">签名：</view><textarea class="motto" type="text" value="{{userInfo.motto}}" disabled="true"></textarea></view>
+   </view>
+ </view>
+</view>

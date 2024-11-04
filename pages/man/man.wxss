@@ -1,13 +1,17 @@
+page{
+  background:  #e9ebee;
+}
 .mancontainer {
   /* background-image: url(../../images/flower1.png); */
-  position: absolute;
+  /* position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: 0; */
   background: -webkit-linear-gradient(top, #74ece6, #e9ebee, #e9ebee, #e9ebee);
   color: black;
   font-size: 18px;
+  padding-bottom: 20rpx;
 }
 
 .outuserinfo {
@@ -76,9 +80,9 @@
 .stare {
   width: 90%;
   margin-left: 5%;
-  height: 100px;
+  height: 88px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 25rpx;
   display: flex;
   justify-content: space-between;
   font-size: 13px;
@@ -88,7 +92,7 @@
   width: 30%;
   height: 50px;
   display: flex;
-  margin-top: 30px;
+  margin-top: 20px;
   flex-direction: column;
   justify-self: center;
   align-items: center;
@@ -103,7 +107,6 @@
 .bottombox {
   width: 90%;
   margin-left: 5%;
-  height: 40%;
   background-color: white;
   border-radius: 10px;
   font-size: 13px;
@@ -199,6 +202,8 @@ display: none;
   padding-top: 5px;
   flex: none;
   width: 100%;
+  border-radius: 25rpx;
+  padding-bottom: 10rpx;
   /* display: flex;
   justify-content: space-around; */
   background: #fff;
@@ -487,7 +492,8 @@ display: none;
   margin: 15px auto;
   background: #fff;
   border-radius: 10px;
-  height: 50px;
-  line-height: 50px;
+  height: 85rpx;
+  font-size: 30rpx;
+  line-height: 85rpx;
   text-align: center;
 }

@@ -12,7 +12,7 @@
         </view>
       </picker>
     </view>
-    <view class="text">(点击即可选择）</view>
+    <view class="text">(点击数字即可选择）</view>
   </view>
   <view class="ImgOperateView">
     <button type="primary" bindtap="chooseMyImage">选择图片</button>

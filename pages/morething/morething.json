@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText":"更多相关工具",
-  "usingComponents": {}
+  "usingComponents": {},
+  "backgroundColor": "#e9ebee",
+  "disableScroll":true
 }

@@ -57,7 +57,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#52e7e0',
+      animation: {
+        duration: 500,
+        timingFunc: 'easeIn'
+      }
+    })
   },
   bindPickerChange: function (e) {
     var idx = e.detail.value
@@ -82,7 +89,6 @@ Page({
             title: "已选择图片",
           })
       },
-
       fail: function () {
         wx.showToast({
           title: "请选择图片",
@@ -108,7 +114,6 @@ Page({
           wx.showToast({
             title: "压缩成功",
           });
-
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success: function (res) {
@@ -118,7 +123,6 @@ Page({
             }
           })
         },
-
         fail: function () {
           wx.showToast({
             title: "压缩失败",

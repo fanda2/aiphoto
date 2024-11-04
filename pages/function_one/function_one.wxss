@@ -6,6 +6,7 @@
   width: 90%;
   margin: 20px auto;
   display: flex;
+  font-size: 28rpx;
 }
 .scale{
   width: 30%;
@@ -13,9 +14,12 @@
 .imgbody{
   width: 100%;
   height:auto;
+  overflow: hidden;
+ 
 }
 .imgbody image{
   width: 100%;
+   max-height: 500px;
 }
 .ImgOperateView{
   margin: 40px;

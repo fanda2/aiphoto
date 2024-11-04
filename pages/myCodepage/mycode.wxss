@@ -1,0 +1,67 @@
+page{
+  background: rgb(247, 252, 255);
+}
+.top{
+  width: 100%;
+  height: 250px;
+  background: rgb(148, 230, 223);
+  text-align: center;
+}
+.code-title{
+  height: 70px;
+  line-height: 70px;
+  font-weight: bold;
+  font-size: 24px;
+  color: white;
+}
+.code-content{
+  width: 100%;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bottom{
+  width: 100%;
+}
+.msg{
+  width: 80%;
+  margin: 0 auto;
+  background: rgb(248, 248, 248);
+  box-sizing: border-box;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 3px 3px 5px #cccccc;
+  color: #3c3c3c;
+  padding-bottom: 10px;
+}
+.tab{
+  font-weight: 550;
+  border-left: 5px solid coral;
+}
+.msg>view{
+  height: 50px;
+  line-height: 50px;
+  padding:0 10px;
+  font-size: 26rpx;
+}
+.msg>view text{
+  margin-left:10px ;
+  font-size: 26rpx;
+}
+.motto-box{
+  min-height: 30px;
+  display: flex;
+  margin-bottom: 10px;
+}
+.label{
+  width: 24%;
+}
+.motto{
+  font-size: 24rpx;
+  height: 120rpx;
+  color: #3c3c3c;
+  padding: 0 5px;
+  line-height: 50rpx;
+}
+/* .motto-box */

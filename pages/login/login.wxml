@@ -1,7 +1,7 @@
 <view class="contertain">
   <view wx:if="{{canIUse}}">
     <view class='header'>
-      <image src='/img/login.png'></image>
+      <image src='../../img/nohoard.png'></image>
     </view>
     <view class='content'>
       <view>申请获取以下权限</view>

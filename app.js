@@ -1,16 +1,16 @@
 // app.js
 App({
   onLaunch() {
-    // 展示本地存储能力
-    // const logs = wx.getStorageSync('logs')
-    // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs) 
-      // 获取用户信息
-    this.globalData.token=wx.getStorageSync('token')
-    this.globalData.userInfo=wx.getStorageSync('userInfo')
-    if(this.globalData.token.length)
-    {
-      this.globalData.isHide=1
+    const welecome = wx.getStorageSync('welcome');
+    if (welecome) {
+      this.welecome=true;
+    } else {
+      this.welecome=false;
+    }
+    this.globalData.token = wx.getStorageSync('token')
+    this.globalData.userInfo = wx.getStorageSync('userInfo')
+    if (this.globalData.token.length) {
+      this.globalData.isHide = 1
     }
     wx.getSetting({
       success: res => {
@@ -22,15 +22,16 @@ App({
   },
   globalData: {
     userInfo: {},
-    currentMarkerId:0,
-    token:'',
-    isHide:0,//登录状态
-    location:{},
-    baseUrl:"https://aiphoto.fjtbkyc.net",
-    city:'',
-    street:'',
-    address:'',//地址
-    latitude:'',
-    longitude:'',
+    currentMarkerId: 0,
+    token: '',
+    isHide: 0, //登录状态
+    location: {},
+    baseUrl: "https://serve.fjtbkyc.top",
+    city: '',
+    street: '',
+    address: '', //地址
+    welecome: true,
+    imgcount:0,
+    imageUrl:"", //背景图片临时背景
   }
 })
