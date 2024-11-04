@@ -32,7 +32,6 @@ Page({
     wx.getUserProfile({
       desc: '用于完善用户资料',
       success: function (res) {
-        console.log("auth ",res)
         new Promise((resolve)=>{
           that.setData({
             userInfo: res = JSON.parse(res.rawData),
@@ -41,6 +40,7 @@ Page({
         }).then((result)=>{
           wx.login({
             success: res => {
+              console.log("..................................",res)
               wx.request({
                 url: app.globalData.baseUrl+'/Login/onLogin', //仅为示例，并非真实的接口地址
                 method: "GET",

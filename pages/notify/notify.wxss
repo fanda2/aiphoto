@@ -1,15 +1,28 @@
 page{
-  background: rgba(114, 209, 253,0.4);
+  background: rgb(247, 252, 255);
 }
-.container{
+.not-container{
   width: 96%;
   margin: 0 auto;
+}
 
+.top-btn{
+  height: 50px;
+  line-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.contact-btn{
+  color: white;
+  background: #07c160;
 }
 .item{
   margin-top: 10px;
   height: 120px;
-  background: rgb(209, 176, 132);
+  background: rgb(216, 189, 153);
+  box-shadow: 2px 2px 2px #cccccc;
   border-radius: 14px;
   width: 100%;
 
@@ -23,7 +36,7 @@ page{
 .title{
   height: 30px;
   width: 85%;
-  font-size: 44rpx;
+  font-size: 36rpx;
   font-weight: 600;
   margin-bottom: 2px;
   border-bottom: black 1px dashed;
@@ -48,6 +61,7 @@ border-radius: 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 26rpx;
 }
 .time{
   width: 96%;
@@ -60,7 +74,7 @@ border-radius: 3px;
   line-height: 60rpx;
   text-align: center;
   /* background-color: blanchedalmond; */
-  font-size: 35rpx;
+  font-size: 36rpx;
   font-weight: 600;
 }
 .showmessage{
@@ -68,6 +82,7 @@ border-radius: 3px;
   width: 98%;
   height: 220rpx;
   /* background: blueviolet; */
+  font-weight: 24rpx;
 }
 .btn{
   margin-top: 10px;
@@ -111,4 +126,27 @@ border-radius: 3px;
 
 .zan-dialog--show .zan-dialog__mask {
   display: block;
+}
+
+/* 没有内容时候显示 */
+.noconcern{
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 50rpx;
+}
+.notext{
+  text-align: center;
+  color: #8b8b8b;
+  line-height: 200rpx;
+}
+.noconcernimg{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 100rpx;
+}
+.noconcernimg image{
+  width: 400rpx;
+  height: 300rpx;
 }

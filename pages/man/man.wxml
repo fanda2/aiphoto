@@ -6,10 +6,10 @@
         </image>
         <view class="userinfo2">
           <text class="userinfo-nickname">{{userinfo.nickname}}</text>
-          <view class='message' bindtap="myinfopage" data-headimg="{{userinfo.avatar}}"
+          <view class='message' bindtap="goMessage" data-headimg="{{userinfo.avatar}}"
             data-username="{{userinfo.nickname}}">
             <!-- //bindtap="myinfopage" -->
-            我的信息
+            我的主页
             <!-- 我的信息 -->
           </view>
         </view>
@@ -67,15 +67,15 @@
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>
-      <view class="list-item" bindtap="gomorething">
-        <image class="item-image" src="/img/more.png"></image>
-        <text class="item-text">更多相关</text>
-        <image class="image-jiantou" src="/img/right-arrow.png"></image>
-      </view>
-      <view class="line"></view>
       <view class="list-item" bindtap="gonotify">
         <image class="item-image" src="/img/notify.png"></image>
         <text class="item-text">通知与提醒</text>
+        <image class="image-jiantou" src="/img/right-arrow.png"></image>
+      </view>
+      <view class="line"></view>
+      <view class="list-item" bindtap="mycodepage">
+        <image class="item-image" src="/img/code.png"></image>
+        <text class="item-text">我的二维码</text>
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>
@@ -85,12 +85,26 @@
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
       <view class="line"></view>
+        <!-- 微信扫一扫 -->
+        <view class="list-item" bindtap="goscan">
+        <image class="item-image" src="/img/scan.png"></image>
+        <text class="item-text">扫一扫</text>
+        <image class="image-jiantou" src="/img/right-arrow.png"></image>
+      </view>
+      <view class="line"></view>
+      <view class="list-item" bindtap="codeman">
+        <image class="item-image" src="/img/open.png"></image>
+        <text class="item-text">开发人员</text>
+        <image class="image-jiantou" src="/img/right-arrow.png"></image>
+      </view>
+      <view class="line"></view>
       <view class="list-item" bindtap="goserve">
         <image class="item-image" src="/img/massge.png"></image>
         <text class="item-text">服务信息条款</text>
         <image class="image-jiantou" src="/img/right-arrow.png"></image>
       </view>
-      <view class="line"></view>
+      <!-- <view class="line"></view> -->
+      
     </view>
   </view>
   <view wx:if="{{isHide}}" class="unlogin" bindtap="unlogin">

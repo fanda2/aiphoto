@@ -18,9 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '玩命加载中'
-      })
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#52e7e0',
@@ -45,13 +42,15 @@ Page({
     var that=this;
     that.notifyget()
   },
-  notifyget:function(e){
+  notifyget(e){
     var that=this;
+    wx.showLoading({
+      title: '玩命加载中'
+      })
     wx.request({
-      url: app.globalData.baseUrl+'/Not/notify_all',
+      url: app.globalData.baseUrl+'/not/notify_all',
       method:"GET",
-    header: {
-      // Authorization: token,
+     header: {
       'content-type': 'application/x-www-form-urlencoded'
     },
     data: {
@@ -59,11 +58,7 @@ Page({
       limit: this.data.baselimit,
     },
     success(res) {
-      wx.hideLoading({
-        success: (res) => {
-          
-        },
-      })
+      wx.hideLoading()
       if (res.data.status == 200) {
         var array=res.data.data.row;
         that.setData({
@@ -71,13 +66,20 @@ Page({
         })
       } else {
         wx.showToast({
-          title: '信息更新失败！',
+          title: '信息加载失败！',
           icon: 'error',
-          duration: 2000
+          duration: 1000
         })
       }
     },
-    fail() {}
+    fail() {
+      wx.hideLoading()
+      wx.showToast({
+        title: '信息加载失败！',
+        icon: 'error',
+        duration: 1000
+      })
+    }
   })
 
   },
@@ -86,11 +88,11 @@ Page({
   detail:function(e)
   {
     var title=e.currentTarget.dataset.title
-    var message=e.currentTarget.dataset.msg
+    var content=e.currentTarget.dataset.msg
     this.setData({
       showDialog: !this.data.showDialog,
       showtitle:title,
-      showmessage:message
+      showmessage:content
     });
 
   },

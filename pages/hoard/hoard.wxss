@@ -8,6 +8,7 @@ page
   color:black;
   font-size: 18px;
   background: rgb(204, 238, 235);
+   
 }
 .nohoard{
   width: 80%;
@@ -16,10 +17,6 @@ page
 }
 .nohoardimg{
   text-align: center;
-}
-.nohoardimg image{
-  width: 400rpx;
-  height: 400rpx;
 }
 .notext{
   text-align: center;
@@ -39,30 +36,30 @@ page
   flex-direction: column;
   justify-items: center;
   justify-content: center;
-  width: 35%;
+  width: 32%;
   overflow: hidden;
   border-radius: 15px;
 }
 .himimg{
   border-radius: 15px;
   margin-left: 5px;
-  height: 220rpx;
-  width: 220rpx;
+  height: 180rpx;
+  width: 180rpx;
   overflow: hidden;
 }
 /* .handimg image{
    width: cover;
 } */
 .hoardtext{
-  padding: 15px;
+  padding: 10px;
   width: 65%;
   /* background: rebeccapurple; */
 }
 .essaytitle{
   padding-top:15rpx;
-  font-size: 35rpx;
-  font-weight: 600;
-  height: 160rpx;
+  font-size: 26rpx;
+  font-weight: 550;
+  height: 120rpx;
   /* background: red; */
 }
 .essaytitle .indent{
@@ -93,8 +90,7 @@ page
   display: flex;
   justify-content: flex-start;
   color: rgb(131, 131, 131);
-  font-weight:500;
-  font-size: 25rpx;
+  font-size: 24rpx;
 }
 .outleft{
   width: 60%;
@@ -115,6 +111,7 @@ page
   justify-items: center;
   justify-content: center;
   margin-left: 9rpx;
+  font-size: 24rpx;
 }
 .author view
 {

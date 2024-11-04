@@ -1,4 +1,13 @@
-<view class="container">
+<!-- 没有数据时候展示 -->
+<view class="notOne" wx:if="{{notify.length==0}}">
+  <view class="noconcernimg">
+    <image src="/img/nofund2.png">
+  </image>
+</view>
+  <view class="notext">附近还未发布过通知信息哦</view>
+</view>
+
+<view class="not-container" wx:else>
   <view wx:for="{{notify}}" class="box">
     <view class="item" data-title="{{item.title}}" data-msg="{{item.message}}" bindtap="detail">
       <view class="top">

@@ -19,11 +19,20 @@
   </view>
   <view  class='cover-center-wrapper' id='center-change-layout' wx:if="{{showTopTip}}"
     style='height:{{inputHe-10}}px;  margin-top: {{vaHe-inputHe-5}}px;'>
-    <view wx:if="{{show_all}}" class="in_left" >
+    <!-- <view wx:if="{{show_all}}" class="in_left" >
       <view class="in_text">全部</view>
     </view>
     <view wx:if="{{show_all}}" class="in_right_visual" bindtap="range_mine"></view>
     <view wx:if="{{!show_all}}" class="in_left_visual" bindtap="range_all">
+    </view>
+    <view  wx:if="{{!show_all}}" class="in_right" >
+      <view class="in_text">个人</view>
+    </view> -->
+     <view wx:if="{{show_all}}" class="in_left" >
+      <view class="in_text">全部</view>
+    </view>
+    <view wx:if="{{show_all}}" class="in_right_visual"></view>
+    <view wx:if="{{!show_all}}" class="in_left_visual">
     </view>
     <view  wx:if="{{!show_all}}" class="in_right" >
       <view class="in_text">个人</view>
@@ -42,10 +51,13 @@
         <cover-view class="cityaddress">{{item.address}}</cover-view>
       </cover-view>
     </cover-view>
-    <map class='map' id='myMap' longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" show-location="true"
+
+    <map class='map' id='newMap' longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" show-location="true"
       markers="{{markers}}" bindmarkertap="bindMakertap" data-item="{{markers}}" bindcontroltap='controlTap'
-      bindregionchange='regionChange' controls='{{controls}}' bindtap='bindMapTap' style="position: relative;">
+      bindregionchange='regionChange' controls='{{controls}}' style="position: relative;">
     </map>
+
+
     <!--定位当前位置-->
     <cover-view class='cover-layout'>
       <cover-image bindtap='selfLocationClick' class='self-location' src='/img/self-local.png'></cover-image>

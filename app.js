@@ -26,7 +26,7 @@ App({
     token: '',
     isHide: 0, //登录状态
     location: {},
-    baseUrl: "https://aiphoto.fjtbkyc.net",
+    baseUrl: "https://serve.fjtbkyc.top",
     city: '',
     street: '',
     address: '', //地址

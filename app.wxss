@@ -8,4 +8,6 @@
 } 
 page {
   background-color: rgba(250,250,250,0.90);
+  font-family: "KaiTi_GB2312";
+  color: #333;
 }

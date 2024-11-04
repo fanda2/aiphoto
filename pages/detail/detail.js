@@ -9,13 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    current:0,
     pageid: '', //跳转到此界面之前页面的id
-    vaHe: 0, //导航菜单高度
-    inputHe: 0, //输入框高度
-    username: "",
-    current: 0, //当前所在页面的 index
-    concernAc: 0, //用户是否关注
-    isconcern: '+关注', //按钮的文字内容
     headimg: "http://wew.fjtbkyc.net/images/bg1.jpg", //默认头像信息
     circular: true, //是否采用衔接滑动
     essayall: [],
@@ -31,7 +26,8 @@ Page({
     ishoard: 0, //是否收藏
     oldlike: 0,
     oldhoard: 0,
-    oldfollow:0,
+    isfollow:0,
+    userSelf:false,
     authorid: 0,
     posterid: 0, //文章的id
     sharepage: 0,
@@ -40,7 +36,17 @@ Page({
     pagehigh:0,  //页面高度
     pagewidth:0,
     inputcontent:"", //评论内容
-    warningText:"可以发表你的评论"
+    warningText:"可以发表你的评论",
+    comment:[] ,//存储评论的内容
+    total:0,
+    showInput:false,
+    parentId:0,//评论的父ID,默认值为0
+    fans:0,
+    concern:0 ,//关注数
+    lat:0,
+    lng:0,
+  
+    
   },
 
   // 点击图片进行预览函数
@@ -71,23 +77,15 @@ Page({
       withShareTicket: true
     })
     var data = wx.getMenuButtonBoundingClientRect()
-    var WH = wx.getSystemInfoSync()
     this.setData({
       // 获取导航栏高度
-      vaHe: data.bottom + 10,
-      inputHe: data.bottom - data.top,
       pageid: options.pageid,
       posterid: options.posterid,
       authorid: options.authorid,
       sharepage: options.share,
     })
-    this.watchHeight(),
-    console.log("加载时获取的信息", this.data.posterid + " ", this.data.authorid + " ", this.data.sharepage)
-    if (options.authorid == app.globalData.userInfo.userid) {
-      this.setData({
-        isyouself: 1,
-      })
-    }
+    this.postfollow();  //加载用户关注数
+    this.postbefollow();   //加载用户粉丝数
   },
 
   swiperChange: function (e) {
@@ -96,15 +94,6 @@ Page({
     })
   },
 
-  //获取页面高度
-  watchHeight:function(){
-    var h = wx.getSystemInfoSync().windowHeight;
-    var w = wx.getSystemInfoSync().windowWidth;
-    this.setData({
-      pagehigh:h,
-      pagewidth:w,
-    })
-  },
   //界面跳转
   goMessage: function (e) {
     if (!app.globalData.token.length) {
@@ -152,111 +141,6 @@ Page({
     })
 
   },
-  deback: function (e) {
-    if (this.data.pageid == 1) {
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
-    } else if (this.data.pageid == 2) {
-      wx.navigateBack({
-        url: '/pages/address/address',
-      })
-    } else if (this.data.pageid == 3) {
-      wx.navigateBack({
-        url: '/pages/hoard/hoard'
-      })
-    } else if (this.data.pageid = 4) {
-      wx.navigateBack({
-        url: '/pages/hoard/hoard'
-      })
-    } else if (this.data.pageid = 5) {
-      wx.navigateBack({
-        url: '/pages/address/address'
-      })
-
-    } else if (this.data.pageid = 6) {
-      wx.navigateBack({
-        url: '/pages/message/message'
-      })
-    } else {
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
-    }
-  },
-  gohome: function (e) {
-    wx.switchTab({
-      url: '/pages/index/index'
-    })
-  },
-
- /**
-   * 绑定输入框
-   */
-  bindAddressInput: function (e) {
-    var that = this;
-    that.setData({
-      inputcontent: e.detail.value,
-    })
-   
-  },
-
-  //  发表评论
-   send_remark:function(){
-     if(this.data.inputcontent!="")
-     {
-        console.log("发送信息",this.data.inputcontent)
-        this.setData({
-          inputcontent:"",
-        })
-        wx.showToast({
-          title: '评论成功',
-          duration: 1500
-        })
-     }
-     else{
-      wx.showToast({
-        title: '输入内容不能为空',
-        icon: 'none',
-        duration: 1500
-      })
-     }
-    
-   },
-  //点击关注按钮调用
-  concern: function () {
-    var that = this
-    if (!app.globalData.token) {
-      that.gologin()
-    } else {
-      this.setData({
-        concernAc: !this.data.concernAc
-      })
-    }
-
-  },
-  //点击关注接口调用
-  postconcern: function (e) {
-    var that = this
-    wx.request({
-      url: app.globalData.baseUrl + '/Flw/follow_updata',
-      method: "GET",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        userid: app.globalData.userInfo.userid,
-        befwuserid: this.data.authorid
-      },
-      success(res) {
-        if (res.data.status == 200) {
-          console.log("关注调用成功")
-        } else {
-          console.log("请求发送失败！")
-        }
-      }
-    })
-  },
 
   gologin: function (e) {
     if (app.globalData.token.length == 0) {
@@ -292,6 +176,7 @@ Page({
       })
     }
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -318,8 +203,10 @@ Page({
           posterid: this.data.posterid
         },
         success(res) {
+          console.log("reeeeeeeeee",res)
           if (res.data.status == 200) {
             if (res.data.data.type) {
+              console.log(res.data.data.type)
               that.setData({
                 islike: 1,
                 oldlike: 1,
@@ -378,10 +265,11 @@ Page({
       })
     }
   },
+
   onShow: function () {
     console.log("加载依次",this.data.concernAc," ",this.data.oldfollow)
     var that = this
-    that.getstatus();
+    this.statuscheck();  //检查关注状态
     that.postselectlike();
     // var postid = app.globalData.currentMarkerId
     var essayall = {};
@@ -400,6 +288,7 @@ Page({
         if (res.data.status == 200) {
           new Promise((resolve, reject) => {
             var marker = res.data.data.jrow;
+            console.log("2222222222",marker)
             essayall.id = marker.posterid;
             essayall.authorid = marker.authorid;
             essayall.local = marker.address;
@@ -413,15 +302,17 @@ Page({
             imgurls = Array.from(new Set(imgurls))
             essayall.imgUrls = imgurls;
             var tags = marker.tags.split("#");
-            for (var i = 0; i < tags.length; i++) {
-              if (tags[i] == "") tags.splice(i, 1);
-            }
+            // for (var i = 0; i < tags.length; i++) {
+            //   if (tags[i] == "") tags.splice(i, 1);
+            // }
             essayall.tabel = tags;
             essayall.like = marker.likes;
             essayall.sharetime = marker.creat_time;
             that.setData({
               username: marker.nickname,
               headimg: marker.avatar,
+              lng:marker.longtitude,
+              lat:marker.latitude
             })
             resolve(essayall);
           }).then(() => {
@@ -450,6 +341,7 @@ Page({
       // promise :36
     }
   },
+  // 进行点赞操作
   dolike: function (e) {
     if (!app.globalData.token) {
       this.gologin();
@@ -482,6 +374,7 @@ Page({
       })
     }
   },
+  // 收藏文章操作
   postlike: function () {
     var that = this
     var token = app.globalData.token;
@@ -519,6 +412,7 @@ Page({
       })
     }
   },
+
   //调用接口执行
   postcollect: function () {
     var that = this
@@ -547,16 +441,192 @@ Page({
     }
   },
 
-  delete: function () {
-    console.log("点击删除按钮")
+
+  //进入个人详情页,传过去用户的id进行信息解析
+  gomydetail(e) {
+    var userid = e.currentTarget.dataset.userid;
+    console.log(userid)
+    wx.navigateTo({
+      url: '/pages/message/message?userid=' + userid,
+    })
   },
-  go_edit: function () {
-      var userid = this.data.authorid
-      var youself = this.data.isyouself
-      wx.navigateTo({
-        url: '/pages/edit/edit?userid=' + userid + "&ismystyle=" + youself,
+
+
+  //进行关注用户操作-----
+  doFollow(e) {
+    var that = this;
+    //如果已经关注则询问是否取消关注
+    if (this.data.isfollow) {
+      that.setData({
+        fans:that.data.fans-1
       })
+      wx.showModal({
+        title: '提示',
+        content: '是否取消关注: ' + e.currentTarget.dataset.name,
+        success(res) {
+          if (res.confirm) {
+            that.postconcern()
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+    //否则执行关注
+    else {
+      that.setData({
+        fans:that.data.fans+1
+      })
+      that.postconcern()
+    }
   },
+//执行关注接口调用
+postconcern: function (e) {
+  var that = this
+  wx.request({
+    url: app.globalData.baseUrl + '/Flw/follow_updata',
+    method: "GET",
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    data: {
+      userid: app.globalData.userInfo.userid,
+      befwuserid: this.data.authorid
+    },
+    success(res) {
+      if (res.data.status == 200) {
+        that.setData({
+          isfollow: !that.data.isfollow
+        })
+      } else {
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none',
+          duration: 1000
+        })
+      }
+    }
+  })
+},
+
+  //检查用户与该文章发布者的关注关系
+  statuscheck() {
+    var that = this;
+    //如果不是用户自己，急需要进行加载
+    if ( app.globalData.userInfo.userid != that.data.authorid) {
+      wx.request({
+        url: app.globalData.baseUrl + '/Flw/follow_check',
+        method: "GET",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          userid: app.globalData.userInfo.userid,
+          befwuserid: this.data.authorid
+        },
+        success: res => {
+           //进行用户信息检查
+          if (res.data.status == 200) {
+            that.setData({
+              isfollow: res.data.data.type,
+              userSelf: false
+            })
+          } else {
+            wx.showToast({
+              title: '网络异常...',
+              icon: 'none',
+              duration: 1000
+            })
+          }
+        },
+        fail: res => {
+          wx.hideLoading();
+          wx.showToast({
+            title: '网络异常...',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      })
+    } else {
+      that.setData({
+        userSelf: true,  //是否展示本人信息
+      })
+    }
+  },
+     //打开本地地图进入导航界面
+     openMap(){
+      var that=this;
+      var lat=Number(that.data.lat);
+      var lng=Number(that.data.lng)
+      wx.openLocation({
+        latitude: lat,
+        longitude: lng,
+        scale: 1,
+        success: function (res) {
+          console.log(res)
+        },
+        fail: function (res){
+          console.log(res)
+        }
+      })
+    },
+
+    //获取用户的关注数
+    postfollow: function (e) {
+      if (app.globalData.token) {
+        var that = this
+        wx.request({
+          url: app.globalData.baseUrl + '/Flw/follow_num',
+          method: "GET",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            userid: this.data.authorid,
+          },
+          success(res) {
+            if (res.data.status == 200) {
+              that.setData({
+                concern: res.data.data.num,
+              })
+              console.log("res:", res)
+            } else {
+              console.log("请求发送失败！")
+            }
+          }
+        })
+      }
+    },
+    //获取用户粉丝数
+    postbefollow: function (e) {
+      if (app.globalData.token) {
+        var that = this
+        wx.request({
+          url: app.globalData.baseUrl + '/Flw/follow_benum',
+          method: "GET",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            userid: that.data.authorid,
+          },
+          success(res) {
+            if (res.data.status == 200) {
+              console.log("res:", res)
+              that.setData({
+                fans: res.data.data.num,
+              })
+            } else {
+              console.log("请求发送失败！")
+            }
+          }
+        })
+      }
+    },
+  
+
+
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -567,9 +637,6 @@ Page({
 
     if (this.data.oldhoard != this.data.ishoard)
       this.postcollect();
-    if (this.data.oldfollow != this.data.concernAc) {
-      this.postconcern();
-    }
   },
 
   /**
@@ -581,9 +648,6 @@ Page({
     }
     if (this.data.oldhoard != this.data.ishoard)
       this.postcollect();
-    if (this.data.oldfollow != this.data.concernAc) {
-      this.postconcern();
-    }
     this.postselectlike();
 
   },

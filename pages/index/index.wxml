@@ -1,7 +1,7 @@
 <!--导航条-->
 <view class="navbar">
-  <scroll-view  style="overflow: hidden" class="txtable" scroll-x="true">
-    <view class="tabel" scroll-x="true">
+  <scroll-view  style="overflow: hidden" class="navbar_txtable" scroll-x="true">
+    <view class="navbar_tabel" scroll-x="true">
       <block wx:for="{{label}}">
         <view bindtap="getMessage" data-idx="{{index}}" data-id="{{item.id}}" class="item {{isactive[index]==1? 'active' : ''}}">{{item.name}}
         </view>
@@ -9,80 +9,73 @@
     </view>
   </scroll-view>
 </view>
-<view class="bottombox">
-  <!--附近分享-->
-  <view hidden="{{cTab==1}}" class="tab1">
+
+
+<view class="articleList">
+  <!--文章分享-->
+  <view hidden="{{cTab==1}}" class="empty_tab">
+     <!-- 如果内容为空则显示 -->
     <view wx:if="{{!navbar.length}}" class="conter">
       <view class="nofund"><image src="/img/nofund.png"></image></view>
          <view>还未发布任何内容哦~,敬请期待</view>
     </view>
+  <!-- 如果有文章内容就显示文章内容 -->
     <view wx:else class="container">
+    <!-- 左列 -->
       <view class="conterL">
         <block wx:for="{{navbar}}" dataidx="{{index}}"  class="text-item" wx:key="idx" bindtap="navbarTap">
-          <view class="wenzhang" wx:if="{{index%2==0}}">
+          <view class="article-item" wx:if="{{index%2==0}}">
             <view class="myimg" style="height:auto">
               <image style="height:100px" src="{{item.imgurl}}" data-posterid="{{item.posterid}}" data-uid="{{item.authorid}}" mode="widthFix" bindtap="goDetail">
               </image>
             </view>
-            <view class="inlocal">
-              <view class="localimg">
+            <view class="mytitle">
+              <view>{{item.title}}</view>
+            </view>
+
+            <!-- 显示地理位置信息 -->
+            <view class="artile-local">
+              <view class="arcicle-local_in">
+              <view class="local_img">
                 <image src="/img/location-icon2.png"></image>
               </view>
               <view class="localname">
                 <view class="inlocalname">{{item.local}}</view>
               </view>
             </view>
-            <view class="mytitle">
-              <view>{{item.title}}</view>
-            </view>
-            <view class="mymessage">
-              <view class="myhand">
-                <image src="{{item.avatar}}" mode="scaleToFill"></image>
-              </view>
-              <view class="myname">{{item.nickname}}</view>
-              <view class="hart">
-                <view>
-                  <image src="/img/bottom-unpraise.png"></image>
-                </view>
-              </view>
-              <view class="like">{{item.like}}</view>
             </view>
           </view>
         </block>
       </view>
+
+      <!-- 右列 -->
       <view class="conterR">
         <block wx:for="{{navbar}}" dataidx="{{index}}" class="text-item" wx:key="idx" bindtap="navbarTap">
-          <view class="wenzhang" wx:if="{{index%2!=0}}">
+          <view class="article-item" wx:if="{{index%2!=0}}">
             <view class="myimg" style="height:auto">
               <image style="height:100px" src="{{item.imgurl}}" mode="widthFix" data-uid="{{item.authorid}}" data-posterid="{{item.posterid}}" bindtap="goDetail"></image>
-            </view>
-            <view class="inlocal">
-              <view class="localimg">
-                <image src="/img/location-icon2.png"></image>
-              </view>
-              <view class="localname">
-                <view class="inlocalname">{{item.local}}</view>
-              </view>
             </view>
 
             <view class="mytitle">
               <view>{{item.title}}</view>
             </view>
-            <view class="mymessage">
-              <view class="myhand">
-                <image src="{{item.avatar}}" mode="scaleToFill"></image>
+            <!-- 显示地理位置信息 -->
+            <view class="artile-local">
+              <view class="arcicle-local_in">
+              <view class="local_img">
+                <image src="/img/location-icon2.png"></image>
               </view>
-              <view class="myname">{{item.nickname}}</view>
-              <view class="hart">
-                <view>
-                  <image src="/img/bottom-unpraise.png"></image>
-                </view>
+              <view class="local_name">
+                <view class="in-local_name">{{item.local}}</view>
               </view>
-              <view class="like">{{item.like}}</view>
+            </view>
             </view>
           </view>
         </block>
       </view>
     </view>
   </view>
+</view>
+<view wx:if="{{isBottom}}" class="list-bottom">
+  --- 文章见底啦 ---      
 </view>

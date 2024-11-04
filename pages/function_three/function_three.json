@@ -1,4 +1,5 @@
 {
+  "disableScroll":true,
   "navigationBarTitleText":"图片清晰度增强",
   "usingComponents": {}
 }

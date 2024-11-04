@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText":"服务信息条款",
-  "usingComponents": {}
+  "usingComponents": {},
+  "backgroundColor": "#f3f3f3"
 }

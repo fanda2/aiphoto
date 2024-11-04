@@ -100,6 +100,7 @@ Page({
     })
   },
 
+  //页面展示时
   onShow: function () {
     var that = this
     that.postbefollow();

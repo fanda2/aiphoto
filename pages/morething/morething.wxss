@@ -3,7 +3,7 @@
   height: 100%;
 }
 page{
-  background-image:url("http://aiphoto.fjtbkyc.net/files/function.jpg") ;
+  background-image:url("http://aiphoto.fjtbkyc.top/files/function.jpg") ;
   background-size: cover;
 }
 .title {

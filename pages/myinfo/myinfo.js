@@ -1,4 +1,3 @@
-// pages/addOrEditUser/addOrEditUser.js
 var Util = require('../../utils/util.js');
 const app = getApp();
 Page({
@@ -22,7 +21,7 @@ Page({
     imgcount: 0,
     show_hidden: "display:none;",
     compression: "", //压缩路径
-    imageUrl:"",//文件剪裁路径
+    imageUrl: "",//文件剪裁路径
   },
 
   //选择图片
@@ -31,11 +30,11 @@ Page({
     wx.chooseImage({
       count: 1,
       success: function (res) {
-        app.globalData.imgcount= 1,
-        that.setData({
-          imagesrc: res.tempFilePaths[0],
-          show_hidden: "display:block"
-        })
+        app.globalData.imgcount = 1,
+          that.setData({
+            imagesrc: res.tempFilePaths[0],
+            show_hidden: "display:block"
+          })
         console.log("上传成功", that.data.imagesrc)
         //进入编辑页面
         wx.navigateTo({
@@ -62,20 +61,20 @@ Page({
         icon: "loading",
       })
       wx.compressImage({
-        src:app.globalData.imageUrl,
+        src: app.globalData.imageUrl,
         quality: 0,
         success: function (res) {
           wx.showToast({
             title: "压缩成功",
           });
-          console.log("压缩"+res.tempFilePath)
-          app.globalData.imgcount=0;
+          console.log("压缩" + res.tempFilePath)
+          app.globalData.imgcount = 0;
           that.setData({
             compression: res.tempFilePath
           })
           wx.showLoading({
             title: '正在上传'
-          }) 
+          })
           wx.uploadFile({
             url: app.globalData.baseUrl + '/Tsf/upload',
             method: 'POST',
@@ -88,13 +87,12 @@ Page({
             success(res) {
               new Promise((resolve => {
                 res = JSON.parse(res.data)
-                app.globalData.imageUrl=""
+                app.globalData.imageUrl = ""
                 resolve(res.data.filepath)
               })).then((res) => {
-                console.log("返回的地址为", res)
                 that.setData({
                   bgimg: res
-                }) 
+                })
                 that.userimgupload();
               })
             },
@@ -117,7 +115,6 @@ Page({
 
   //用户头像更新接口
   userimgupload: function (e) {
-    console.log("背景信息",this.data.bgimg)
     var that = this;
     wx.request({
       url: app.globalData.baseUrl + '/Use/bgimg_updata',
@@ -131,9 +128,8 @@ Page({
         filepath: that.data.bgimg
       },
       success(res) {
-        console.log(res);
         if (res.data.status == 200) {
-          that.setUserinfo()
+          // that.setUserinfo()
         } else {
           wx.showToast({
             title: '信息更新失败！',
@@ -142,7 +138,7 @@ Page({
           })
         }
       },
-      fail() {}
+      fail() { }
     })
   },
 
@@ -232,12 +228,9 @@ Page({
    * 生命周期函数--监听页面显示a
    */
   onShow: function () {
-    console.log("存储的11111",app.globalData.imageUrl)
-      if(app.globalData.imageUrl!="")
-      {
-        console.log("上传图片")
-        this.MyImageCompression()
-      }
+    if (app.globalData.imageUrl != "") {
+      this.MyImageCompression()
+    }
   },
 
   /**
@@ -286,7 +279,6 @@ Page({
     var newreg1 = that.data.region1;
     var newreg2 = that.data.region2;
     var newmotto = that.data.introduce;
-    console.log(that.data.introduce)
     var newaddress = newreg1 + " " + newreg2;
     if (oldbirthday != newbirthday || address[0] != newreg1 || address[1] != newreg2 || oldmotto != newmotto) {
       wx.showLoading({
@@ -305,8 +297,9 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: res => {
+          //信息修改成功后返回用户信息，使用需要的进行渲染
           if (res.data.status == 200) {
-            that.setUserinfo()
+            console.log(res.data.data)
           } else {
             wx.showToast({
               title: '信息更新失败！',
@@ -333,37 +326,4 @@ Page({
 
     }
   },
-  setUserinfo: function (e) {
-    var that = this
-    wx.request({
-      url: app.globalData.baseUrl + '/Use/user_one', //仅为示例，并非真实的接口地址
-      method: "GET",
-      data: {
-        id: that.data.userid,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        wx.hideLoading();
-        var array;
-        array = res.data.data.jrow;
-        app.globalData.userInfo = res.data.data.jrow
-        try {
-          wx.setStorageSync('userInfo', res.data.data.jrow)
-        } catch (e) {
-          console.log("存储失败33！")
-        }
-        that.setData({
-          userInfo: array
-        })
-      }
-    })
-    wx.showToast({
-      title: '更新成功',
-      icon: 'success',
-      duration: 2000
-    })
-    that.onShow();
-  }
 })

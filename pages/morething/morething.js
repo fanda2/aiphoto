@@ -15,14 +15,6 @@ Page({
     if (!app.globalData.token) {
       this.gologin()
     } 
-      wx.setNavigationBarColor({
-        frontColor: '#ffffff',
-        backgroundColor: '#52e7e0',
-        animation: {
-          duration: 500,
-          timingFunc: 'easeIn'
-        }
-      })
   },
   
   gologin: function (e) {

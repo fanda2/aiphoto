@@ -20,8 +20,8 @@
    
           <view class="outleft">
             <view class="bleft">
-            <view>{{item.like}}<text style="font-size:30rpx;font-weight:600"> 喜欢. </text></view>
-            <view>{{item.concern}} <text style="font-size:30rpx;font-weight:600">收藏</text></view>
+            <view>{{item.likes}}<text style="font-size:24rpx;font-weight:600"> 喜欢. </text></view>
+            <view>{{item.concern}} <text style="font-size:24rpx;font-weight:600">收藏</text></view>
             </view>
           </view>
           <view class="bright">

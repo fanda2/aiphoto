@@ -1,0 +1,34 @@
+<view class="container">
+ <view class="introduce">
+ <view class="tag"> 开发人员
+ </view>
+ <view class="content">
+  <view class="name"><text class="title">开发人员：</text>{{introduction}}</view>
+  <view class="tell">{{tell}}</view>
+ </view>
+
+ </view>
+ <view class="goal">
+ <view class="tag">项目介绍</view>
+ <view class="content">
+ {{Objabout}}
+ </view>
+ </view>
+ <view class="version">
+ <view class="tag">版本迭代</view>
+ <view class="content ver">
+ <view wx:for="{{version}}" dataidx="{{index}}" class="item"> 
+  <!-- 版本编号 -->
+  <view class="table">
+    <text class="title">版本号：{{item.ver}}</text>
+  </view>
+  <!-- 版本介绍 -->
+  <view class="introduction">
+    <block wx:for="{{item.introduce}}" dataidx="{{index}}" >
+    <view> <text>-</text>{{item}}</view>
+    </block>
+  </view>
+</view>
+ </view>
+ </view>
+</view>

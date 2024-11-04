@@ -39,7 +39,6 @@ Page({
   btn6(){
     // 返回刚才的界面，带回图片链接
     cropper.getImagePath(res =>{
-      console.log(res.path)
       app.globalData.imageUrl=res.path;
       wx.navigateBack({
         delta: 0,

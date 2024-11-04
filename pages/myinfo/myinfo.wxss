@@ -14,7 +14,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding-top: 60rpx;
+  padding-top: 50rpx;
 }
 
 .headimg {
@@ -24,7 +24,7 @@
 }
 
 .box {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .head {
