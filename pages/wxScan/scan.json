@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"扫一扫"
+  "navigationBarTitleText":"扫一扫",
+   "disableScroll": true
 }
